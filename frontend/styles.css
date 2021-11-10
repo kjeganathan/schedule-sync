@@ -1,0 +1,67 @@
+
+.main-container {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #F0F2F5;
+}
+
+.high-banner {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: white;
+    background-color: #7D9FEC;
+    font-weight: bold;
+}
+
+.low-banner {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: black;
+    background-color: #F3BD56;
+    font-weight: bold;
+}
+
+#integrate {
+    color: black;
+    background-color: white;
+    border-color: black;
+    width: 250px;
+	height: 50px;
+}
+
+#integrate:hover {
+    color: #F0F2F5;
+    background-color: black;
+    font-weight: bold;
+	width: 250px;
+	height: 50px;
+}
+
+#upload, #schedule, #meeting, #profile{
+    color: white;
+    width: 320px;
+	height: 30px;
+	background-color: transparent;
+	border: none;
+}
+
+#logout{
+	color: white;
+	width: 100px;
+	height: 30px;
+	background-color: black;
+	border: none;
+}
+
+
+
