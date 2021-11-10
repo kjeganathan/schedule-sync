@@ -1,0 +1,23 @@
+.container{
+    text-align: center;
+    background: #7d9fec;
+}
+.col{
+    margin-top: 20px;
+    height: 600px;
+}
+
+.container1{
+    height:600px;
+    border: solid 5px;
+    border-width: 10px;
+    color:black;
+    border-color: black;
+    background-color: #f3bd56;
+}
+.A{
+    width: 0px;
+    height: 590px;
+    padding: 5px;
+    background-color: black;
+}
