@@ -17,31 +17,10 @@ body {
     width: 100%;
 }
 
-/* Style the links inside the navigation bar */
-.navbar a {
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-/* Change the color of links on hover */
-.navbar a:hover {
-    background-color: #F3BD56;
-    color: black;
-    border-radius: 8px;
-}
-  
-/* Adding an active class to highlight the current page */
-.navbar a.active {
-    background-color: #F3BD56;
-    color: white;
-}
-
 /* Adding CSS for navbar logo */ 
 .logo {
-    display: inline-block;
+    display: center;
+    align-items: center;
 }
 
 /* Navbar log out button */ 
