@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Schedule Sync</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+    <link rel="icon" href="../assets/images/logo-blue.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <img
+        width="100px"
+        height="74x"
+        class="logo"
+        src="../assets/images/logo-blue.png"
+      />
+    </div>
+
+    <!--Login and Create New Account Grid-->
+    <div class="container">
+      <!--Login and Create New Account Header Banner-->
+      <div class="row">
+        <!--Login Banner Column-->
+        <div id="loginCol" class="col-sm border-right">
+          <h1 class="loginBannerTitle">Login</h1>
+        </div>
+
+        <!--Create Account Banner Column-->
+        <div id="createAccountCol" class="col-sm">
+          <h1 class="createAccountBannerTitle">Create Account</h1>
+        </div>
+      </div>
+
+      <!--Login and Create Account Form-->
+      <div class="row">
+        <!--Login Form-->
+        <div id="loginForm" class="col-sm border-right">
+          <form>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="inputEmail"
+                aria-describedby="emailHelp"
+                placeholder="Email"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="inputPassword"
+                placeholder="Password"
+              />
+            </div>
+            <button id="login" type="submit" class="btn btn-dark">Login</button>
+          </form>
+        </div>
+
+        <!--Create Account Form-->
+        <div id="createAccountForm" class="col-sm">
+          <form action="/createAccount" method="POST">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                name="user[firstName]"
+                placeholder="First Name"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="createLastName"
+                name="user[lastName]"
+                placeholder="Last Name"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="createEmailInput"
+                aria-describedby="emailHelp"
+                name="user[email]"
+                placeholder="Email"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="createPasswordInput"
+                name="user[password]"
+                placeholder="Password"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="verifyPassword"
+                class="form-control"
+                id="createVerifyPasswordInput"
+                name="verifyPassword"
+                placeholder="Verify Password"
+              />
+            </div>
+            <button id="createAccount" type="submit" class="btn btn-dark">
+              Create Account
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <style>
+        .heart {
+          color: #e25555;
+        }
+      </style>
+      <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
+    </div>
+  </body>
+</html>
