@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MeetingsComponent } from './meetings/meetings.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
+import { MeetingInfoComponent } from './meeting-info/meeting-info.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SchedulingComponent } from './scheduling/scheduling.component';
     LoginComponent,
     CalendarComponent,
     MeetingsComponent,
-    SchedulingComponent
+    SchedulingComponent,
+    MeetingInfoComponent
   ],
   imports: [
     BrowserModule,
