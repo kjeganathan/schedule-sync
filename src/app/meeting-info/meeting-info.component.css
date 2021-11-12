@@ -23,3 +23,19 @@ mat-chip {
   justify-content: space-evenly;
   align-items: center;
 }
+
+.description{
+  padding-top: 50px;
+  position: absolute;
+  left: 25%;
+  width: 20%;
+  text-align: center;
+}
+
+.responses{
+  padding-top: 50px;
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  text-align: center;
+}

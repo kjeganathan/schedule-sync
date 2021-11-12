@@ -42,8 +42,15 @@
   </mat-card>
 </div>
 
-<mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
-  <mat-chip *ngFor="let chip of availableColors" selected [color]="chip.color">
-    {{ chip.name }}
-  </mat-chip>
-</mat-chip-list>
+<div class="description">
+    <h2>Meeting Description</h2>
+    <p>This meeting is about some kind of topic and blah blah blah blah blah!</p>
+</div>
+
+<div class="responses">
+    <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+        <mat-chip *ngFor="let chip of availableColors" selected [color]="chip.color">
+        {{ chip.name }}
+        </mat-chip>
+        </mat-chip-list>
+</div>
