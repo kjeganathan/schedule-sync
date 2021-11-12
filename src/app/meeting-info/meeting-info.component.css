@@ -1,3 +1,7 @@
 .example-card {
-    max-width: 15vw;
+  max-width: 15vw;
+}
+
+mat-chip {
+  max-width: 200px;
 }

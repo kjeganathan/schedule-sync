@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+
+export interface ChipColor {
+  name: string;
+  color: ThemePalette;
+}
 
 @Component({
   selector: 'app-meeting-info',
@@ -6,9 +12,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./meeting-info.component.css']
 })
 export class MeetingInfoComponent implements OnInit {
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
+  availableColors: ChipColor[] = [
+    {name: 'abc@gmail.com', color: undefined},
+    {name: 'def@gmail.com', color: 'primary'},
+    {name: 'ghi@gmail.com', color: 'accent'},
+    {name: 'xyz@gmail.com', color: 'warn'},
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

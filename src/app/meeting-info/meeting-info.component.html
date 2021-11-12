@@ -1,5 +1,7 @@
 <h2>Meeting Title</h2>
-<mat-card class="example-card">
-    <mat-card-title>Date</mat-card-title>
-    <mat-card-subtitle>Nov 9, 2021</mat-card-subtitle>
-</mat-card>
+
+<mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+  <mat-chip *ngFor="let chip of availableColors" selected [color]="chip.color">
+    {{ chip.name }}
+  </mat-chip>
+</mat-chip-list>
