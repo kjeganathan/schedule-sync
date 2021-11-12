@@ -22,11 +22,12 @@ body {
 /* Style the links inside the navigation bar */
 .navbar a {
   color: #f2f2f2;
+  display: block;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-  width: max-content;
+  width: 20%;
 }
 
 /* Change the color of links on hover */
