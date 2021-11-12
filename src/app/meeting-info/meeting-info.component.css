@@ -10,7 +10,8 @@ mat-chip {
   max-width: 25vw;
 }
 
-.top-cards {
+.top-cards,
+.respondents {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -24,7 +25,7 @@ mat-chip {
   align-items: center;
 }
 
-.description{
+.description {
   padding-top: 50px;
   position: absolute;
   left: 25%;
@@ -32,7 +33,7 @@ mat-chip {
   text-align: center;
 }
 
-.responses{
+.responses {
   padding-top: 50px;
   position: absolute;
   left: 50%;

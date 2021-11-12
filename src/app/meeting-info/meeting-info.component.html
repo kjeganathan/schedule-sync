@@ -43,14 +43,17 @@
 </div>
 
 <div class="description">
-    <h2>Meeting Description</h2>
-    <p>This meeting is about some kind of topic and blah blah blah blah blah!</p>
+  <h2>Meeting Description</h2>
+  <p>This meeting is about some kind of topic and blah blah blah blah blah!</p>
 </div>
 
 <div class="responses">
-    <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
-        <mat-chip *ngFor="let chip of availableColors" selected [color]="chip.color">
+  <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+    <div *ngFor="let chip of availableColors" class="respondents">
+      <mat-chip selected [color]="chip.color">
         {{ chip.name }}
-        </mat-chip>
-        </mat-chip-list>
+      </mat-chip>
+      <mat-icon [color]="chip.color">{{ chip.response }}</mat-icon>
+    </div>
+  </mat-chip-list>
 </div>

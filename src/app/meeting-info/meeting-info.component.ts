@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 
-export interface ChipColor {
+export interface RespondentChips {
   name: string;
   color: ThemePalette;
+  response: string;
 }
 
 @Component({
@@ -12,11 +13,11 @@ export interface ChipColor {
   styleUrls: ['./meeting-info.component.css']
 })
 export class MeetingInfoComponent implements OnInit {
-  availableColors: ChipColor[] = [
-    {name: 'abc@gmail.com', color: 'primary'},
-    {name: 'def@gmail.com', color: 'primary'},
-    {name: 'ghi@gmail.com', color: 'accent'},
-    {name: 'xyz@gmail.com', color: 'warn'},
+  availableColors: RespondentChips[] = [
+    {name: 'abc@gmail.com', color: 'primary', response: 'check_circle_outline'},
+    {name: 'def@gmail.com', color: 'primary', response: 'check_circle_outline'},
+    {name: 'ghi@gmail.com', color: 'accent', response: 'help_outline'},
+    {name: 'xyz@gmail.com', color: 'warn', response: 'highlight_off'},
   ];
 
   constructor() { }
