@@ -13,7 +13,7 @@ export interface ChipColor {
 })
 export class MeetingInfoComponent implements OnInit {
   availableColors: ChipColor[] = [
-    {name: 'abc@gmail.com', color: undefined},
+    {name: 'abc@gmail.com', color: 'primary'},
     {name: 'def@gmail.com', color: 'primary'},
     {name: 'ghi@gmail.com', color: 'accent'},
     {name: 'xyz@gmail.com', color: 'warn'},
