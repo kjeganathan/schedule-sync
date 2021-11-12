@@ -1,3 +1,21 @@
-.example-card {
+.tiny-card {
     max-width: 15vw;
+}
+
+.large-card{
+    max-width: 25vw;
+}
+
+.top-cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.bottom-cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
