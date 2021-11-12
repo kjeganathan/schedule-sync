@@ -1,5 +1,47 @@
 <h2>Meeting Title</h2>
 
+<div class="top-cards">
+  <mat-card class="tiny-card">
+    <mat-icon>calendar_today</mat-icon>
+    <mat-card-title>Date</mat-card-title>
+    <mat-card-subtitle>Nov 9, 2021</mat-card-subtitle>
+  </mat-card>
+
+  <mat-card class="tiny-card">
+    <mat-icon>alarm</mat-icon>
+    <mat-card-title>Start Time</mat-card-title>
+    <mat-card-subtitle>9:00 AM</mat-card-subtitle>
+  </mat-card>
+
+  <mat-card class="tiny-card">
+    <mat-icon>alarm</mat-icon>
+    <mat-card-title>End Time</mat-card-title>
+    <mat-card-subtitle>10:00 AM</mat-card-subtitle>
+  </mat-card>
+
+  <mat-card class="tiny-card">
+    <mat-icon>access_time</mat-icon>
+    <mat-card-title>Time Zone</mat-card-title>
+    <mat-card-subtitle>EST</mat-card-subtitle>
+  </mat-card>
+
+  <mat-card class="tiny-card">
+    <mat-icon>person</mat-icon>
+    <mat-card-title>Attendee Number</mat-card-title>
+    <mat-card-subtitle>10</mat-card-subtitle>
+  </mat-card>
+</div>
+
+<div class="bottom-cards">
+  <mat-card class="large-card">
+    <mat-card-title>Location or Zoom Link</mat-card-title>
+  </mat-card>
+
+  <mat-card class="large-card">
+    <mat-card-title>Recurring Y/N</mat-card-title>
+  </mat-card>
+</div>
+
 <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
   <mat-chip *ngFor="let chip of availableColors" selected [color]="chip.color">
     {{ chip.name }}

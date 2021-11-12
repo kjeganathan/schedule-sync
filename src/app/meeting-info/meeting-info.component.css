@@ -1,7 +1,25 @@
-.example-card {
+mat-chip {
+  max-width: 200px;
+}
+
+.tiny-card {
   max-width: 15vw;
 }
 
-mat-chip {
-  max-width: 200px;
+.large-card {
+  max-width: 25vw;
+}
+
+.top-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bottom-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
