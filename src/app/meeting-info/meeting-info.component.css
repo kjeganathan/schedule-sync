@@ -1,13 +1,22 @@
-mat-chip {
-  max-width: 200px;
+#title {
+  margin: 3vh 0;
+  font-size: 30px;
 }
 
 .tiny-card {
-  max-width: 15vw;
+  width: 15vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 .large-card {
-  max-width: 25vw;
+  width: 25vw;
+}
+
+.tiny-card,
+.large-card {
+  background-color: rgb(224, 223, 223);
 }
 
 .top-cards,
@@ -27,7 +36,6 @@ mat-chip {
 
 .description {
   padding-top: 50px;
-  position: absolute;
   left: 25%;
   width: 20%;
   text-align: center;
@@ -35,8 +43,29 @@ mat-chip {
 
 .responses {
   padding-top: 50px;
-  position: absolute;
   left: 50%;
-  width: 50%;
+  width: max-content;
   text-align: center;
+}
+
+.info {
+  padding-left: 1em;
+}
+
+.other-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 0;
+}
+
+mat-chip {
+  max-width: 200px;
+}
+
+mat-card {
+  margin-bottom: 8vh;
 }
