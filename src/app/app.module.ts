@@ -45,7 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              "500421331480-8o0r6v4m948lgr10vd0i6par63e9vsu5.apps.googleusercontent.com"
+              '500421331480-8o0r6v4m948lgr10vd0i6par63e9vsu5.apps.googleusercontent.com'
             )
           }
         ]
