@@ -1,30 +1,23 @@
-<!-- <div class="navbar">
-      <div class="logo">
-        <img
-          width="100px"
-          height="80px"
-          src="../../assets/images/logo-blue.png"
-        />
-      </div>
-    </div> -->
-<div class="navbar">
-  <a [routerLink]="'my-calendar'" id="uploadCalendar">Upload Calendar</a>
-  <a [routerLink]="'scheduling'" id="scheduleMeeting">Schedule a Meeting</a>
-  <img
-    width="100px"
-    height="74x"
-    class="logo"
-    src="../assets/images/logo-blue.png"
-  />
-  <a [routerLink]="'my-meetings'" id="myMeetings">My Meetings</a>
-  <a [routerLink]="'login'" id="logout">Logout</a>
-</div>
-<router-outlet></router-outlet>
-<div class="footer">
-  <style>
-    .heart {
-      color: #e25555;
-    }
-  </style>
-  <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
+<div [ngClass]="{ login: !loggedIn }">
+  <div class="navbar" *ngIf="loggedIn">
+    <a [routerLink]="'my-calendar'" id="myCalendar">My Calendar</a>
+    <a [routerLink]="'scheduling'" id="scheduleMeeting">Schedule a Meeting</a>
+    <img
+      width="100px"
+      height="74x"
+      class="logo"
+      src="../assets/images/logo-blue.png"
+    />
+    <a [routerLink]="'my-meetings'" id="myMeetings">My Meetings</a>
+    <a [routerLink]="'login'" id="logout">Logout</a>
+  </div>
+  <router-outlet></router-outlet>
+  <div class="footer" *ngIf="loggedIn">
+    <style>
+      .heart {
+        color: #e25555;
+      }
+    </style>
+    <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
+  </div>
 </div>

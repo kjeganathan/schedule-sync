@@ -1,97 +1,20 @@
-<!--Login and Create New Account Grid-->
-<div class="container">
-  <!--Login and Create New Account Header Banner-->
-  <div class="row">
-    <!--Login Banner Column-->
-    <div id="loginCol" class="col-sm border-right">
-      <h1 class="loginBannerTitle">Login</h1>
-    </div>
-
-    <!--Create Account Banner Column-->
-    <div id="createAccountCol" class="col-sm">
-      <h1 class="createAccountBannerTitle">Create Account</h1>
-    </div>
-  </div>
-
-  <!--Login and Create Account Form-->
-  <div class="row">
-    <!--Login Form-->
-    <div id="loginForm" class="col-sm border-right">
-      <form>
-        <div class="form-group">
-          <input
-            type="email"
-            class="form-control"
-            id="inputEmail"
-            aria-describedby="emailHelp"
-            placeholder="Email"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="password"
-            class="form-control"
-            id="inputPassword"
-            placeholder="Password"
-          />
-        </div>
-        <button id="login" type="submit" class="btn btn-dark">Login</button>
-      </form>
-    </div>
-
-    <!--Create Account Form-->
-    <div id="createAccountForm" class="col-sm">
-      <form action="/createAccount" method="POST">
-        <div class="form-group">
-          <input
-            type="text"
-            class="form-control"
-            id="firstName"
-            name="user[firstName]"
-            placeholder="First Name"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="text"
-            class="form-control"
-            id="createLastName"
-            name="user[lastName]"
-            placeholder="Last Name"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="email"
-            class="form-control"
-            id="createEmailInput"
-            aria-describedby="emailHelp"
-            name="user[email]"
-            placeholder="Email"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="password"
-            class="form-control"
-            id="createPasswordInput"
-            name="user[password]"
-            placeholder="Password"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            type="verifyPassword"
-            class="form-control"
-            id="createVerifyPasswordInput"
-            name="verifyPassword"
-            placeholder="Verify Password"
-          />
-        </div>
-        <button id="createAccount" type="submit" class="btn btn-dark">
-          Create Account
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
+<mat-card class="login-card">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-subtitle>Welcome to Schedule Sync!</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <img
+      id="logo"
+      mat-card-image
+      src="../../assets/images/logo.jpg"
+      alt="Schedule Sync Logo"
+    />
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button id="login">
+      <img src="../../assets/images/btn_google_dark_normal_ios.svg" />Sign in
+      with Google
+    </button>
+  </mat-card-actions>
+</mat-card>
