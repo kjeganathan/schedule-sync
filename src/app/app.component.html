@@ -1,5 +1,5 @@
-<div [ngClass]="{ login: !loggedIn }">
-  <div class="navbar" *ngIf="loggedIn">
+<div>
+  <div class="navbar">
     <a [routerLink]="'my-calendar'" id="myCalendar">My Calendar</a>
     <a [routerLink]="'scheduling'" id="scheduleMeeting">Schedule a Meeting</a>
     <img
@@ -12,7 +12,7 @@
     <a [routerLink]="'login'" id="logout">Logout</a>
   </div>
   <router-outlet></router-outlet>
-  <div class="footer" *ngIf="loggedIn">
+  <div class="footer">
     <style>
       .heart {
         color: #e25555;

@@ -7,7 +7,7 @@ import { MeetingsComponent } from './meetings/meetings.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/my-calendar', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'scheduling', component: SchedulingComponent},
   { path: 'my-meetings', component: MeetingsComponent },
