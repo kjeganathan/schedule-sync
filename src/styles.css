@@ -28,6 +28,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  color: #f2f2f2;
 }
 
 /* Style the links inside the navigation bar */
