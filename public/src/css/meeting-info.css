@@ -1,0 +1,205 @@
+#title {
+  margin: 3vh 0;
+  font-size: 30px;
+}
+
+.tiny-card {
+  width: 15vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.large-card {
+  width: 25vw;
+}
+
+.tiny-card,
+.large-card {
+  background-color: rgb(224, 223, 223);
+}
+
+.top-cards,
+.respondents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bottom-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.description {
+  padding-top: 50px;
+  left: 25%;
+  width: 20%;
+  text-align: center;
+}
+
+.responses {
+  padding-top: 50px;
+  left: 50%;
+  width: max-content;
+  text-align: center;
+}
+
+.info {
+  padding-left: 1em;
+}
+
+.other-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 0;
+}
+
+mat-chip {
+  max-width: 200px;
+}
+
+mat-card {
+  margin-bottom: 8vh;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* General body CSS */
+body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  font-family: system-ui;
+  font-size: 16px;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+}
+
+/* Adding a background color to the top navigation */
+.navbar {
+  background-color: #7d9fec;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #f2f2f2;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  color: #f2f2f2;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 20%;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #f3bd56;
+  color: black;
+  border-radius: 8px;
+}
+
+/* Adding an active class to highlight the current page */
+.navbar a.active {
+  background-color: #f3bd56;
+  color: white;
+}
+
+/* Adding CSS for navbar logo */
+.logo {
+  display: block;
+  margin: auto;
+}
+
+/* Footer CSS */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f3bd56;
+  color: grey;
+  text-align: center;
+  height: 50px;
+}
+
+/* Footer text */
+.footer p {
+  padding-top: 10px;
+}
+
+/* Red heart CSS for footer text */
+.redheart {
+  color: #ff0000;
+  font-size: 14px;
+  font-family: "arial unicode MS", arial, geneva, sans-serif;
+}
+
+.high-banner {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: white;
+  background-color: #7d9fec;
+  font-weight: bold;
+}
+
+.low-banner {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: black;
+  background-color: #f3bd56;
+  font-weight: bold;
+}
+
+#integrate {
+  color: black;
+  background-color: white;
+  border-color: black;
+  width: 250px;
+  height: 50px;
+}
+
+#integrate:hover {
+  color: #f0f2f5;
+  background-color: black;
+  font-weight: bold;
+  width: 250px;
+  height: 50px;
+}
+
+#upload,
+#schedule,
+#meeting,
+#profile {
+  color: white;
+  width: 320px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+}
