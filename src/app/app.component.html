@@ -1,5 +1,5 @@
-<div>
-  <div class="navbar">
+<div [ngClass]="{ login: !authService.user }">
+  <div class="navbar" *ngIf="authService.user">
     <a [routerLink]="'my-calendar'" id="myCalendar">My Calendar</a>
     <a [routerLink]="'scheduling'" id="scheduleMeeting">Schedule a Meeting</a>
     <img
@@ -9,10 +9,10 @@
       src="../assets/images/logo-blue.png"
     />
     <a [routerLink]="'my-meetings'" id="myMeetings">My Meetings</a>
-    <a [routerLink]="'login'" id="logout">Logout</a>
+    <a role="button" id="logout" (click)="authService.logout()">Logout</a>
   </div>
   <router-outlet></router-outlet>
-  <div class="footer">
+  <div class="footer" *ngIf="authService.user">
     <style>
       .heart {
         color: #e25555;
