@@ -1,0 +1,44 @@
+{
+    "users":[
+        {
+            "email": "emmaMartinez@gmail.com",
+            "firstName": "Emma",
+            "lastName": "Martinez",
+            "meetings": ["Sunday Brunch", "Econ Meeting", "Fall Photoshoot", "Band Photoshoot"],
+            "tentativeMeetings": [{"title":"Boston MeetUp", "isDecline": true}, {"title": "Party Planning", "isDecline":true}]
+        },
+        {
+            "email": "sammyRemerez@gmail.com",
+            "firstName": "Sammy",
+            "lastName": "Remerez",
+            "meetings": ["Latino Club"],
+            "tentativeMeetings": [{"title":"Boston MeetUp", "isDecline": false}]
+        },
+        {
+            "email": "amitRam@gmail.com",
+            "firstName": "Amit",
+            "lastName": "Ram",
+            "meetings": ["Asian Debate Team"],
+            "tentativeMeetings": [{"title":"Boston MeetUp", "isDecline": true}]
+        }
+    ],
+
+   "memory": [
+       {
+        "title": "Sunday Brunch",
+        "date": "November 18, 2021",
+        "startTime": "9:00 AM",
+        "endTime": "10:00 AM",
+        "location": "Zoom",
+        "description": "Meeting at 9:00 AM for our brunch"
+       },
+       {
+        "title": "Econ Meeting",
+        "date": "November 20, 2021",
+        "startTime": "10:00 AM",
+        "endTime": "11:00 AM",
+        "location": "Zoom",
+        "description": "Meeting at 10:00 AM for our econ meeting"
+       }
+   ]
+}
