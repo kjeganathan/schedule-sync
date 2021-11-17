@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from './authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,5 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent {
   title = 'schedule-sync';
-  constructor(public authService: AuthenticationService){}
+  loggedIn = false;
 }
