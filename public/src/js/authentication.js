@@ -3,6 +3,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 $(document).ready(function () {
@@ -56,11 +57,16 @@ function googleLogin() {
 }
 
 function googleLogout() {
-  signOut()
+  signOut(auth)
     .then(() => {
       // Sign-out successful.
+      // Add the customer id to local storage for access accross the website
+      localStorage.removeItem("user");
+      // Open the home page in the same window
+      open("/src/html/login.html", "_self");
     })
     .catch((error) => {
       // An error happened.
+      console.log(error);
     });
 }
