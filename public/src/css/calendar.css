@@ -131,3 +131,8 @@ body {
   background-color: transparent;
   border: none;
 }
+
+#calendar {
+  width: 50vw;
+  margin: 20px auto;
+}

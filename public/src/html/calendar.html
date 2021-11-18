@@ -7,13 +7,32 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=yes"
     />
-    <link rel="icon" href="images/logo-blue.png" type="image/png" />
+    <link rel="icon" href="/assets/images/logo-blue.png" type="image/png" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../css/calendar.css" />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' />
+    <link rel="stylesheet" type="text/css" href="/src/css/calendar.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth-compat.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+    <script type="module" src="/src/js/authentication.js"></script>
+    <script type="module" src="/src/js/calendar.js"></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridWeek'
+        });
+        calendar.render();
+      });
+
+    </script>
   </head>
+
   <body>
     <div class="navbar">
       <a href="calendar.html" id="uploadCalendar">Upload Calendar</a>
@@ -23,10 +42,8 @@
       <a type="button" id="logout">Log Out</button>
     </div>
 
-    <!-- <div>
-      <full-calendar [options]="calendarOptions"></full-calendar>
-    </div> -->
-
+    <div id='calendar'></div>
+    
     <div class="footer">
       <style>
         .heart {
