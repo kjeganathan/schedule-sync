@@ -7,26 +7,66 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=yes"
     />
-    <link rel="icon" href="images/logo-blue.png" type="image/png" />
+    <link rel="icon" href="/assets/images/logo-blue.png" type="image/png" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../css/calendar.css" />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' />
+    <link rel="stylesheet" type="text/css" href="/src/css/calendar.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth-compat.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+    <script type="module" src="/src/js/authentication.js"></script>
+    <script type="module" src="/src/js/calendar.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          dayMaxEvents: true,
+          headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          },
+          googleCalendarApiKey: 'AIzaSyA_dnFhAlsnKF_C6h49PHKq4bTnfHjjbBQ',
+          eventSources: [
+            {
+              googleCalendarId: 'c_4lbahl431sc1uvat086nkqddc8@group.calendar.google.com'
+            }
+          ],
+          eventClick: function(event) {
+            // opens events in a popup window
+            open(event.url, "_blank");
+          },
+          eventMouseEnter: function( event, jsEvent, view ) { 
+            // $(event.el).tooltip({placement: "top", title: event.title});
+          },
+          eventMouseLeave: function() {
+            // popover.hide();
+            // popover = null;
+          }
+        });
+        calendar.render();
+      });
+    </script>
   </head>
+
   <body>
     <div class="navbar">
-      <a href="calendar.html" id="uploadCalendar">Upload Calendar</a>
+      <a href="calendar.html" id="uploadCalendar">My Calendar</a>
       <a href="scheduling.html" id="scheduleMeeting">Schedule a Meeting</a>
       <img width="100px" height="74x" class="logo" src="../../assets/images/logo-blue.png" />
       <a href="meetings.html" id="myMeetings">My Meetings</a>
       <a type="button" id="logout">Log Out</button>
     </div>
 
-    <!-- <div>
-      <full-calendar [options]="calendarOptions"></full-calendar>
-    </div> -->
-
+    <div id='calendar'></div>
+    
     <div class="footer">
       <style>
         .heart {

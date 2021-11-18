@@ -131,3 +131,11 @@ body {
   background-color: transparent;
   border: none;
 }
+
+/* CALENDAR BODY CSS */
+
+#calendar {
+  width: 90vw;
+  height: 75vh;
+  margin: 20px auto;
+}
