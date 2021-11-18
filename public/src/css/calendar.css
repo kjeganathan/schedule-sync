@@ -132,7 +132,10 @@ body {
   border: none;
 }
 
+/* CALENDAR BODY CSS */
+
 #calendar {
-  width: 50vw;
+  width: 90vw;
+  height: 75vh;
   margin: 20px auto;
 }
