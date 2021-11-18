@@ -1,8 +1,16 @@
 const express = require("express");
 const path = require("path");
-var fs = require("fs"); //Library for call files
 const router = express.Router();
 const PORT = process.env.PORT || 8081;
+const { Pool } = require("pg");
+// environment variables
+require("dotenv").config();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 // environment variables
 require("dotenv").config();
