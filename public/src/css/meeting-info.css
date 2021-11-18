@@ -1,75 +1,4 @@
-#title {
-  margin: 3vh 0;
-  font-size: 30px;
-}
-
-.tiny-card {
-  width: 15vw;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
-
-.large-card {
-  width: 25vw;
-}
-
-.tiny-card,
-.large-card {
-  background-color: rgb(224, 223, 223);
-}
-
-.top-cards,
-.respondents {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.bottom-cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.description {
-  padding-top: 50px;
-  left: 25%;
-  width: 20%;
-  text-align: center;
-}
-
-.responses {
-  padding-top: 50px;
-  left: 50%;
-  width: max-content;
-  text-align: center;
-}
-
-.info {
-  padding-left: 1em;
-}
-
-.other-info {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
-
-.mat-card-subtitle {
-  margin-bottom: 0;
-}
-
-mat-chip {
-  max-width: 200px;
-}
-
-mat-card {
-  margin-bottom: 8vh;
-}
-
+/* MAIN STYLING - NAVBAR & FOOTER */
 html,
 body {
   height: 100%;
@@ -202,4 +131,58 @@ body {
   height: 30px;
   background-color: transparent;
   border: none;
+}
+
+/* MEETINGS PAGE BODY CSS */
+#title {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 100%;
+  height: 32px;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 32px;
+  color: #000000;
+}
+
+.card-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  text-align: left;
+  /* identical to box height, or 89% */
+}
+
+.card-text {
+  text-align: left;
+  font-size: 20px;
+}
+
+.card {
+  width: max-content;
+  padding: 2vh 2vw;
+  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card-horizontal {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+}
+
+.img-square-wrapper {
+  margin-right: 2vw !important;
+}
+
+.container {
+  display: flex;
+  gap: 25px;
+  flex-direction: row;
 }
