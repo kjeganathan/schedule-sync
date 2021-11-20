@@ -4,7 +4,7 @@
   "description": "A scheduling application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "npm run build && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/kjeganathan/schedule-sync#readme",
   "dependencies": {
-    "bootstrap": "^5.1.3",
-    "bootstrap-icons": "^1.7.1"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "pg": "^8.7.1"
   }
 }
