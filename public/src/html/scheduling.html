@@ -22,6 +22,7 @@
     <script type="module" src="/src/js/authentication.js"></script>
   </head>
   <body>
+
     <div class="navbar">
       <a href="calendar.html" id="uploadCalendar">My Calendar</a>
       <a href="scheduling.html" id="scheduleMeeting">Schedule a Meeting</a>
@@ -29,96 +30,56 @@
       <a href="meetings.html" id="myMeetings">My Meetings</a>
       <a type="button" id="logout">Log Out</button>
     </div>
-    <div>
+
+    <div class = "scheduleMeeting">
+    <h2>Schedule a Meeting</h2>
     <form>
-      <div class="form-group"> <!-- Title -->
-        <label for="full_name_id" class="control-label">Full Name</label>
-        <input type="text" class="form-control" id="full_name_id" name="full_name" placeholder="John Deer">
-      </div>	
-    
-      <div class="form-group"> <!-- Street 1 -->
-        <label for="street1_id" class="control-label">Street Address 1</label>
-        <input type="text" class="form-control" id="street1_id" name="street1" placeholder="Street address, P.O. box, company name, c/o">
-      </div>					
-                  
-      <div class="form-group"> <!-- Street 2 -->
-        <label for="street2_id" class="control-label">Street Address 2</label>
-        <input type="text" class="form-control" id="street2_id" name="street2" placeholder="Apartment, suite, unit, building, floor, etc.">
-      </div>	
-    
-      <div class="form-group"> <!-- City-->
-        <label for="city_id" class="control-label">City</label>
-        <input type="text" class="form-control" id="city_id" name="city" placeholder="Smallville">
-      </div>									
-                  
-      <div class="form-group"> <!-- State Button -->
-        <label for="state_id" class="control-label">State</label>
-        <select class="form-control" id="state_id">
-          <option value="AL">Alabama</option>
-          <option value="AK">Alaska</option>
-          <option value="AZ">Arizona</option>
-          <option value="AR">Arkansas</option>
-          <option value="CA">California</option>
-          <option value="CO">Colorado</option>
-          <option value="CT">Connecticut</option>
-          <option value="DE">Delaware</option>
-          <option value="DC">District Of Columbia</option>
-          <option value="FL">Florida</option>
-          <option value="GA">Georgia</option>
-          <option value="HI">Hawaii</option>
-          <option value="ID">Idaho</option>
-          <option value="IL">Illinois</option>
-          <option value="IN">Indiana</option>
-          <option value="IA">Iowa</option>
-          <option value="KS">Kansas</option>
-          <option value="KY">Kentucky</option>
-          <option value="LA">Louisiana</option>
-          <option value="ME">Maine</option>
-          <option value="MD">Maryland</option>
-          <option value="MA">Massachusetts</option>
-          <option value="MI">Michigan</option>
-          <option value="MN">Minnesota</option>
-          <option value="MS">Mississippi</option>
-          <option value="MO">Missouri</option>
-          <option value="MT">Montana</option>
-          <option value="NE">Nebraska</option>
-          <option value="NV">Nevada</option>
-          <option value="NH">New Hampshire</option>
-          <option value="NJ">New Jersey</option>
-          <option value="NM">New Mexico</option>
-          <option value="NY">New York</option>
-          <option value="NC">North Carolina</option>
-          <option value="ND">North Dakota</option>
-          <option value="OH">Ohio</option>
-          <option value="OK">Oklahoma</option>
-          <option value="OR">Oregon</option>
-          <option value="PA">Pennsylvania</option>
-          <option value="RI">Rhode Island</option>
-          <option value="SC">South Carolina</option>
-          <option value="SD">South Dakota</option>
-          <option value="TN">Tennessee</option>
-          <option value="TX">Texas</option>
-          <option value="UT">Utah</option>
-          <option value="VT">Vermont</option>
-          <option value="VA">Virginia</option>
-          <option value="WA">Washington</option>
-          <option value="WV">West Virginia</option>
-          <option value="WI">Wisconsin</option>
-          <option value="WY">Wyoming</option>
-        </select>					
+      <div class="mb-3">
+        <label for="meeting-title" class="form-label">Meeting Title</label>
+        <input type="text" class="form-control" id="meetingTitle" placeholder="Add a Meeting Title" required>
       </div>
-      
-      <div class="form-group"> <!-- Zip Code-->
-        <label for="zip_id" class="control-label">Zip Code</label>
-        <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
-      </div>		
-      
-      <div class="form-group"> <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Buy!</button>
-      </div>     
-      
-    </form>		
+      <div class="mb-3">
+        <label for="meeting-date" class="form-label">Meeting Date</label>
+        <input type="date" class="form-control" id="meetingDate" required>
+      </div>
+      <div class="wrapper">
+        <div class="mb-1">
+        <label for="start-time" class="form-label">Start Time</label>
+        <input type="time" class="form-control" id="startTime" required>
+      </div>
+      <div class="mb-3">
+        <label for="end-time" class="form-label">End Time</label>
+        <input type="time" class="form-control" id="endTime" required>
+      </div></div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control mb-10" id="description">
+      </div>
+      <div class="mb-3">
+        <label for="attendees" class="form-label">Enter a comma separated list of attendees emails</label>
+        <input type="email" class="form-control mb-10" id="attendeesEmail" multiple required>
+      </div>
+      <label for="location" class="form-label">Select how you would like to meet and enter details</label>
+      <div class="flex-container">
+        <div class="input-group mb-3">
+          <div class="input-group-text">
+            <label for="remote" class="form-label">Remote</label>
+            <input class="form-check-input" type="radio" name="location" id="remoteCheckbox">
+          </div>
+          <input type="text" class="form-control" id="remote" placeholder="add meeting link">
+        </div>
+        <div class="input-group mb-3 ml-10">
+          <div class="input-group-text">
+            <label for="in-person" class="form-label">In-person</label>
+            <input class="form-check-input" type="radio" name="location" id="inPersonCheckbox">
+          </div>
+          <input type="text" class="form-control" id="inPerson" placeholder="add physical address">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" id="Schedule">Schedule</button>
+    </form>
   </div>
+
     <!-- INSERT BODY HERE -->
 
     <div class="footer">
