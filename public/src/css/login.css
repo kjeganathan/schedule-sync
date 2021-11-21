@@ -47,9 +47,10 @@ body {
   font-size: 14px;
   font-family: "arial unicode MS", arial, geneva, sans-serif;
 }
+
 .card {
   width: 700px;
-  border: solid 5px #4285f4;
+  /* border: solid 5px #4285f4; */
   padding: 5vh 5vw;
   margin: 0 auto;
   margin-left: auto;
