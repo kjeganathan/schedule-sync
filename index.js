@@ -25,7 +25,7 @@ express()
   .use(express.json())
   .use("/api", router)
   .get("/", function (req, res) {
-    res.sendFile(path.join(__dirname + "/public/src/html/login.html"));
+    res.sendFile(path.join(__dirname + "/public/login.html"));
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
