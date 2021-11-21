@@ -20,38 +20,34 @@
     <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth-compat.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
     <script type="module" src="/src/js/authentication.js"></script>
-    <script type="module" src="/src/js/calendar.js"></script>
-    <script>
+    <script async>
         document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: "dayGridMonth",
-          dayMaxEvents: true,
-          headerToolbar: {
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay",
-          },
-          googleCalendarApiKey: 'AIzaSyA_dnFhAlsnKF_C6h49PHKq4bTnfHjjbBQ',
-          eventSources: [
-            {
-              googleCalendarId: 'c_4lbahl431sc1uvat086nkqddc8@group.calendar.google.com'
-            }
-          ],
-          eventClick: function(event) {
-            // opens events in a popup window
-            open(event.url, "_blank");
-          },
-          eventMouseEnter: function( event, jsEvent, view ) { 
-            // $(event.el).tooltip({placement: "top", title: event.title});
-          },
-          eventMouseLeave: function() {
-            // popover.hide();
-            // popover = null;
-          }
+        $.ajax({
+          url: "/api/user-calendars",
+          type: "GET"
+        }).done(function (data) {
+            const calendars = data.googleCalendars;
+            console.log(calendars);
+            var calendarEl = document.getElementById("calendar");
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+              initialView: "dayGridMonth",
+              dayMaxEvents: true,
+              headerToolbar: {
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,timeGridDay",
+              },
+              googleCalendarApiKey: 'AIzaSyA_dnFhAlsnKF_C6h49PHKq4bTnfHjjbBQ',
+              eventSources: calendars,
+              eventClick: function(event) {
+                // opens events in a popup window
+                open(event.url, "_blank");
+              }
+            });
+            calendar.render();
+        }).fail(function (jqXHR) {
+            console.log("Error loading the google calendars");
         });
-        calendar.render();
       });
     </script>
   </head>
