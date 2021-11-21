@@ -1,91 +1,133 @@
 #title {
-  margin-top: 50px;
-  width:fit-content;
-  margin-left:auto;
-  margin-right:auto;
-  height: 32px;
-  font-style: normal;
+
+  margin-top: 2vw;
+  margin-bottom: 1vw;
+  width: fit-content;
+  height: 4vh;
   font-weight: normal;
-  font-size: 48px;
+  font-size: 30px;
   line-height: 32px;
   color: #000000;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 text{
   z-index:1000;
 }
 
+.row{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
 #detailButton {
-  margin-left: 130px;
-  height:fit-content;
   background-color: white;
   color: #8f7878;
-  border-radius:15px;
+  font-size: 0.75vw;
+  font-weight:bold;
+  border-radius:20px;
+  margin-left:6vw;
+}
+
+#detailButton:hover{
+  background-color: lightgray;
 }
 
 #tentativeButton1{
-  margin-top: 20px;
+  border-color:#7d9fec;
+  background-color:#7d9fec;
+  font-size: 0.75vw;
+  border-radius:20px;
+  margin-left:1vw;
+  font-weight:bold;
+
+}
+
+#tentativeButton1:hover{
+  background-color:green;
 }
 
 #tentativeButton2{
-  margin-top: 20px;
+  background-color:#f3bd56;
+  border-color:#f3bd56;
+  font-size: 0.75vw;
+  border-radius:20px;
+  font-weight:bold;
+  margin-left:3px;
+}
+
+#tentativeButton2:hover{
+  background-color:red;
 }
 
 .tentative-meetings-title, .upcoming-meetings-title{
+  padding:10px;
   width:fit-content;
   margin-right:auto;
   margin-left:auto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 36px;
-  color:#505050;
+  height: 4vh;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 32px;
+  color: #000000;
 
 }
 
+.card-body{
+  display:flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+  margin-top:2vw;
+  width: 25vw;
+  height:18vh;
+}
+
 .card-title {
-  width: 338px;
-  height: 32px;
+  width: fit-content;
+  height: 2vh;
   padding: 0px;
 
+  font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  font-size: 36px;
+  font-size: 2vw;
   line-height: 32px;
-  margin-bottom: 0px;
+  margin-bottom: 1vw;
   /* identical to box height, or 89% */
 
   color: #ffffff;
 }
 
-.card-body {
-  height: 250px;
-}
-
 #start-time,
 #end-time,
 #location {
-  width: 100%;
-  height: 40px;
+  width: 20vw;
+  height: 4vh;
 
+  font-family: Roboto;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1vw;
   line-height: 3px;
 
   color: #ffffff;
 }
 
+
+
 .card {
-  height: 250px;
-  width: 600px;
-  margin-top: 50px;
+  margin-top: 3vw;
   margin-left:auto;
   margin-right:auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 #card1 {
-  margin-top: 100px;
+  height: 23vh;
+  width: 34.5vw;
+  margin-top: 6vw;
   border-radius: 20px;
   background: #505050;
 }
@@ -93,46 +135,54 @@ text{
 /* Login and Create Account Header Banner Styling */
 
 #loginCol {
-  height: 0px;
+  height: 0vh;
   position: absolute;
   left: 0%;
-  width: 50%;
+  width: 50vw;
   text-align: left;
-  margin-left: 20px;
-  margin-right: 100px;
+  margin-left: 1vw;
+  margin-right: 5vw;
 }
 
 #createAccountCol {
-  margin-left: 60%;
-  width: 50%;
-  height: 240px;
+  margin-left: 30vw;
+  width: 50vw;
+  height: 27vh;
   text-align: left;
   border-left-width: 5px;
 }
 
 .card-horizontal {
   display: flex;
-  height: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width:max-content;
+  margin-bottom:4vw;
 }
 
 #calendar-icon {
-  height: 180px;
-  width: 200px;
-  padding-top: 30px;
+  margin-left:1vw;
+  height: 18vh;
+  width: 10vw;
+  padding-top: 2vw;
   color: white;
 }
 
 #clock-icon,
 #location-icon {
-  margin-right: 10px;
-  height: 19px;
-  width: 19px;
+  margin-right: 0.5vw;
+  height: 2vh;
+  width: 1vw;
   color: white;
 }
 
 .container {
-  height: 100%;
+  display: flex;
+  gap: 20vw;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
+
 
 html,
 body {
@@ -140,6 +190,7 @@ body {
 }
 body {
   margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* General body CSS */
@@ -265,5 +316,9 @@ body {
   height: 30px;
   background-color: transparent;
   border: none;
+}
+
+.img-square-wrapper {
+  margin-right: 2vw !important;
 }
 
