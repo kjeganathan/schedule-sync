@@ -23,8 +23,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api", router);
 
+// ENDPOINT for sending the app to the login page on the main domain
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/public/login.html"));
+  res.sendFile(path.join(__dirname + "/public/src/html/login.html"));
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
