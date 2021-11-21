@@ -24,10 +24,30 @@ express()
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
   .use("/api", router)
+
   .get("/", function (req, res) {
     res.sendFile(path.join(__dirname + "/public/login.html"));
   })
+
+  .get("/meetings", function (req, res) {
+    res.sendFile(path.join(__dirname + "/public/meetings.html"));
+  })
+
+  .get("/calendar", function (req, res) {
+    res.sendFile(path.join(__dirname + "/public/calendar.html"));
+  })
+
+  .get("/meeting-info", function (req, res) {
+    res.sendFile(path.join(__dirname + "/public/meeting-info.html"));
+  })
+
+  .get("/scheduling", function (req, res) {
+    res.sendFile(path.join(__dirname + "/public/scheduling.html"));
+  })
+
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+  
 
 /* * * * * * * * * * * * * * * * * * * * * *  
  *             DATABASE TABLES             *
