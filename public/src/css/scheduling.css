@@ -61,7 +61,7 @@ body {
 
 /* Footer CSS */
 .footer {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -131,3 +131,48 @@ body {
   background-color: transparent;
   border: none;
 }
+
+.form-group{
+  color: rgb(0, 0, 0);
+}
+
+.scheduleMeeting{
+  margin-top:20px;
+}
+
+#description{
+  height:80px;
+}
+
+.flex-container{
+  display: flex;
+  width: 1000px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flex-container > div{
+  margin-right: 20px;
+  width: 1000px;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.wrapper > div{
+  margin-right: 20px;
+}
+
+#inPersonCheckbox{
+  display:inline-flex;
+}
+
+.input-group-text {
+  display: flex !important;
+  width: max-content;
+}
+
+ 
