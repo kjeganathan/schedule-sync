@@ -2,14 +2,14 @@
  *             DATABASE TABLES             *
  * * * * * * * * * * * * * * * * * * * * * * 
     
-create table users(user_id SERIAL PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, email TEXT NOT NULL, meetings text[], tentative_meetings jsonb);
+create table users(user_id SERIAL PRIMARY KEY, full_name TEXT NOT NULL, email TEXT NOT NULL, meetings text[], tentative_meetings jsonb);
 create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date DATE NOT NULL, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL, attendees text[]);
 
 Example tables:
         
 user_id  |  first_name   |    last_name     |            email            |       meetings      
 ---------+---------------+------------------+-----------------------------+----------------------    
-1        |    Emma       |     Martinez     |   emmaMartinez@gmail.com    |  ["Music Arts Club"]
+1        |    Emma       |     Martinez     |   emmaMartinez@gmail.com    |  ["1"]
 
 
 meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees  
@@ -18,7 +18,7 @@ meeting_id   |       title         |        date         |    start_time    |   
 
 */
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const pgp = require("pg-promise")({
   connect(client) {
@@ -33,7 +33,7 @@ const pgp = require("pg-promise")({
   },
 });
 
-let secrets = require('././secrets.json');
+let secrets = require("././secrets.json");
 let username = secrets.username;
 let password = secrets.password;
 
@@ -59,11 +59,11 @@ async function connectAndRun(task) {
 }
 
 //Database functions
-async function addUser(first_name, last_name, email) {
+async function addUser(full_name, email) {
   return await connectAndRun((db) =>
     db.none(
-      "INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3);",
-      [first_name, last_name, email]
+      "INSERT INTO users (full_name, email, meetings, tentative_meetings) VALUES ($1, $2, $3, $4);",
+      [full_name, email, [], []]
     )
   );
 }
