@@ -1,5 +1,5 @@
 const express = require("express");
-let fs = require('fs');
+let fs = require("fs");
 const path = require("path");
 const router = express.Router();
 const passport = require('passport'); 
@@ -62,11 +62,11 @@ app.post("/schedule-meeting", async (req, res) => {
   res.sendStatus(200);
 });
 
-app.get("/meetings", checkLoggedIn, async (req, res) => {
+app.get("/meetings", async (req, res) => {
   res.send(JSON.stringify(await db.getMeetings(req.email)));
 });
 
-app.delete("/meetings/:title", checkLoggedIn, async (req, res) => {
+app.delete("/meetings/:title", async (req, res) => {
   await db.delMeeting(req.params.title, req.email);
   res.sendStatus(200);
 });

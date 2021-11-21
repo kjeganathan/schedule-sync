@@ -84,25 +84,22 @@ async function addMeeting(
   attendees
 ) {
   return await connectAndRun((db) =>
-    db.none(
+    db.any(
       "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees) VALUES ($1, $2, $3, $4, $5, $6, $7);",
       [title, date, start_time, end_time, location, description, attendees]
     )
   );
 }
 
-async function getMeetings(email) {
+async function getMeetings(meeting_id) {
   return await connectAndRun((db) =>
-    db.any("SELECT * FROM meetings where email = $1;", [email])
+    db.any("SELECT * FROM meetings where meeting_id = $1;", [meeting_id])
   );
 }
 
-async function delMeeting(title, email) {
+async function delMeeting(meeting_id) {
   return await connectAndRun((db) =>
-    db.none("DELETE FROM meetings where title = $1 and email = $2;", [
-      title,
-      email,
-    ])
+    db.none("DELETE FROM meetings where meeting_id = $1;", [meeting_id])
   );
 }
 
