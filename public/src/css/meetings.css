@@ -87,11 +87,9 @@ text {
   width: fit-content;
   height: 2vh;
   padding: 0px;
-
-  font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  font-size: 2vw;
+  font-size: 1.5vw;
   line-height: 32px;
   margin-bottom: 1vw;
   /* identical to box height, or 89% */
@@ -99,13 +97,15 @@ text {
   color: #ffffff;
 }
 
+.last-card {
+  margin-bottom: 100px;
+}
+
 #start-time,
 #end-time,
 #location {
   width: 20vw;
   height: 4vh;
-
-  font-family: Roboto;
   font-style: normal;
   font-weight: 400;
   font-size: 1vw;
@@ -186,7 +186,6 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* General body CSS */
