@@ -2,19 +2,19 @@
  *             DATABASE TABLES             *
  * * * * * * * * * * * * * * * * * * * * * * 
     
-create table users(user_id SERIAL PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, email TEXT NOT NULL, meetings TEXT NOT NULL, tentative_meetings TEXT NOT NULL);
-create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date DATE NOT NULL, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL, attendees TEXT NOT NULL);
+create table users(user_id SERIAL PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, email TEXT NOT NULL, meetings text[], tentative_meetings jsonb);
+create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date DATE NOT NULL, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL, attendees text[]);
 
 Example tables:
         
-user_id  |  first_name   |   last_name   |   email    |   meetings      
----------+---------------+---------------+------------+------------      
-1        |    Mahmood    |     Jasim     |   a@b.c    | 
+user_id  |  first_name   |    last_name     |            email            |       meetings      
+---------+---------------+------------------+-----------------------------+----------------------    
+1        |    Emma       |     Martinez     |   emmaMartinez@gmail.com    |  ["Music Arts Club"]
 
 
-meeting_id   |       title        |        date         |    start_time    |    end_time    |    location     |   description   |   attendees  
--------------+--------------------+---------------------+------------------+----------------+-----------------+-----------------+------------
-1            |   CS 325 Meeting   |     11/09/2021      |                  |                |                 |                 |
+meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees  
+-------------+---------------------+---------------------+------------------+----------------+-----------------+-----------------------------+-------------------------------------------------------
+1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"]
 
 */
 
