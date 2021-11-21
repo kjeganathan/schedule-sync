@@ -5,7 +5,6 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* General body CSS */
@@ -187,6 +186,14 @@ body {
   gap: 25px;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+.meeting-description-container {
+  display: flex;
+  gap: 25px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 100px;
 }
 
 .large-card {
