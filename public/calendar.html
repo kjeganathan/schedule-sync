@@ -7,13 +7,13 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=yes"
     />
-    <link rel="icon" href="/assets/images/logo-blue.png" type="image/png" />
+    <link rel="icon" href="assets/images/logo-blue.png" type="image/png" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' />
-    <link rel="stylesheet" type="text/css" href="/src/css/calendar.css" />
+    <link rel="stylesheet" href="src/css/calendar.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app-compat.js"></script>
@@ -58,11 +58,16 @@
 
   <body>
     <div class="navbar">
-      <a href="calendar.html" id="uploadCalendar">My Calendar</a>
-      <a href="scheduling.html" id="scheduleMeeting">Schedule a Meeting</a>
-      <img width="100px" height="74x" class="logo" src="../../assets/images/logo-blue.png" />
-      <a href="meetings.html" id="myMeetings">My Meetings</a>
-      <a type="button" id="logout">Log Out</button>
+      <a href="src/html/calendar.html" id="myCalendar">My Calendar</a>
+      <a href="src/html/scheduling" id="scheduleMeeting">Schedule a Meeting</a>
+      <img
+        width="100px"
+        height="74x"
+        class="logo"
+        src="assets/images/logo-blue.png"
+      />
+      <a href="src/meetings" id="myMeetings">My Meetings</a>
+      <a role="button" id="logout" (click)="logout()">Logout</a>
     </div>
 
     <div id='calendar'></div>
