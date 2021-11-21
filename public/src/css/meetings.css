@@ -1,6 +1,8 @@
 #title {
-  margin-top: 20px;
-  width: 100%;
+  margin-top: 50px;
+  width:fit-content;
+  margin-left:auto;
+  margin-right:auto;
   height: 32px;
   font-family: Inter;
   font-style: normal;
@@ -8,6 +10,10 @@
   font-size: 48px;
   line-height: 32px;
   color: #000000;
+}
+
+text{
+  z-index:1000;
 }
 
 #detailButton {
