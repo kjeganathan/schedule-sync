@@ -1,9 +1,13 @@
 const express = require("express");
+let fs = require('fs');
 const path = require("path");
 const router = express.Router();
 const PORT = process.env.PORT || 8081;
 const { Pool } = require("pg");
 // environment variables
+let database;
+database = JSON.parse(fs.readFileSync("data.json"));
+
 require("dotenv").config();
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -43,6 +47,17 @@ express()
 
   .get("/scheduling", function (req, res) {
     res.sendFile(path.join(__dirname + "/public/scheduling.html"));
+  })
+
+  
+  .get("/meetings/tentative", function(req, res){
+    let userId = "1";
+    for(let i = 0; i<database["users"].length; i++){
+      if(userId === JSON.stringify(database["users"][i].userId)){
+        console.log(data["users"][i]);
+        res.send(data["users"][i]);
+      }
+    }
   })
 
   .listen(PORT, () => console.log(`Listening on ${PORT}`));

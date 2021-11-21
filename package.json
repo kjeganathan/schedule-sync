@@ -24,6 +24,7 @@
   "homepage": "https://github.com/kjeganathan/schedule-sync#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "path": "^0.12.7",
     "pg": "^8.7.1"
