@@ -51,7 +51,7 @@
             type="text"
             class="form-control"
             id="meetingTitle"
-            placeholder="Add a Meeting Title"
+            placeholder="e.g. CS 325 Group Meeting"
             required
           />
         </div>
@@ -71,7 +71,13 @@
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <input type="text" class="form-control mb-10" id="description" />
+          <textarea
+            id="description"
+            name="description"
+            class="form-control mb-10"
+            rows="4"
+            cols="50"
+          ></textarea>
         </div>
         <div class="mb-3">
           <label for="attendees" class="form-label"
@@ -88,7 +94,7 @@
         <label for="location" class="form-label"
           >Select how you would like to meet and enter details</label
         >
-        <div class="flex-container">
+        <div class="wrapper">
           <div class="input-group mb-3">
             <div class="input-group-text">
               <label for="remote" class="form-label">Remote</label>
