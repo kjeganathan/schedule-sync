@@ -81,6 +81,7 @@ text {
   margin-top: 2vw;
   width: 25vw;
   height: 18vh;
+  margin-bottom: 2vw;
 }
 
 .card-title {
@@ -98,7 +99,7 @@ text {
 }
 
 .last-card {
-  margin-bottom: 100px;
+  margin-bottom: 3vw;
 }
 
 #start-time,

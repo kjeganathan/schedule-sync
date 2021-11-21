@@ -67,3 +67,4 @@ node_modules/
 
 #optional DS_Store
 .DS_Store
+node_modules
