@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script type="module" src="js/meetings.js" defer></script>
+
+<head>
     <title>Schedule Sync</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=yes"
     />
-    <link rel="stylesheet" href="src/css/meetings.css">
+    <link rel="stylesheet" href="../css/meetings.css">
     <link rel="icon" href="assets/images/logo-blue.png" type="image/png" />
     <link
       rel="stylesheet"
@@ -17,21 +17,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth-compat.js"></script>
-    <script type="module" src="/src/js/authentication.js"></script>
-    <script type="module" src="/src/js/calendar.js"></script>
+    <script type="module" src="../js/authentication.js"></script>
   </head>
 
   <body>
     <div class="navbar">
-      <a href="calendar.html" id="myCalendar">My Calendar</a>
-      <a href="scheduling.html" id="scheduleMeeting">Schedule a Meeting</a>
+      <a href="../html/calendar.html" id="myCalendar">My Calendar</a>
+      <a href="../html/scheduling.html" id="scheduleMeeting">Schedule a Meeting</a>
       <img
         width="100px"
         height="74x"
         class="logo"
-        src="assets/images/logo-blue.png"
+        src="../../assets/images/logo-blue.png"
       />
-      <a href="meetings.html" id="myMeetings">My Meetings</a>
+      <a href="../html/meetings.html" id="myMeetings">My Meetings</a>
       <a role="button" id="logout" (click)="logout()">Logout</a>
     </div>
 
@@ -57,7 +56,7 @@
                                 </svg> 
                             </div>
                             <div class="card-body">
-                                    <h2 class="card-title">Sunday Brunch</h2>
+                                    <div class="card-title">Sunday Brunch</div>
                                 <br />
                                 <div class="card-text">
                                     <div id="start-time">
@@ -81,8 +80,8 @@
                                     
                             </div>
                         </div>
+                        </div>
                     </div>
-
                     <div class="card" id="card1">
                         <div id="entire-card" class="card-horizontal">
                             <div class="img-square-wrapper">
@@ -92,7 +91,7 @@
                                 </svg>
                             </div>
                             <div class="card-body">
-                                    <h2 class="card-title">Econ Meeting</h2>
+                                    <div class="card-title">Econ Meeting</div>
                                 <br />
                                 <div class="card-text">
                                     <div id="start-time">
@@ -139,7 +138,7 @@
                                 </svg>
                             </div>
                             <div class="card-body">
-                                    <h2 class="card-title">Fall Photoshoot</h2>
+                                    <div class="card-title">Fall Photoshoot</div>
                                 <br />
                                 <div class="card-text">
                                     <div id="start-time">
@@ -162,6 +161,7 @@
 
                             </div>
                         </div>
+                        </div>
                     </div>
 
                     <div class="card" id="card1">
@@ -173,7 +173,7 @@
                                 </svg>
                             </div>
                             <div class="card-body">
-                                    <h2 class="card-title">Band Photoshoot</h2>
+                                    <div class="card-title">Band Photoshoot</div>
                                 <br />
                                 <div class="card-text">
                                     <div id="start-time">
@@ -200,13 +200,14 @@
             </div>
         </div>
 
-    <div class="footer">
-      <style>
-        .heart {
-          color: #e25555;
-        }
-      </style>
-      <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
-    </div>
-  </body>
+                <div class="footer">
+                    <style>
+                        .heart {
+                            color: #e25555;
+                        }
+                    </style>
+                    <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
+                </div>
+</body>
+
 </html>
