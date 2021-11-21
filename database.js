@@ -18,6 +18,8 @@ meeting_id   |       title         |        date         |    start_time    |   
 
 */
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
+
 const pgp = require("pg-promise")({
   connect(client) {
     console.log("Connected to database:", client.connectionParameters.database);
@@ -31,11 +33,11 @@ const pgp = require("pg-promise")({
   },
 });
 
-const username = "postgres";
-const password = "admin";
+let secrets = require('././secrets.json');
+let username = secrets.username;
+let password = secrets.password;
 
-const url =
-  process.env.DATABASE_URL || `postgres://${username}:${password}@localhost/`;
+const url = `postgres://${username}:${password}@ec2-52-201-195-11.compute-1.amazonaws.com:5432/d5jgvmlhrb3udn?sslmode=require`;
 const db = pgp(url);
 
 async function connectAndRun(task) {

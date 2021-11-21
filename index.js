@@ -2,6 +2,8 @@ const express = require("express");
 let fs = require('fs');
 const path = require("path");
 const router = express.Router();
+const passport = require('passport'); 
+const LocalStrategy = require('passport-local').Strategy;   
 const PORT = process.env.PORT || 8081;
 const db = require("./database.js");
 
@@ -15,6 +17,16 @@ app.use(express.static(path.join(__dirname, "public"), { index: false }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api", router);
+
+function checkLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+// If we are authenticated, run the next route.
+next();
+  } else {
+// Otherwise, redirect to the login page.
+res.redirect('/login');
+  }
+}
 
 // ENDPOINT for sending the app to the login page on the main domain
 app.get("/", function (req, res) {
