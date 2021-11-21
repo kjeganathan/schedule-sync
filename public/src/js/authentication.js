@@ -38,7 +38,8 @@ function googleLogin() {
       // The signed-in user info.
       const user = result.user;
       // Add the customer id to local storage for access accross the website
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("email", JSON.stringify(user.email));
+      localStorage.setItem("username", JSON.stringify(user.displayName));
       // Open the home page in the same window
       open("/src/html/calendar.html", "_self");
       // ...
