@@ -42,18 +42,13 @@
       <a role="button" id="logout" (click)="logout()">Logout</a>
     </div>
 
+    <h2 id="title">Schedule a Meeting</h2>
+
     <div class="scheduleMeeting">
-      <h2>Schedule a Meeting</h2>
       <form>
         <div class="mb-3">
           <label for="meeting-title" class="form-label">Meeting Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="meetingTitle"
-            placeholder="e.g. CS 325 Group Meeting"
-            required
-          />
+          <input type="text" class="form-control" id="meetingTitle" required />
         </div>
         <div class="mb-3">
           <label for="meeting-date" class="form-label">Meeting Date</label>
@@ -80,19 +75,18 @@
           ></textarea>
         </div>
         <div class="mb-3">
-          <label for="attendees" class="form-label"
-            >Enter a comma separated list of attendees emails</label
-          >
+          <label for="attendees" class="form-label">Add Guests</label>
           <input
             type="email"
             class="form-control mb-10"
             id="attendeeEmail"
+            placeholder="Enter a comma separated list of attendees emails"
             multiple
             required
           />
         </div>
         <label for="location" class="form-label"
-          >Select how you would like to meet and enter details</label
+          >How would you like to meet?</label
         >
         <div class="wrapper">
           <div class="input-group mb-3">

@@ -131,6 +131,18 @@ body {
   border: none;
 }
 
+/* SCHEDULING PAGE CSS */
+#title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 32px;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 32px;
+  color: #000000;
+}
+
 .form-group {
   color: rgb(0, 0, 0);
 }
@@ -176,6 +188,6 @@ body {
 
 #description,
 #attendeeEmail {
-  width: 80vw !important;
+  width: 45vw !important;
   margin: 0 auto;
 }
