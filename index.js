@@ -15,19 +15,19 @@ const pool = new Pool({
 // environment variables
 require("dotenv").config();
 
-express()
-  .use(
-    express.static(path.join(__dirname, "public"), {
-      index: false,
-    })
-  )
-  .use(express.urlencoded({ extended: true }))
-  .use(express.json())
-  .use("/api", router)
-  .get("/", function (req, res) {
-    res.sendFile(path.join(__dirname + "/public/src/html/login.html"));
-  })
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+const app = express();
+
+// App configuration
+app.use(express.static(path.join(__dirname, "public"), { index: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use("/api", router);
+
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname + "/public/login.html"));
+});
+
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 /* * * * * * * * * * * * * * * * * * * * * *  
  *             DATABASE TABLES             *

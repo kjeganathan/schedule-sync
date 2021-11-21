@@ -1,6 +1,8 @@
 #title {
-  margin-top: 20px;
-  width: 100%;
+  margin-top: 50px;
+  width:fit-content;
+  margin-left:auto;
+  margin-right:auto;
   height: 32px;
   font-family: Inter;
   font-style: normal;
@@ -10,10 +12,36 @@
   color: #000000;
 }
 
+text{
+  z-index:1000;
+}
+
 #detailButton {
   margin-left: 130px;
+  height:fit-content;
   background-color: white;
-  color: #505050;
+  color: #8f7878;
+  border-radius:15px;
+}
+
+#tentativeButton1{
+  margin-left:40px;
+}
+
+#tentativeButton2{
+  margin-left:10px;
+}
+
+.tentative-meetings-title, .upcoming-meetings-title{
+  width:fit-content;
+  margin-right:auto;
+  margin-left:auto;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  color:#505050;
+
 }
 
 .card-title {
@@ -48,9 +76,11 @@
 }
 
 .card {
-  height: 200px;
+  height: 220px;
   width: 600px;
   margin-top: 50px;
+  margin-left:auto;
+  margin-right:auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -237,3 +267,4 @@ body {
   background-color: transparent;
   border: none;
 }
+
