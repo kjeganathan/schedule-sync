@@ -25,26 +25,51 @@ text{
 #detailButton {
   background-color: white;
   color: #8f7878;
+  font-size: 0.75vw;
+  font-weight:bold;
   border-radius:20px;
-  margin-left:4vw;
+  margin-left:6vw;
+}
+
+#detailButton:hover{
+  background-color: lightgray;
 }
 
 #tentativeButton1{
-  margin-left:0.5vw;
+  border-color:#7d9fec;
+  background-color:#7d9fec;
+  font-size: 0.75vw;
   border-radius:20px;
+  margin-left:1vw;
+  font-weight:bold;
+
+}
+
+#tentativeButton1:hover{
+  background-color:green;
 }
 
 #tentativeButton2{
+  background-color:#f3bd56;
+  border-color:#f3bd56;
+  font-size: 0.75vw;
   border-radius:20px;
+  font-weight:bold;
+  margin-left:3px;
+}
+
+#tentativeButton2:hover{
+  background-color:red;
 }
 
 .tentative-meetings-title, .upcoming-meetings-title{
+  padding:10px;
   width:fit-content;
   margin-right:auto;
   margin-left:auto;
   height: 4vh;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 32px;
   line-height: 32px;
   color: #000000;
 
@@ -54,9 +79,9 @@ text{
   display:flex;
   flex-direction:column;
   justify-content: space-evenly;
-  margin-top:1vw;
+  margin-top:2vw;
   width: 25vw;
-  height:20vh;
+  height:18vh;
 }
 
 .card-title {
@@ -67,7 +92,7 @@ text{
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  font-size: 36px;
+  font-size: 2vw;
   line-height: 32px;
   margin-bottom: 1vw;
   /* identical to box height, or 89% */
@@ -84,7 +109,7 @@ text{
   font-family: Roboto;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1vw;
   line-height: 3px;
 
   color: #ffffff;
@@ -101,7 +126,7 @@ text{
 
 #card1 {
   height: 23vh;
-  width: 36vw;
+  width: 34.5vw;
   margin-top: 6vw;
   border-radius: 20px;
   background: #505050;
@@ -136,8 +161,9 @@ text{
 }
 
 #calendar-icon {
-  height: 20vh;
-  width: 12vw;
+  margin-left:1vw;
+  height: 18vh;
+  width: 10vw;
   padding-top: 2vw;
   color: white;
 }
@@ -152,10 +178,11 @@ text{
 
 .container {
   display: flex;
-  gap: 10vw;
+  gap: 20vw;
   flex-direction: row;
   justify-content: space-evenly;
 }
+
 
 html,
 body {
