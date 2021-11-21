@@ -15,39 +15,19 @@ const pool = new Pool({
 // environment variables
 require("dotenv").config();
 
-express()
-  .use(
-    express.static(path.join(__dirname, "public"), {
-      index: false,
-    })
-  )
-  .use(express.urlencoded({ extended: true }))
-  .use(express.json())
-  .use("/api", router)
+const app = express();
 
-  .get("/", function (req, res) {
-    res.sendFile(path.join(__dirname + "/public/login.html"));
-  })
+// App configuration
+app.use(express.static(path.join(__dirname, "public"), { index: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use("/api", router);
 
-  .get("/meetings", function (req, res) {
-    res.sendFile(path.join(__dirname + "/public/meetings.html"));
-  })
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname + "/public/login.html"));
+});
 
-  .get("/calendar", function (req, res) {
-    res.sendFile(path.join(__dirname + "/public/calendar.html"));
-  })
-
-  .get("/meeting-info", function (req, res) {
-    res.sendFile(path.join(__dirname + "/public/meeting-info.html"));
-  })
-
-  .get("/scheduling", function (req, res) {
-    res.sendFile(path.join(__dirname + "/public/scheduling.html"));
-  })
-
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-  
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 /* * * * * * * * * * * * * * * * * * * * * *  
  *             DATABASE TABLES             *
