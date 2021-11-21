@@ -36,24 +36,6 @@
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           },
-          googleCalendarApiKey: "AIzaSyA_dnFhAlsnKF_C6h49PHKq4bTnfHjjbBQ",
-          eventSources: [
-            {
-              googleCalendarId:
-                "c_4lbahl431sc1uvat086nkqddc8@group.calendar.google.com",
-            },
-          ],
-          eventClick: function (event) {
-            // opens events in a popup window
-            open(event.url, "_blank");
-          },
-          eventMouseEnter: function (event, jsEvent, view) {
-            // $(event.el).tooltip({placement: "top", title: event.title});
-          },
-          eventMouseLeave: function () {
-            // popover.hide();
-            // popover = null;
-          },
         });
         calendar.render();
       });
