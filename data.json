@@ -5,8 +5,8 @@
             "email": "emmaMartinez@gmail.com",
             "firstName": "Emma",
             "lastName": "Martinez",
-            "meetings": ["1"],
-            "tentativeMeetings": [{"meetingId":"2", "isDecline": true}]
+            "meetings": ["3", "4"],
+            "tentativeMeetings": [{"meetingId":"1", "isDecline": null}, {"meetingId":"2", "isDecline": null}]
         },
         {
             "userId": "2",
