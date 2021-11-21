@@ -40,7 +40,7 @@ function googleLogin() {
       // Add the customer id to local storage for access accross the website
       localStorage.setItem("user", JSON.stringify(user));
       // Open the home page in the same window
-      open("calendar.html", "_self");
+      open("/src/html/calendar.html", "_self");
       // ...
     })
     .catch((error) => {
