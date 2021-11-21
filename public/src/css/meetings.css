@@ -1,5 +1,4 @@
 #title {
-
   margin-top: 2vw;
   margin-bottom: 1vw;
   width: fit-content;
@@ -8,17 +7,17 @@
   font-size: 30px;
   line-height: 32px;
   color: #000000;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-text{
-  z-index:1000;
+text {
+  z-index: 1000;
 }
 
-.row{
-  display:flex;
-  flex-direction:row;
+.row {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -26,62 +25,62 @@ text{
   background-color: white;
   color: #8f7878;
   font-size: 0.75vw;
-  font-weight:bold;
-  border-radius:20px;
-  margin-left:6vw;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-left: 6vw;
 }
 
-#detailButton:hover{
+#detailButton:hover {
   background-color: lightgray;
 }
 
-#tentativeButton1{
-  border-color:#7d9fec;
-  background-color:#7d9fec;
+#tentativeButton1 {
+  border-color: #7d9fec;
+  background-color: #7d9fec;
   font-size: 0.75vw;
-  border-radius:20px;
-  margin-left:1vw;
-  font-weight:bold;
-
+  border-radius: 20px;
+  margin-left: 1vw;
+  font-weight: bold;
 }
 
-#tentativeButton1:hover{
-  background-color:green;
+#tentativeButton1:hover {
+  background-color: green;
 }
 
-#tentativeButton2{
-  background-color:#f3bd56;
-  border-color:#f3bd56;
+#tentativeButton2 {
+  background-color: #f3bd56;
+  border-color: #f3bd56;
   font-size: 0.75vw;
-  border-radius:20px;
-  font-weight:bold;
-  margin-left:3px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-left: 3px;
 }
 
-#tentativeButton2:hover{
-  background-color:red;
+#tentativeButton2:hover {
+  background-color: red;
 }
 
-.tentative-meetings-title, .upcoming-meetings-title{
-  padding:10px;
-  width:fit-content;
-  margin-right:auto;
-  margin-left:auto;
+.tentative-meetings-title,
+.upcoming-meetings-title {
+  padding: 10px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
   height: 4vh;
   font-weight: normal;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 32px;
   color: #000000;
-
+  text-decoration: underline;
 }
 
-.card-body{
-  display:flex;
-  flex-direction:column;
+.card-body {
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
-  margin-top:2vw;
+  margin-top: 2vw;
   width: 25vw;
-  height:18vh;
+  height: 18vh;
 }
 
 .card-title {
@@ -115,12 +114,10 @@ text{
   color: #ffffff;
 }
 
-
-
 .card {
   margin-top: 3vw;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -156,12 +153,12 @@ text{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width:max-content;
-  margin-bottom:4vw;
+  width: max-content;
+  margin-bottom: 4vw;
 }
 
 #calendar-icon {
-  margin-left:1vw;
+  margin-left: 1vw;
   height: 18vh;
   width: 10vw;
   padding-top: 2vw;
@@ -182,7 +179,6 @@ text{
   flex-direction: row;
   justify-content: space-evenly;
 }
-
 
 html,
 body {
@@ -321,4 +317,3 @@ body {
 .img-square-wrapper {
   margin-right: 2vw !important;
 }
-
