@@ -57,6 +57,10 @@ text{
   color: #ffffff;
 }
 
+.card-body {
+  height: 250px;
+}
+
 #start-time,
 #end-time,
 #location {
