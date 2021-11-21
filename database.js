@@ -68,11 +68,22 @@ async function addUser(full_name, email) {
   );
 }
 
+async function addUserTest(full_name, email, meetings, tentative_meetings) {
+  return await connectAndRun((db) =>
+    db.none(
+      "INSERT INTO users (full_name, email, meetings, tentative_meetings) VALUES ($1, $2, $3, $4);",
+      [full_name, email, meetings, tentative_meetings]
+    )
+  );
+}
+
+
 async function getUser(email) {
   return await connectAndRun((db) =>
     db.any("SELECT * FROM users WHERE email = $1;", [email])
   );
 }
+
 
 async function addMeeting(
   title,
@@ -103,10 +114,25 @@ async function delMeeting(meeting_id) {
   );
 }
 
+async function getTentativeMeetings(email) {
+  return await connectAndRun((db) =>
+    db.any("SELECT tentative_meetings FROM users where email = $1;", [email])
+  );
+}
+
+async function getUpcomingMeetings(email) {
+  return await connectAndRun((db) =>
+    db.any("SELECT meetings FROM users where email = $1;", [email])
+  );
+}
+
 module.exports = {
   addUser,
   getUser,
   addMeeting,
   getMeetings,
   delMeeting,
+  getTentativeMeetings,
+  getUpcomingMeetings,
+  addUserTest
 };
