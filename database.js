@@ -3,13 +3,13 @@
  * * * * * * * * * * * * * * * * * * * * * * 
     
 create table users(user_id SERIAL PRIMARY KEY, full_name TEXT NOT NULL, email TEXT NOT NULL, meetings text[], tentative_meetings jsonb);
-create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date DATE NOT NULL, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL, attendees text[]);
+create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date DATE NOT NULL, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT, attendees text[]);
 
 Example tables:
         
-user_id  |  first_name   |    last_name     |            email            |       meetings      
----------+---------------+------------------+-----------------------------+----------------------    
-1        |    Emma       |     Martinez     |   emmaMartinez@gmail.com    |  ["1"]
+user_id  |       full_name       |            email            |    meetings      |   tentative meetings   
+---------+-----------------------+------------------+-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |      ["1"]       |   [{"meeting_id": 1, "title": "Music Arts Club", "date": "11/09/2021", "start_time": "9:00 AM", "end_time": "10:00 AM", "location": "Zoom", "description", "", "attendees": ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"]} ]
 
 
 meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees  

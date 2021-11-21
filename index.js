@@ -2,8 +2,8 @@ const express = require("express");
 let fs = require("fs");
 const path = require("path");
 const router = express.Router();
-const passport = require('passport'); 
-const LocalStrategy = require('passport-local').Strategy;   
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 const PORT = process.env.PORT || 8081;
 const db = require("./database.js");
 
@@ -20,11 +20,11 @@ app.use("/api", router);
 
 function checkLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-// If we are authenticated, run the next route.
-next();
+    // If we are authenticated, run the next route.
+    next();
   } else {
-// Otherwise, redirect to the login page.
-res.redirect('/login');
+    // Otherwise, redirect to the login page.
+    res.redirect("/login");
   }
 }
 
@@ -48,7 +48,7 @@ app.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 
-app.post("/schedule-meeting", async (req, res) => {
+app.post("/schedule", async (req, res) => {
   const data = req.body;
   await db.addMeeting(
     data.title,
