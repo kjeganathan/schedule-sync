@@ -44,7 +44,7 @@ window.addEventListener("load", async function () {
         body: JSON.stringify({
             title: addMeetingTitle,
             date: meetingDate,
-            star_time: startTime,
+            start_time: startTime,
             end_time: endTime,
             location: locationValue,
             description: description,
