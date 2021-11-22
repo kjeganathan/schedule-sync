@@ -1,6 +1,6 @@
 window.addEventListener("load", async function () {
   // populate the meeting details
-  populateMeetingInfo(33);
+  populateMeetingInfo(36);
 });
 
 async function populateMeetingInfo(meeting_id) {
@@ -19,6 +19,7 @@ async function populateMeetingInfo(meeting_id) {
       document.getElementById("end-time").innerHTML = meeting.end_time;
       document.getElementById("attendee-number").innerHTML =
         meeting.attendees.length;
+      document.getElementById("description").innerHTML = meeting.description;
       document.getElementById("location").innerHTML = meeting.location;
     })
     .catch((error) => console.log("error", error));
