@@ -105,18 +105,19 @@ app.put("/tentativemeetings/:email", async (req, res) => {
 
 });
 
+// ENDPOINT for deleting a person
 app.post("/deletePerson", async(req,res) => {
   const data = req.body;
   await db.delUser(data.email);
 });
 
-
+// ENDPOINT for adding a person
 app.post("/addPerson", async(req,res) => {
   const data = req.body;
   await db.addUserTest(data.full_name, data.email, data.meetings, data.tentative_meetings);
 });
 
-
+// ENDPOINT for getting the user's tentative meetings
 app.post('/tentativemeetings', async (req, res) => { //returns meeting id
   const data = req.body;
   const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
@@ -132,6 +133,14 @@ app.post("/upcomingmeetings", async (req, res) => {
   for (let i = 0; i < meetingIds.length; i++) {
     res.send(JSON.stringify(await db.getMeeting(meetingIds[i])));
   }
+});
+
+//ENDPOINT for getting a meeting id from a meeting's title
+app.post("/meetingId", async (req, res) => {
+  const data = req.body;
+  let meetingId = await db.getMeetingIdFromTitle(data.title);
+  let meetings = meetingId[0]["meeting_id"];
+  res.send(JSON.stringify(meetings));
 });
 
 // ENDPOINT for user declining a meeting invite
