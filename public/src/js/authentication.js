@@ -6,11 +6,17 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
-$(document).ready(function () {
+window.addEventListener("load", function () {
   // Login user
-  $("#login").click(googleLogin);
+  const login = this.document.getElementById("login");
+  if (login != null) {
+    login.addEventListener("click", googleLogin);
+  }
   // Logout user
-  $("#logout").click(googleLogout);
+  const logout = this.document.getElementById("logout");
+  if (logout != null) {
+    logout.addEventListener("click", googleLogout);
+  }
 });
 
 // Firebase project configuration
@@ -32,12 +38,9 @@ let provider = new GoogleAuthProvider();
 function googleLogin() {
   signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      // Add the customer id to local storage for access accross the website
+      // Add the user id to local storage for access accross the website
       localStorage.setItem("email", JSON.stringify(user.email));
       localStorage.setItem("username", JSON.stringify(user.displayName));
       // Open the home page in the same window
@@ -45,15 +48,8 @@ function googleLogin() {
       // ...
     })
     .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(errorCode);
-      // ...
+      // Log the error
+      console.log(error.message);
     });
 }
 
@@ -61,9 +57,9 @@ function googleLogout() {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
-      // Add the customer id to local storage for access accross the website
+      // Remove the user id to local storage for access accross the website
       localStorage.removeItem("user");
-      // Open the home page in the same window
+      // Open the login page in the same window
       open("login.html", "_self");
     })
     .catch((error) => {

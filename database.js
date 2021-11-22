@@ -3,7 +3,7 @@
  * * * * * * * * * * * * * * * * * * * * * * 
     
 create table users(user_id SERIAL PRIMARY KEY, full_name TEXT NOT NULL, email TEXT NOT NULL, meetings text[], tentative_meetings jsonb);
-create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date DATE NOT NULL, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT, attendees text[]);
+create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date TEXT, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT, attendees text[]);
 
 Example tables:
         
@@ -77,13 +77,11 @@ async function addUserTest(full_name, email, meetings, tentative_meetings) {
   );
 }
 
-
 async function getUser(email) {
   return await connectAndRun((db) =>
     db.any("SELECT * FROM users WHERE email = $1;", [email])
   );
 }
-
 
 async function addMeeting(
   title,
@@ -102,7 +100,7 @@ async function addMeeting(
   );
 }
 
-async function getMeetings(meeting_id) {
+async function getMeeting(meeting_id) {
   return await connectAndRun((db) =>
     db.any("SELECT * FROM meetings where meeting_id = $1;", [meeting_id])
   );
@@ -122,16 +120,21 @@ async function getTentativeMeetings(email) {
 
 async function updateTentativeMeetings(tentative_meetings, email) {
   return await connectAndRun((db) =>
-    db.any("UPDATE users SET tentative_meetings = $1 where email = $2;", [tentative_meetings, email])
+    db.any("UPDATE users SET tentative_meetings = $1 where email = $2;", [
+      tentative_meetings,
+      email,
+    ])
   );
 }
 
 async function updateUpcomingMeetings(meetings, email) {
   return await connectAndRun((db) =>
-    db.any("UPDATE users SET meetings = $1 where email = $2;", [meetings, email])
+    db.any("UPDATE users SET meetings = $1 where email = $2;", [
+      meetings,
+      email,
+    ])
   );
 }
-
 
 async function getUpcomingMeetings(email) {
   return await connectAndRun((db) =>
@@ -143,11 +146,11 @@ module.exports = {
   addUser,
   getUser,
   addMeeting,
-  getMeetings,
+  getMeeting,
   delMeeting,
   getTentativeMeetings,
   getUpcomingMeetings,
   addUserTest,
   updateTentativeMeetings,
-  updateUpcomingMeetings
+  updateUpcomingMeetings,
 };
