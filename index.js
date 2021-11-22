@@ -98,6 +98,9 @@ app.get("/tentativemeetings", async (req, res) => {
   res.send(JSON.stringify(await db.getMeeting(meetingId))); //gets the array of tentative meetings
 });
 
+// ENDPOINT for adding a meeting to user's tentative meetings
+app.put("/tentativemeetings/:email", async (req, res) => {});
+
 // ENDPOINT for getting the user's upcoming meetings
 app.post("/upcomingmeetings", async (req, res) => {
   const data = req.body;
