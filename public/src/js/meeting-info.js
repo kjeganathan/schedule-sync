@@ -1,6 +1,7 @@
 window.addEventListener("load", async function () {
   // populate the meeting details
-  populateMeetingInfo(36);
+  let upcomingMeeting = localStorage.getItem("upcomingMeetingId");
+  populateMeetingInfo(upcomingMeeting);
 });
 
 async function populateMeetingInfo(meeting_id) {

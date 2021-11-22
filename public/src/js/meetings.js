@@ -1,9 +1,6 @@
 'use strict';
 
 const email = localStorage.getItem("email");
-const tentativeTitle = "";
-const tentativeStartTime = "";
-const tentativeEndTime = "";
 
 window.addEventListener("load", async function () {
     let response = await fetch('/tentativemeetings', {
@@ -22,7 +19,6 @@ window.addEventListener("load", async function () {
       document.getElementById('start-time-title').innerText = "Start Time: " +data[0]["start_time"];
       document.getElementById('end-time-title').innerText = "End Time: " +data[0]["end_time"];
       document.getElementById('location-title').innerText = "Location: " +data[0]["location"];
-      console.log(tentativeTitle);
 
       let responseupcoming = await fetch('/upcomingmeetings', {
         method: 'POST',
@@ -35,7 +31,9 @@ window.addEventListener("load", async function () {
       });
 
       let upcomingdata = await responseupcoming.json();    
-      console.log(upcomingdata[0]);
+      console.log(upcomingdata[0]["meeting_id"]); 
+      let upcomingindex = upcomingdata[0]["meeting_id"];
+      localStorage.setItem("upcomingMeetingId", JSON.stringify(upcomingindex));
       document.getElementById('upcoming-card-title').innerText = upcomingdata[0]["title"];
       document.getElementById('upcoming-start-time').innerText = "Start Time: " +upcomingdata[0]["start_time"];
       document.getElementById('upcoming-end-time').innerText = "End Time: " +upcomingdata[0]["end_time"];
@@ -89,5 +87,10 @@ acceptButton.addEventListener('click', async () => {
 
 
 });
+
+let detailButton = document.getElementById('detailButton');
+detailButton.addEventListener('click', () => {
+  window.location.href = "http://localhost:8081/src/html/meeting-info.html";
+})
 
 
