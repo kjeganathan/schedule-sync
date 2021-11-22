@@ -47,7 +47,12 @@ app.post("/login", async (req, res) => {
 app.post("/addPerson", async(req,res) => {
   const data = req.body;
   await db.addUserTest(data.full_name, data.email, data.meetings, data.tentative_meetings);
-})
+});
+
+app.post("/deletePerson", async(req,res) => {
+  const data = req.body;
+  await db.delUser(data.email);
+});
 
 app.get("/logout", (req, res) => {
   req.logout();

@@ -114,6 +114,12 @@ async function delMeeting(meeting_id) {
   );
 }
 
+async function delUser(email) {
+  return await connectAndRun((db) =>
+    db.none("DELETE FROM users where email = $1;", [email])
+  );
+}
+
 async function getTentativeMeetings(email) {
   return await connectAndRun((db) =>
     db.any("SELECT tentative_meetings FROM users where email = $1;", [email])
@@ -148,5 +154,6 @@ module.exports = {
   getUpcomingMeetings,
   addUserTest,
   updateTentativeMeetings,
-  updateUpcomingMeetings
+  updateUpcomingMeetings,
+  delUser
 };
