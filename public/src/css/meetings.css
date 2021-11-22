@@ -179,6 +179,7 @@ text {
 
 #tentativeButton1:hover {
   background-color: green;
+  border-color: green;
 }
 
 #tentativeButton2 {
@@ -192,6 +193,7 @@ text {
 
 #tentativeButton2:hover {
   background-color: red;
+  border-color: red;
 }
 
 .tentative-meetings-title,
