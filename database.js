@@ -120,6 +120,19 @@ async function getTentativeMeetings(email) {
   );
 }
 
+async function updateTentativeMeetings(tentative_meetings, email) {
+  return await connectAndRun((db) =>
+    db.any("UPDATE users SET tentative_meetings = $1 where email = $2;", [tentative_meetings, email])
+  );
+}
+
+async function updateUpcomingMeetings(meetings, email) {
+  return await connectAndRun((db) =>
+    db.any("UPDATE users SET meetings = $1 where email = $2;", [meetings, email])
+  );
+}
+
+
 async function getUpcomingMeetings(email) {
   return await connectAndRun((db) =>
     db.any("SELECT meetings FROM users where email = $1;", [email])
@@ -134,5 +147,7 @@ module.exports = {
   delMeeting,
   getTentativeMeetings,
   getUpcomingMeetings,
-  addUserTest
+  addUserTest,
+  updateTentativeMeetings,
+  updateUpcomingMeetings
 };
