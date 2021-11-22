@@ -132,7 +132,6 @@ async function updateUpcomingMeetings(meetings, email) {
   );
 }
 
-
 async function getUpcomingMeetings(email) {
   return await connectAndRun((db) =>
     db.any("SELECT meetings FROM users where email = $1;", [email])

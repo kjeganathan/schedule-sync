@@ -74,14 +74,14 @@ app.get("/meetings", async (req, res) => {
   res.send(JSON.stringify(await db.getMeetings(req.email)));
 });
 
-app.get('/tentativemeetings', async (req, res) => { //returns meeting id
+app.post('/tentativemeetings', async (req, res) => { //returns meeting id
    const data = req.body;
    const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
-   let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"];
-   res.send(JSON.stringify(await db.getMeetings(meetingId))); //gets the array of tentative meetings
+  let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"];
+  res.send(JSON.stringify(await db.getMeetings(meetingId))); //gets the array of tentative meetings
 })
 
-app.get('/upcomingmeetings', async (req, res) => {
+app.post('/upcomingmeetings', async (req, res) => {
   const data = req.body;
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(data.email));
   let meetingIds = JSON.parse(upcoming)[0]["meetings"]; 
