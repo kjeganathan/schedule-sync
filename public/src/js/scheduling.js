@@ -56,6 +56,8 @@ window.addEventListener("load", async function () {
       if (!response.ok) {
         console.error("Could not save the user to the server.");
       }
+        alert('Meeting successfully scheduled.');
     }
+
   });
 });
