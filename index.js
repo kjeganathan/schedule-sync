@@ -51,6 +51,11 @@ app.post("/register", async (req, res) => {
   await db.addUser(data.full_name, data.email);
 });
 
+app.post("/deletePerson", async (req, res) => {
+  const data = req.body;
+  await db.delUser(data.email);
+});
+
 // ENDPOINT for logging out the user
 app.get("/logout", (req, res) => {
   req.logout();
@@ -94,7 +99,7 @@ app.get("/tentativemeetings", async (req, res) => {
 });
 
 // ENDPOINT for getting the user's upcoming meetings
-app.get("/upcomingmeetings", async (req, res) => {
+app.post("/upcomingmeetings", async (req, res) => {
   const data = req.body;
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(data.email));
   let meetingIds = JSON.parse(upcoming)[0]["meetings"];
@@ -112,7 +117,10 @@ app.post("/meetingdeclined", async (req, res) => {
   const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
   let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"]; //meeting id of declined tentative meeting
   await db.delMeeting(meetingId); //deletes the meeting from the meeting table
-  await db.updateTentativeMeetings({}, data.email);
+  await db.updateTentativeMeetings(
+    { meeting_id: meetingId, isDecline: true },
+    data.email
+  );
 });
 
 // ENDPOINT for user accepting a meeting invite
@@ -124,7 +132,10 @@ app.post("/meetingaccepted", async (req, res) => {
   let meetingId = JSON.stringify(
     JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"]
   );
-  await db.updateTentativeMeetings({}, data.email);
+  await db.updateTentativeMeetings(
+    { meeting_id: meetingId, isDecline: false },
+    data.email
+  );
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(data.email));
   let upcomingmeetingIds = JSON.parse(upcoming)[0]["meetings"]; //gives the array of meetingids
   let arr = [];
