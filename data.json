@@ -51,7 +51,7 @@
         "endTime": "10:00 AM",
         "location": "Zoom",
         "description": "Meeting at 9:00 AM for our brunch",
-        "attendees": ["1", "2"] 
+        "attendees": ["SammyRayne@gmail.com", "jt@gmail.com"] 
        },
        {
         "meetingId": "2",
@@ -61,7 +61,7 @@
         "endTime": "11:00 AM",
         "location": "Zoom",
         "description": "Meeting at 10:00 AM for our econ meeting",
-        "attendees": ["1", "2"]
+        "attendees": ["SammyRayne@gmail.com", "jt@gmail.com"] 
        },
        {
         "meetingId": "3",
@@ -71,7 +71,7 @@
         "endTime": "1:00 PM",
         "location": "Zoom",
         "description": "Meeting at 12:00 PM for our photoshoot",
-        "attendees": ["3", "4"]
+        "attendees": ["Sam@gmail.com", "jan@gmail.com"] 
        },
        {
         "meetingId": "4",
@@ -81,7 +81,7 @@
         "endTime": "2:30 PM",
         "location": "Zoom",
         "description": "Meeting at 1:30 PM for our photoshoot",
-        "attendees": ["3", "5"]
+        "attendees": ["SammyRayne@gmail.com", "jt@gmail.com"] 
        },
        {
         "meetingId": "5",
@@ -91,7 +91,7 @@
         "endTime": "4:30 PM",
         "location": "Zoom",
         "description": "Meeting at 3:30 PM for our board meeting",
-        "attendees": ["1", "5"]
+        "attendees": ["SammyRayne@gmail.com", "jt@gmail.com"] 
        }
    ]
 }
