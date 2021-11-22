@@ -99,7 +99,11 @@ app.get("/tentativemeetings/:email", async (req, res) => {
 });
 
 // ENDPOINT for adding a meeting to user's tentative meetings
-app.put("/tentativemeetings/:email", async (req, res) => {});
+app.put("/tentativemeetings/:email", async (req, res) => {
+  const data = req.body;
+  //const meeting_id = 
+
+});
 
 // ENDPOINT for getting the user's upcoming meetings
 app.post("/upcomingmeetings", async (req, res) => {

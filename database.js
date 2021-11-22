@@ -17,7 +17,6 @@ meeting_id   |       title         |        date         |    start_time    |   
 1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"]
 
 */
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const pgp = require("pg-promise")({
   connect(client) {

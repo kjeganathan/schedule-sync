@@ -1,5 +1,7 @@
 "use strict";
 
+const email = localStorage.getItem("email");
+
 window.addEventListener("load", async function () {
   const scheduleButton = document.getElementById("Schedule");
   const remoteInput = document.getElementById("remote");
@@ -41,20 +43,7 @@ window.addEventListener("load", async function () {
     ) {
       alert("Required information is missing.");
     } else {
-      this.localStorage.setItem(
-        "test",
-        JSON.stringify({
-          title: addMeetingTitle,
-          date: meetingDate,
-          start_time: startTime,
-          end_time: endTime,
-          location: locationValue,
-          description: description,
-          attendeeEmails: attendeeEmails,
-          attendees: attendeeEmailsArray,
-        })
-      );
-      const response = await fetch("/schedule", {
+      const response1 = await fetch("/schedule", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -71,11 +60,25 @@ window.addEventListener("load", async function () {
         }),
       });
 
-      if (!response.ok) {
+      if (!response1.ok) {
         console.error("Could not save the user to the server.");
-      } else {
+      } 
+      
+      const response2 = await fetch("/tentativemeetings/:email", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+          email: email,
+          attendees: attendeeEmailsArray,
+        }),
+      });
+
+      if (!response2.ok) {
+        console.error("Could not save the user to the server.");
+      } 
         alert("Meeting successfully scheduled.");
-      }
     }
   });
 });
