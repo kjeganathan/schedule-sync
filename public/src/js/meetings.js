@@ -68,6 +68,7 @@ acceptButton.addEventListener('click', async () => {
       namediv.classList.add('card');
       namediv.setAttribute('id', 'card3');
       upcoming.appendChild(namediv);
+      
 
       let response2 = await fetch('/tentativemeetings', {
         method: 'POST',
@@ -80,7 +81,31 @@ acceptButton.addEventListener('click', async () => {
       });
 
       let data2 = await response2.json();
-    
+
+      let card3 = document.getElementById('card3');
+      const newdiv = document.createElement('div');
+      newdiv.classList.add('card-title');
+      newdiv.innerHTML = data2[0]["title"];
+      newdiv.setAttribute('id', 'newdiv');
+      card3.appendChild(newdiv);
+
+      const startdiv = document.createElement('div');
+      startdiv.classList.add('start-time');
+      startdiv.innerHTML = data2[0]["start_time"];
+      startdiv.setAttribute('id', 'start-time');
+      card3.appendChild(startdiv);
+
+      const enddiv = document.createElement('div');
+      enddiv.classList.add('end-time');
+      enddiv.innerHTML = data2[0]["end_time"];
+      enddiv.setAttribute('id', 'end-time');
+      card3.appendChild(enddiv);
+
+      const locationdiv = document.createElement('div');
+      locationdiv.classList.add('location');
+      locationdiv.innerHTML = data2[0]["location"];
+      locationdiv.setAttribute('id', 'location');
+      card3.appendChild(locationdiv);
 
     // let tentativeCardToDelete = document.getElementById("card1");
     // tentativeCard.remove();
