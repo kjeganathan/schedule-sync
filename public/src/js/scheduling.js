@@ -58,27 +58,28 @@ window.addEventListener("load", async function () {
           attendeeEmails: attendeeEmails,
           attendees: attendeeEmailsArray,
         }),
+        
       });
 
       if (!response1.ok) {
         console.error("Could not save the user to the server.");
       } 
       
-      const response2 = await fetch("/tentativemeetings/:email", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify({
-          email: email,
-          attendees: attendeeEmailsArray,
-        }),
-      });
+      // const response2 = await fetch("/tentativemeetings/:email", {
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-Type": "application/json;charset=utf-8",
+      //   },
+      //   body: JSON.stringify({
+      //     email: email,
+      //     attendees: attendeeEmailsArray,
+      //   }),
+      // });
 
-      if (!response2.ok) {
-        console.error("Could not save the user to the server.");
-      } 
-        alert("Meeting successfully scheduled.");
+      // if (!response2.ok) {
+      //   console.error("Could not save the user to the server.");
+      // } 
+      //   alert("Meeting successfully scheduled.");
     }
   });
 });
