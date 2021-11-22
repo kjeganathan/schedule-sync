@@ -21,7 +21,7 @@ async function populateMeetingInfo(meeting_id) {
         meeting.attendees.length;
       document.getElementById("description").innerHTML = meeting.description;
       document.getElementById("location").innerHTML = meeting.location;
-      populateAttendees(meeting.attendees, meeting_id);
+      //   populateAttendees(meeting.attendees, meeting_id);
     })
     .catch((error) => console.log("error", error));
 }
@@ -45,30 +45,30 @@ async function populateAttendees(attendees, meeting_id) {
               <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
             </svg>`;
 
-  attendees.forEach((attendee) => {
-    await fetch(`/tenativemeetings`, {
+  attendees.forEach(async (attendee) => {
+    await fetch(`/tenativemeetings/${attendee}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
-      body: JSON.stringify({
-        email: JSON.parse(attendee),
-      }),
     })
       .then((response) => response.text())
       .then((result) => {
-        const tentative_meetings = JSON.parse(result)[0];
-        tentative_meetings.forEach((meeting) => {
-          if ((meeting.meeting_id = meeting_id)) {
-            if (meeting.isDecline == null) {
-              acceptedClass = tentativeClass;
-              actualIcon = tentativeIcon;
-            } else {
-              actualClass = meeting.isDecline ? acceptedClass : declinedClass;
-              actualIcon = meeting.isDecline ? acceptedIcon : declinedIcon;
+        console.log(result);
+        if (result.length !== 0) {
+          const tentative_meetings = JSON.parse(result)[0];
+          tentative_meetings.forEach((meeting) => {
+            if (meeting.meeting_id === meeting_id) {
+              if (meeting.isDecline === null) {
+                acceptedClass = tentativeClass;
+                actualIcon = tentativeIcon;
+              } else {
+                actualClass = meeting.isDecline ? acceptedClass : declinedClass;
+                actualIcon = meeting.isDecline ? acceptedIcon : declinedIcon;
+              }
             }
-          }
-        });
+          });
+        }
       })
       .catch((error) => console.log("error", error));
     attendeeListHtml += `<span class="badge rounded-pill ${actualClass}">${attendee}</span> ${actualIcon}`;

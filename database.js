@@ -7,9 +7,9 @@ create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date 
 
 Example tables:
         
-user_id  |       full_name       |            email            |    meetings      |   tentative meetings   
----------+-----------------------+------------------+-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |      ["1"]       |   [{"meeting_id": 1, "title": "Music Arts Club", "date": "11/09/2021", "start_time": "9:00 AM", "end_time": "10:00 AM", "location": "Zoom", "description", "", "attendees": ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"]} ]
+user_id  |       full_name       |            email            |    meetings      |             tentative meetings   
+---------+-----------------------+------------------+-----------------------------+------------------------------------------------
+1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |      ["1"]       |   [ {"meetingId":"1", "isDecline": false} ]
 
 
 meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees  
@@ -17,8 +17,6 @@ meeting_id   |       title         |        date         |    start_time    |   
 1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"]
 
 */
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const pgp = require("pg-promise")({
   connect(client) {

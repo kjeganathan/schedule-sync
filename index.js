@@ -90,10 +90,10 @@ app.delete("/meetings/:id", async (req, res) => {
 });
 
 // ENDPOINT for getting the user's tentative meetings
-app.get("/tentativemeetings", async (req, res) => {
+app.get("/tentativemeetings/:email", async (req, res) => {
   //returns meeting id
-  const data = req.body;
-  const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
+  const email = req.params.email;
+  const tentative = JSON.stringify(await db.getTentativeMeetings(email));
   let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"];
   res.send(JSON.stringify(await db.getMeeting(meetingId))); //gets the array of tentative meetings
 });
