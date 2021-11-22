@@ -18,6 +18,8 @@ meeting_id   |       title         |        date         |    start_time    |   
 
 */
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const pgp = require("pg-promise")({
   connect(client) {
     console.log("Connected to database:", client.connectionParameters.database);
