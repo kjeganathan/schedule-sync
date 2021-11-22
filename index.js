@@ -102,7 +102,7 @@ app.post('/meetingdeclined', async (req, res) => { //called if tentative meeting
   const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
   let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"]; //meeting id of declined tentative meeting
   await db.delMeeting(meetingId); //deletes the meeting from the meeting table
-  await db.updateTentativeMeetings({}, data.email);
+  await db.updateTentativeMeetings({"meeting_id":meetingId, "isDecline":true}, data.email);
 })
 
 app.post('/meetingaccepted', async (req, res) => {
@@ -111,7 +111,7 @@ app.post('/meetingaccepted', async (req, res) => {
   const data = req.body;
   const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
   let meetingId = JSON.stringify(JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"]);
-  await db.updateTentativeMeetings({}, data.email);
+  await db.updateTentativeMeetings({"meeting_id":meetingId, "isDecline":false}, data.email);
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(data.email));
   let upcomingmeetingIds = JSON.parse(upcoming)[0]["meetings"]; //gives the array of meetingids
   let arr = [];
