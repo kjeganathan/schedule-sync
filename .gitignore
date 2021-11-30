@@ -76,3 +76,6 @@ node_modules
 
 # secrets
 secrets.json
+
+# local storage
+local-storage
