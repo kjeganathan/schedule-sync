@@ -67,4 +67,12 @@ node_modules/
 
 #optional DS_Store
 .DS_Store
+
+# node modules
 node_modules
+
+# vs code settings
+.vscode
+
+# secrets
+secrets.json
