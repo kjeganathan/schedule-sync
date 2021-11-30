@@ -23,13 +23,28 @@
   },
   "homepage": "https://github.com/kjeganathan/schedule-sync#readme",
   "dependencies": {
+<<<<<<< HEAD
     "concurrently": "^6.4.0",
+=======
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.7.1",
+>>>>>>> e40f883745ce2b4ce859b2ec3a39fdce9604ad1e
     "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "fs": "0.0.1-security",
     "googleapis": "^91.0.0",
     "path": "^0.12.7",
     "pg": "^8.7.1",
     "readline": "^1.3.0"
+=======
+    "express-session": "^1.17.2",
+    "node-localstorage": "^2.2.1",
+    "passport": "^0.5.0",
+    "passport-google-oauth": "^2.0.0",
+    "path": "^0.12.7",
+    "pg-promise": "^10.11.1"
+>>>>>>> e40f883745ce2b4ce859b2ec3a39fdce9604ad1e
   }
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Schedule Sync</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+    <link rel="icon" href="assets/images/logo-blue.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/calendar.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script type="module" src="/js/authentication.js"></script>
+    <script type="module" src="/js/calendar.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          dayMaxEvents: true,
+          headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          },
+          googleCalendarApiKey: "AIzaSyA_dnFhAlsnKF_C6h49PHKq4bTnfHjjbBQ",
+          eventSources: [
+            {
+              googleCalendarId:
+                "okmprlkvjph1ptr52fr3c142p4@group.calendar.google.com",
+            },
+          ],
+        });
+        calendar.render();
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="./calendar" id="myCalendar">My Calendar</a>
+      <a href="./scheduling" id="scheduleMeeting">Schedule a Meeting</a>
+      <img
+        width="100px"
+        height="74x"
+        class="logo"
+        src="../assets/images/logo-blue.png"
+      />
+      <a href="./meetings" id="myMeetings">My Meetings</a>
+      <a href="./logout" id="logout">Logout</a>
+    </div>
+
+    <div id="calendar"></div>
+
+    <div class="footer">
+      <style>
+        .heart {
+          color: #e25555;
+        }
+      </style>
+      <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
+    </div>
+  </body>
+</html>

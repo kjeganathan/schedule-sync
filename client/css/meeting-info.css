@@ -1,0 +1,266 @@
+/* MAIN STYLING - NAVBAR & FOOTER */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+/* General body CSS */
+body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  font-family: system-ui;
+  font-size: 16px;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+}
+
+/* Adding a background color to the top navigation */
+.navbar {
+  background-color: #7d9fec;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #f2f2f2;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  color: #f2f2f2;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 20%;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #f3bd56;
+  color: black;
+  border-radius: 8px;
+}
+
+/* Adding an active class to highlight the current page */
+.navbar a.active {
+  background-color: #f3bd56;
+  color: white;
+}
+
+/* Adding CSS for navbar logo */
+.logo {
+  display: block;
+  margin: auto;
+}
+
+/* Footer CSS */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f3bd56;
+  color: grey;
+  text-align: center;
+  height: 50px;
+}
+
+/* Footer text */
+.footer p {
+  padding-top: 10px;
+}
+
+/* Red heart CSS for footer text */
+.redheart {
+  color: #ff0000;
+  font-size: 14px;
+  font-family: "arial unicode MS", arial, geneva, sans-serif;
+}
+
+.high-banner {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: white;
+  background-color: #7d9fec;
+  font-weight: bold;
+}
+
+.low-banner {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: black;
+  background-color: #f3bd56;
+  font-weight: bold;
+}
+
+#integrate {
+  color: black;
+  background-color: white;
+  border-color: black;
+  width: 250px;
+  height: 50px;
+}
+
+#integrate:hover {
+  color: #f0f2f5;
+  background-color: black;
+  font-weight: bold;
+  width: 250px;
+  height: 50px;
+}
+
+#upload,
+#schedule,
+#meeting,
+#profile {
+  color: white;
+  width: 320px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+}
+
+/* MEETINGS PAGE BODY CSS */
+#title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 32px;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 32px;
+  color: #000000;
+}
+
+.card-title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: left;
+  width: max-content;
+}
+
+.card-text {
+  text-align: left;
+  font-size: 18px;
+}
+
+.card {
+  width: max-content;
+  padding: 3vh 8vw;
+  margin: 0 auto;
+  margin-top: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #e5ecfb;
+}
+
+.card-horizontal {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+
+.img-square-wrapper {
+  margin-right: 2vw !important;
+}
+
+.container {
+  display: flex;
+  gap: 25px;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.meeting-description-container {
+  display: flex;
+  gap: 25px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 100px;
+}
+
+.large-card {
+  width: 25vw;
+  padding: 3vh 7.5vw;
+  margin: 0 auto;
+  margin-top: 4vw;
+  margin-left: auto;
+  margin-bottom: 4vw;
+  margin-right: auto;
+  vertical-align: middle;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #e5ecfb;
+}
+
+.large-card-title {
+  width: 20vw;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+}
+
+.large-card-text {
+  text-align: center;
+  font-size: 18px;
+}
+
+.description {
+  width: max-content;
+  font-size: 18px;
+  width: 15vw;
+  margin: 0 auto;
+  margin-top: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.line {
+  border-right: 3px solid black;
+}
+
+.badge {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.badge-container {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.icons-container {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}

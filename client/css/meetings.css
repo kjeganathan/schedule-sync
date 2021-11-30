@@ -1,0 +1,331 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+/* General body CSS */
+body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  font-family: system-ui;
+  font-size: 16px;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+}
+
+/* Adding a background color to the top navigation */
+.navbar {
+  background-color: #7d9fec;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #f2f2f2;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  color: #f2f2f2;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none !important;
+  font-size: 17px;
+  width: 20%;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #f3bd56;
+  color: black;
+  border-radius: 8px;
+}
+
+/* Adding an active class to highlight the current page */
+.navbar a.active {
+  background-color: #f3bd56;
+  color: white;
+}
+
+/* Adding CSS for navbar logo */
+.logo {
+  display: block;
+  margin: auto;
+}
+
+/* Footer CSS */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f3bd56;
+  color: grey;
+  text-align: center;
+  height: 50px;
+}
+
+/* Footer text */
+.footer p {
+  padding-top: 10px;
+}
+
+/* Red heart CSS for footer text */
+.redheart {
+  color: #ff0000;
+  font-size: 14px;
+  font-family: "arial unicode MS", arial, geneva, sans-serif;
+}
+
+.high-banner {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: white;
+  background-color: #7d9fec;
+  font-weight: bold;
+}
+
+.low-banner {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: black;
+  background-color: #f3bd56;
+  font-weight: bold;
+}
+
+#integrate {
+  color: black;
+  background-color: white;
+  border-color: black;
+  width: 250px;
+  height: 50px;
+}
+
+#integrate:hover {
+  color: #f0f2f5;
+  background-color: black;
+  font-weight: bold;
+  width: 250px;
+  height: 50px;
+}
+
+#upload,
+#schedule,
+#meeting,
+#profile {
+  color: white;
+  width: 320px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+}
+
+/* MEETINGS PAGE CSS */
+#title {
+  margin-top: 2vw;
+  margin-bottom: 1vw;
+  width: fit-content;
+  height: 4vh;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 32px;
+  color: #000000;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+text {
+  z-index: 1000;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#detailButton {
+  background-color: white;
+  color: #8f7878;
+  font-size: 0.75vw;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-left: 6vw;
+}
+
+#detailButton:hover {
+  background-color: lightgray;
+}
+
+#tentativeButton1 {
+  border-color: #7d9fec;
+  background-color: #7d9fec;
+  font-size: 0.75vw;
+  border-radius: 20px;
+  margin-left: 1vw;
+  font-weight: bold;
+}
+
+#tentativeButton1:hover {
+  background-color: green;
+  border-color: green;
+}
+
+#tentativeButton2 {
+  background-color: #f3bd56;
+  border-color: #f3bd56;
+  font-size: 0.75vw;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-left: 3px;
+}
+
+#tentativeButton2:hover {
+  background-color: red;
+  border-color: red;
+}
+
+.tentative-meetings-title,
+.upcoming-meetings-title {
+  padding: 10px;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  height: 4vh;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 32px;
+  color: #000000;
+  text-decoration: underline;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 2vw;
+  width: 25vw;
+  height: 18vh;
+  margin-bottom: 2vw;
+}
+
+.card-title {
+  width: fit-content;
+  height: 2vh;
+  padding: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.5vw;
+  line-height: 32px;
+  margin-bottom: 1vw;
+  /* identical to box height, or 89% */
+
+  color: #ffffff;
+}
+
+.last-card {
+  margin-bottom: 3vw;
+}
+
+#start-time,
+#end-time,
+#location {
+  width: 20vw;
+  height: 4vh;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1vw;
+  line-height: 3px;
+
+  color: #ffffff;
+}
+
+.card {
+  margin-top: 3vw;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#card1,
+#card2 {
+  height: 23vh;
+  width: 34.5vw;
+  margin-top: 6vw;
+  border-radius: 20px;
+  background: #505050;
+}
+
+#card3 {
+  height: 23vh;
+  width: 34.5vw;
+  margin-top: 1vw;
+  border-radius: 20px;
+  background: #505050;
+}
+
+/* Login and Create Account Header Banner Styling */
+
+#loginCol {
+  height: 0vh;
+  position: absolute;
+  left: 0%;
+  width: 50vw;
+  text-align: left;
+  margin-left: 1vw;
+  margin-right: 5vw;
+}
+
+#createAccountCol {
+  margin-left: 30vw;
+  width: 50vw;
+  height: 27vh;
+  text-align: left;
+  border-left-width: 5px;
+}
+
+.card-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: max-content;
+  margin-bottom: 4vw;
+}
+
+#calendar-icon {
+  margin-left: 1vw;
+  height: 18vh;
+  width: 10vw;
+  padding-top: 2vw;
+  color: white;
+}
+
+#clock-icon,
+#location-icon {
+  margin-right: 0.5vw;
+  height: 2vh;
+  width: 1vw;
+  color: white;
+}
+
+.container {
+  display: flex;
+  gap: 20vw;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.img-square-wrapper {
+  margin-right: 2vw !important;
+}

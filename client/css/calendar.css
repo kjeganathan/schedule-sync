@@ -1,82 +1,9 @@
-#title {
-  margin: 3vh 0;
-  font-size: 30px;
-}
-
-.tiny-card {
-  width: 15vw;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
-
-.large-card {
-  width: 25vw;
-}
-
-.tiny-card,
-.large-card {
-  background-color: rgb(224, 223, 223);
-}
-
-.top-cards,
-.respondents {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.bottom-cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.description {
-  padding-top: 50px;
-  left: 25%;
-  width: 20%;
-  text-align: center;
-}
-
-.responses {
-  padding-top: 50px;
-  left: 50%;
-  width: max-content;
-  text-align: center;
-}
-
-.info {
-  padding-left: 1em;
-}
-
-.other-info {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-}
-
-.mat-card-subtitle {
-  margin-bottom: 0;
-}
-
-mat-chip {
-  max-width: 200px;
-}
-
-mat-card {
-  margin-bottom: 8vh;
-}
-
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* General body CSS */
@@ -202,4 +129,12 @@ body {
   height: 30px;
   background-color: transparent;
   border: none;
+}
+
+/* CALENDAR BODY CSS */
+
+#calendar {
+  width: 90vw;
+  height: 75vh;
+  margin: 20px auto;
 }
