@@ -40,9 +40,8 @@ app.post("/login", async (req, res) => {
   const results = await db.getUser(data.email);
   if (results.length === 0) {
     await db.addUser(data.full_name, data.email);
-  } else {
-    res.sendStatus(200);
   }
+  res.sendStatus(200);
 });
 
 // ENDPOINT for adding a user to database
@@ -101,29 +100,34 @@ app.get("/tentativemeetings/:email", async (req, res) => {
 // ENDPOINT for adding a meeting to user's tentative meetings
 app.put("/tentativemeetings/:email", async (req, res) => {
   const data = req.body;
-  //const meeting_id = 
-
+  //const meeting_id =
 });
 
 // ENDPOINT for deleting a person
-app.post("/deletePerson", async(req,res) => {
+app.post("/deletePerson", async (req, res) => {
   const data = req.body;
   await db.delUser(data.email);
 });
 
 // ENDPOINT for adding a person
-app.post("/addPerson", async(req,res) => {
+app.post("/addPerson", async (req, res) => {
   const data = req.body;
-  await db.addUserTest(data.full_name, data.email, data.meetings, data.tentative_meetings);
+  await db.addUserTest(
+    data.full_name,
+    data.email,
+    data.meetings,
+    data.tentative_meetings
+  );
 });
 
 // ENDPOINT for getting the user's tentative meetings
-app.post('/tentativemeetings', async (req, res) => { //returns meeting id
+app.post("/tentativemeetings", async (req, res) => {
+  //returns meeting id
   const data = req.body;
   const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
- let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"];
- res.send(JSON.stringify(await db.getMeeting(meetingId))); //gets the array of tentative meetings
-})
+  let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"];
+  res.send(JSON.stringify(await db.getMeeting(meetingId))); //gets the array of tentative meetings
+});
 
 // ENDPOINT for getting the user's upcoming meetings
 app.post("/upcomingmeetings", async (req, res) => {

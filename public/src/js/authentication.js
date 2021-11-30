@@ -37,15 +37,29 @@ let provider = new GoogleAuthProvider();
 
 function googleLogin() {
   signInWithPopup(auth, provider)
-    .then((result) => {
+    .then(async (result) => {
       // The signed-in user info.
       const user = result.user;
-      // Add the user id to local storage for access accross the website
-      localStorage.setItem("email", JSON.stringify(user.email));
-      localStorage.setItem("username", JSON.stringify(user.displayName));
-      // Open the home page in the same window
-      open("/src/html/calendar.html", "_self");
-      // ...
+      await fetch(`/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+          email: user.email,
+        }),
+      })
+        .then((response) => response.text())
+        .then((result) => {
+          console.log(result);
+          console.log("hi");
+          // Add the user id to local storage for access accross the website
+          localStorage.setItem("email", JSON.stringify(user.email));
+          localStorage.setItem("username", JSON.stringify(user.displayName));
+          // Open the home page in the same window
+          open("/src/html/calendar.html", "_self");
+        })
+        .catch((error) => console.log("error", error));
     })
     .catch((error) => {
       // Log the error
