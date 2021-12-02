@@ -7,34 +7,10 @@ const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const LocalStorage = require("node-localstorage").LocalStorage;
 const PORT = process.env.PORT || 8081;
 const db = require("./database.js");
+const googleCalendar = require("./google-calendar.js");
 
-const app = express();
-
-// App configuration
-app.use(express.static(path.join(__dirname, "public"), { index: false }));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use("/api", router);
-
-// ENDPOINT for sending the app to the login page on the main domain
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/public/src/html/login.html"));
-});
-
-// ENDPOINT for getting the user's calendars
-app.get("/api/user-calendars", async function (req, res) {
-  try {
-    const calendars = await googleCalendar.listCalendars();
-    if (calendars.length !== 0) {
-      res.json({ googleCalendars: calendars });
-    } else {
-      res.sendStatus(404);
-    }
-  } catch (error) {
-    console.trace(error);
-    res.sendStatus(500);
-  }
-});
+// environment variables
+require("dotenv").config();
 
 const app = express();
 
@@ -55,6 +31,7 @@ app.use(passport.session());
 
 // Passport configuration
 var userProfile;
+var credentials;
 
 passport.use(
   new GoogleStrategy(
@@ -63,8 +40,10 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${process.env.DOMAIN}/auth/google/callback`,
     },
-    function (accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, params, profile, done) {
       userProfile = profile;
+      credentials = params;
+      credentials.refreshToken = refreshToken;
       return done(null, userProfile);
     }
   )
@@ -115,7 +94,15 @@ app.get("/scheduling", checkLoggedIn, function (req, res) {
 // ENDPOINTS for authenticating user
 app.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/calendar",
+    ],
+    accessType: "offline",
+    approvalPrompt: "force",
+  })
 );
 
 // ENDPOINT for logging in user and adding user to database if they are not already in it
@@ -125,6 +112,7 @@ app.get(
   async function (req, res) {
     const email = userProfile.emails[0].value;
     const user = userProfile.displayName;
+    console.log(user);
     const results = await db.getUser(email);
     if (results.length === 0) {
       await db.addUser(user, email);
@@ -136,13 +124,9 @@ app.get(
   }
 );
 
-app.post("/deletePerson", checkLoggedIn, async (req, res) => {
-  const data = req.body;
-  await db.delUser(data.email);
-});
-
 // ENDPOINT for logging out the user
 app.get("/logout", (req, res) => {
+  credentials = null;
   req.logout();
   localStorage.clear();
   res.redirect("/");
@@ -270,6 +254,21 @@ app.post("/meetingaccepted", checkLoggedIn, async (req, res) => {
   }
   arr.push(meetingId); //pushes id of tentative meeting turned upcoming
   await db.updateUpcomingMeetings(arr, data.email);
+});
+
+app.get("/google-calendar", checkLoggedIn, async (req, res) => {
+  try {
+    const calendars = await googleCalendar.listCalendars(credentials);
+    if (calendars.length !== 0) {
+      res.contentType("application/json");
+      res.send(JSON.stringify({ calendars: calendars }));
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.trace(error);
+    res.sendStatus(500);
+  }
 });
 
 app.get("*", (req, res) => {

@@ -25,11 +25,39 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-auth-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rrule@2.6.4/dist/es5/rrule.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@5.5.0/main.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
-    <script type="module" src="/js/authentication.js"></script>
-    <script type="module" src="/js/calendar.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", async function () {
+        var calendar_events = [];
+        const response = await fetch("/google-calendar", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+        })
+          .then((response) => response.text())
+          .then((result) => {
+            const events = JSON.parse(result)["calendars"];
+            events.forEach((item) => {
+              var event = {
+                title: item.summary,
+                start: item.start.date || item.start.dateTime,
+                allDay: item.start.date ? true : false,
+                rrule: item.recurrence
+                  ? `DTSTART:${new Date(item.start.date || item.start.dateTime)
+                      .toISOString()
+                      .replace(/-|:/g, "")
+                      .replace(/\.\d{3}Z/, "Z")}\n${item.recurrence[0]}`
+                  : "",
+                url: item.htmlLink,
+              };
+              calendar_events.push(event);
+            });
+            console.log(calendar_events[0]);
+          });
         var calendarEl = document.getElementById("calendar");
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -40,13 +68,14 @@
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           },
-          googleCalendarApiKey: "AIzaSyA_dnFhAlsnKF_C6h49PHKq4bTnfHjjbBQ",
-          eventSources: [
-            {
-              googleCalendarId:
-                "okmprlkvjph1ptr52fr3c142p4@group.calendar.google.com",
-            },
-          ],
+          events: calendar_events,
+          eventClick: function (info) {
+            info.jsEvent.preventDefault(); // don't let the browser navigate
+
+            if (info.event.url) {
+              window.open(info.event.url);
+            }
+          },
         });
         calendar.render();
       });
