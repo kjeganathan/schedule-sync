@@ -173,7 +173,7 @@ app.get("/tentativemeetings/:email", async (req, res) => {
 });
 
 // ENDPOINT for getting the user's tentative meetings
-app.post("/tentativemeetings", checkLoggedIn, async (req, res) => {
+app.put("/tentativemeetings", checkLoggedIn, async (req, res) => {
   //returns meeting id
   const email = req.body.email;
   const tentative = JSON.stringify(await db.getTentativeMeetings(email));
