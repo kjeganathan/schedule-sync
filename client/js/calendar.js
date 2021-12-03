@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
   var calendar_events = [];
+  // Get user's google calendar events
   await fetch("/google-calendar", {
     method: "GET",
     headers: {
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         calendar_events.push(event);
       });
     });
+
   var calendarEl = document.getElementById("calendar");
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
