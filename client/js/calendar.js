@@ -12,10 +12,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       events.forEach((item) => {
         var event = {
           title: item.summary,
-          start: item.start.date || item.start.dateTime,
-          allDay: item.start.date ? true : false,
+          start: item.start ? item.start.dateTime : "",
           rrule: item.recurrence
-            ? `DTSTART:${new Date(item.start.date || item.start.dateTime)
+            ? `DTSTART:${new Date(item.start.dateTime)
                 .toISOString()
                 .replace(/-|:/g, "")
                 .replace(/\.\d{3}Z/, "Z")}\n${item.recurrence[0]}`
