@@ -160,18 +160,27 @@ app.delete("/meetings/:id", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting the user's tentative meetings
-app.get("/tentativemeetings/:email", checkLoggedIn, async (req, res) => {
+app.get("/tentativemeetings/:email", async (req, res) => {
   //returns meeting id
   const email = req.params.email;
   const tentative = JSON.stringify(await db.getTentativeMeetings(email));
-  let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"];
-  res.send(JSON.stringify(await db.getMeeting(meetingId))); //gets the array of tentative meetings
+  let results = JSON.parse(tentative)[0]["tentative_meetings"];
+  let meetings = [];
+  results.forEach((item) => {
+    meetings.push(JSON.parse(item));
+  });
+  res.send(meetings); //gets the array of tentative meetings
 });
 
-// ENDPOINT for adding a meeting to user's tentative meetings
-app.put("/tentativemeetings/:email", checkLoggedIn, async (req, res) => {
-  const data = req.body;
-  //const meeting_id =
+// ENDPOINT for getting the user's tentative meetings
+app.post("/tentativemeetings", checkLoggedIn, async (req, res) => {
+  //returns meeting id
+  const email = req.body.email;
+  const tentative = JSON.stringify(await db.getTentativeMeetings(email));
+  let meetingIds = JSON.parse(tentative)[0]["meetings"];
+  for (let i = 0; i < meetingIds.length; i++) {
+    res.send(JSON.stringify(await db.getMeeting(meetingIds[i])));
+  }
 });
 
 // ENDPOINT for deleting a person
@@ -181,7 +190,7 @@ app.post("/deletePerson", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for adding a person
-app.post("/addPerson", checkLoggedIn, async (req, res) => {
+app.post("/addPerson", async (req, res) => {
   const data = req.body;
   await db.addUserTest(
     data.full_name,
@@ -189,15 +198,6 @@ app.post("/addPerson", checkLoggedIn, async (req, res) => {
     data.meetings,
     data.tentative_meetings
   );
-});
-
-// ENDPOINT for getting the user's tentative meetings
-app.post("/tentativemeetings", checkLoggedIn, async (req, res) => {
-  //returns meeting id
-  const data = req.body;
-  const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
-  let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"];
-  res.send(JSON.stringify(await db.getMeeting(meetingId))); //gets the array of tentative meetings
 });
 
 // ENDPOINT for getting the user's upcoming meetings
