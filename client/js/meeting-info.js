@@ -1,6 +1,10 @@
 window.addEventListener("load", async function () {
   // populate the meeting details
-  let upcomingMeeting = localStorage.getItem("upcomingMeetingId");
+  const upcomingMeeting = localStorage.getItem("upcomingMeetingId");
+  const deleteButton = document.getElementById("delete");
+  const editButton = document.getElementById("edit");
+  deleteButton.addEventListener("click", deleteMeeting);
+  editButton.addEventListener("click", editMeeting);
   populateMeetingInfo(upcomingMeeting);
 });
 
@@ -78,6 +82,20 @@ async function populateAttendees(attendees, meeting_id) {
 }
 
 async function deleteMeeting(meeting_id) {
+  await fetch(`/meetings/${meeting_id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => console.log("error", error));
+}
+
+async function editMeeting(meeting_id) {
   await fetch(`/meetings/${meeting_id}`, {
     method: "DELETE",
     headers: {
