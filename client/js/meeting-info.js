@@ -76,3 +76,17 @@ async function populateAttendees(attendees, meeting_id) {
   });
   document.getElementById("attendee-list").innerHTML = attendeeListHtml;
 }
+
+async function deleteMeeting(meeting_id) {
+  await fetch(`/meetings/${meeting_id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => console.log("error", error));
+}

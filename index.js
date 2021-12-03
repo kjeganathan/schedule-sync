@@ -156,7 +156,7 @@ app.get("/meetings/:id", checkLoggedIn, async (req, res) => {
 // ENDPOINT for deleting a meeting with a specific id
 app.delete("/meetings/:id", checkLoggedIn, async (req, res) => {
   await db.delMeeting(req.params.id);
-  res.sendStatus(200);
+  res.redirect("/meetings");
 });
 
 // ENDPOINT for getting the user's tentative meetings
