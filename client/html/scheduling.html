@@ -32,18 +32,16 @@
   </head>
   <body>
     <div class="navbar">
-      <a href="../html/calendar.html" id="myCalendar">My Calendar</a>
-      <a href="../html/scheduling.html" id="scheduleMeeting"
-        >Schedule a Meeting</a
-      >
+      <a href="./calendar" id="myCalendar">My Calendar</a>
+      <a href="./scheduling" id="scheduleMeeting">Schedule a Meeting</a>
       <img
         width="100px"
         height="74x"
         class="logo"
-        src="../../assets/images/logo-blue.png"
+        src="../assets/images/logo-blue.png"
       />
-      <a href="../html/meetings.html" id="myMeetings">My Meetings</a>
-      <a role="button" id="logout" (click)="logout()">Logout</a>
+      <a href="./meetings" id="myMeetings">My Meetings</a>
+      <a href="./logout" id="logout">Logout</a>
     </div>
 
     <h2 id="title">Schedule a Meeting</h2>
@@ -95,7 +93,12 @@
         <div class="wrapper">
           <div class="input-group mb-3">
             <div class="input-group-text">
-              <label for="remote" class="form-label">Remote</label>
+              <label
+                for="remote"
+                class="form-label"
+                style="margin: 0.2rem !important"
+                >Remote</label
+              >
             </div>
             <input
               type="text"
@@ -106,7 +109,12 @@
           </div>
           <div class="input-group mb-3 ml-10">
             <div class="input-group-text">
-              <label for="in-person" class="form-label">In-person</label>
+              <label
+                for="in-person"
+                class="form-label"
+                style="margin: 0.2rem !important"
+                >In-person</label
+              >
             </div>
             <input
               type="text"

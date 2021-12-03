@@ -22,7 +22,7 @@ async function populateMeetingInfo(meeting_id) {
         meeting.attendees.length;
       document.getElementById("description").innerHTML = meeting.description;
       document.getElementById("location").innerHTML = meeting.location;
-      //   populateAttendees(meeting.attendees, meeting_id);
+      populateAttendees(meeting.attendees, meeting_id);
     })
     .catch((error) => console.log("error", error));
 }
