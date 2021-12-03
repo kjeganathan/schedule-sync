@@ -1,0 +1,48 @@
+document.addEventListener("DOMContentLoaded", async function () {
+  var calendar_events = [];
+  await fetch("/google-calendar", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      const events = JSON.parse(result)["calendars"];
+      events.forEach((item) => {
+        var event = {
+          title: item.summary,
+          start: item.start.date || item.start.dateTime,
+          allDay: item.start.date ? true : false,
+          rrule: item.recurrence
+            ? `DTSTART:${new Date(item.start.date || item.start.dateTime)
+                .toISOString()
+                .replace(/-|:/g, "")
+                .replace(/\.\d{3}Z/, "Z")}\n${item.recurrence[0]}`
+            : "",
+          url: item.htmlLink,
+        };
+        calendar_events.push(event);
+      });
+    });
+  var calendarEl = document.getElementById("calendar");
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: "dayGridMonth",
+    dayMaxEvents: true,
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "dayGridMonth,timeGridWeek,timeGridDay",
+    },
+    events: calendar_events,
+    eventClick: function (info) {
+      info.jsEvent.preventDefault(); // don't let the browser navigate
+
+      if (info.event.url) {
+        window.open(info.event.url);
+      }
+    },
+  });
+  calendar.render();
+});
