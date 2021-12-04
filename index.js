@@ -202,11 +202,17 @@ app.get("/tentative-meetings-info/:email", checkLoggedIn, async (req, res) => {
   res.send(meetings); //gets the array of tentative meetings
 });
 
-// ENDPOINT for getting the user's tentative meetings
+// ENDPOINT for getting the group of users' tentative meetings
 app.put("/tentative-meetings", checkLoggedIn, async (req, res) => {
-  const email = req.body.email;
-  const tentative = JSON.stringify(await db.getTentativeMeetings(email));
-  let results = JSON.parse(tentative)[0]["tentative_meetings"];
+  const meeting_id = req.body.meeting_id;
+  const attendees = req.body.attendees;
+  attendees.forEach((email) => {
+    const tentative = JSON.stringify(await db.getTentativeMeetings(email));
+    let results = JSON.parse(tentative)[0]["tentative_meetings"];
+    results.push({ meetingId: meeting_id, isDecline: null });
+    await db.updateTentativeMeetings(results, email);
+  });
+  res.sendStatus(200);
 });
 
 // ENDPOINT for getting the user's upcoming meetings
@@ -219,6 +225,16 @@ app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
     meetings.push(JSON.stringify(await db.getMeeting(meeting_id)));
   });
   res.send(meetings); //gets the array of upcoming meetings
+});
+
+// ENDPOINT for updating the host's upcoming meetings
+app.put("/upcoming-meetings", checkLoggedIn, async (req, res) => {
+  const email = req.body.email;
+  const meeting_id = req.body.meeting_id;
+  const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
+  let results = JSON.parse(upcoming)[0]["meetings"];
+  results.push(meeting_id);
+  res.sendStatus(200);
 });
 
 //ENDPOINT for getting a meeting id from a meeting's title

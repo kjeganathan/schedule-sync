@@ -58,14 +58,16 @@ async function scheduleMeeting() {
         end_time: endTime,
         location: locationValue,
         description: description,
-        attendeeEmails: attendeeEmails,
         attendees: attendeeEmailsArray,
       }),
     })
       .then((response) => response.text())
       .then((result) => {
         console.log(result);
-        updateAttendeeMeetings(JSON.parse(result).id);
+        // Call update meetings and pass meeting id and attendees array
+        updateAttendeeMeetings(JSON.parse(result).id, attendeeEmailsArray);
+        updateHostMeetings(JSON.parse(result).id, email);
+        // Alert user that meeting has been successfully scheduled
         alert("Meeting successfully scheduled.");
       })
       .catch((error) => {
@@ -74,4 +76,38 @@ async function scheduleMeeting() {
   }
 }
 
-async function updateAttendeeMeetings(meeting_id) {}
+async function updateAttendeeMeetings(meeting_id, attendees) {
+  await fetch(`/tentative-meetings`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: {
+      meeting_id: meeting_id,
+      attendees: attendees,
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => console.log("error", error));
+}
+
+async function updateHostMeetings(meeting_id, email) {
+  await fetch(`/upcoming-meetings`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: {
+      meeting_id: meeting_id,
+      email: email,
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => console.log("error", error));
+}
