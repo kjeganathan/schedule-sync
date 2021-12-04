@@ -154,7 +154,7 @@ app.post("/schedule", checkLoggedIn, async (req, res) => {
   //should be changed to updating the tentative meetings in users as well
   //adds a meeting to the meeting table
   const data = req.body;
-  await db.addMeeting(
+  let meeting_id = await db.addMeeting(
     data.title,
     data.date,
     data.start_time,
@@ -163,6 +163,7 @@ app.post("/schedule", checkLoggedIn, async (req, res) => {
     data.description,
     data.attendees
   );
+  res.send(JSON.stringify({ id: meeting_id }));
 });
 
 // ENDPOINT for getting the meeting information for a meeting with a specific id

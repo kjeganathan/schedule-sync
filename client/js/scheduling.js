@@ -65,24 +65,7 @@ async function scheduleMeeting() {
       .then((response) => response.text())
       .then((result) => {
         console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    await fetch("/tentativemeetings/:email", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({
-        email: email,
-        attendees: attendeeEmailsArray,
-      }),
-    })
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
+        updateAttendeeMeetings(JSON.parse(result).id);
         alert("Meeting successfully scheduled.");
       })
       .catch((error) => {
@@ -90,3 +73,5 @@ async function scheduleMeeting() {
       });
   }
 }
+
+async function updateAttendeeMeetings(meeting_id) {}

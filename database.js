@@ -94,7 +94,7 @@ async function addMeeting(
 ) {
   return await connectAndRun((db) =>
     db.any(
-      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING meeting_id;",
       [title, date, start_time, end_time, location, description, attendees]
     )
   );
@@ -118,7 +118,7 @@ async function delUser(email) {
   );
 }
 
-async function getMeetingIdFromTitle(title){
+async function getMeetingIdFromTitle(title) {
   return await connectAndRun((db) =>
     db.any("SELECT meeting_id FROM meetings where title = $1;", [title])
   );
@@ -166,5 +166,5 @@ module.exports = {
   updateTentativeMeetings,
   updateUpcomingMeetings,
   delUser,
-  getMeetingIdFromTitle
+  getMeetingIdFromTitle,
 };
