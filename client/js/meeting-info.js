@@ -1,6 +1,6 @@
 window.addEventListener("load", async function () {
   // populate the meeting details
-  const upcomingMeeting = localStorage.getItem("upcomingMeetingId");
+  const upcomingMeeting = localStorage.getItem("meeting-id");
   const deleteButton = document.getElementById("delete");
   const editButton = document.getElementById("edit");
   deleteButton.addEventListener("click", deleteMeeting);
@@ -17,7 +17,7 @@ async function populateMeetingInfo(meeting_id) {
   })
     .then((response) => response.text())
     .then((result) => {
-      const meeting = JSON.parse(result)[0];
+      const meeting = JSON.parse(result);
       document.getElementById("title").innerHTML = meeting.title;
       document.getElementById("date").innerHTML = meeting.date;
       document.getElementById("start-time").innerHTML = meeting.start_time;

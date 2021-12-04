@@ -132,6 +132,23 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+// ENDPOINT for deleting a person
+app.post("/deletePerson", checkLoggedIn, async (req, res) => {
+  const data = req.body;
+  await db.delUser(data.email);
+});
+
+// ENDPOINT for adding a person
+app.post("/addPerson", checkLoggedIn, async (req, res) => {
+  const data = req.body;
+  await db.addUserTest(
+    data.full_name,
+    data.email,
+    data.meetings,
+    data.tentative_meetings
+  );
+});
+
 // ENDPOINT for scheduling a meeting
 app.post("/schedule", checkLoggedIn, async (req, res) => {
   //should be changed to updating the tentative meetings in users as well
@@ -150,7 +167,7 @@ app.post("/schedule", checkLoggedIn, async (req, res) => {
 
 // ENDPOINT for getting the meeting information for a meeting with a specific id
 app.get("/meetings/:id", checkLoggedIn, async (req, res) => {
-  res.send(JSON.stringify(await db.getMeeting(parseInt(req.params.id))));
+  res.send(JSON.stringify(await db.getMeeting(parseInt(req.params.id)))[0]);
 });
 
 // ENDPOINT for deleting a meeting with a specific id
@@ -160,7 +177,7 @@ app.delete("/meetings/:id", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting the user's tentative meetings
-app.get("/tentativemeetings/:email", async (req, res) => {
+app.get("/tentative-meetings/:email", checkLoggedIn, async (req, res) => {
   //returns meeting id
   const email = req.params.email;
   const tentative = JSON.stringify(await db.getTentativeMeetings(email));
@@ -172,42 +189,35 @@ app.get("/tentativemeetings/:email", async (req, res) => {
   res.send(meetings); //gets the array of tentative meetings
 });
 
+// ENDPOINT for getting the meeting info from a user's tentative meetings
+app.get("/tentative-meetings-info/:email", checkLoggedIn, async (req, res) => {
+  const email = req.params.email;
+  const tentative = JSON.stringify(await db.getTentativeMeetings(email));
+  let results = JSON.parse(tentative)[0]["tentative_meetings"];
+  let meetings = [];
+  results.forEach(async (item) => {
+    meetings.push(await db.getMeeting(JSON.parse(item)["meetingId"]));
+  });
+  res.send(meetings); //gets the array of tentative meetings
+});
+
 // ENDPOINT for getting the user's tentative meetings
-app.put("/tentativemeetings", checkLoggedIn, async (req, res) => {
-  //returns meeting id
+app.put("/tentative-meetings", checkLoggedIn, async (req, res) => {
   const email = req.body.email;
   const tentative = JSON.stringify(await db.getTentativeMeetings(email));
-  let meetingIds = JSON.parse(tentative)[0]["meetings"];
-  for (let i = 0; i < meetingIds.length; i++) {
-    res.send(JSON.stringify(await db.getMeeting(meetingIds[i])));
-  }
-});
-
-// ENDPOINT for deleting a person
-app.post("/deletePerson", checkLoggedIn, async (req, res) => {
-  const data = req.body;
-  await db.delUser(data.email);
-});
-
-// ENDPOINT for adding a person
-app.post("/addPerson", async (req, res) => {
-  const data = req.body;
-  await db.addUserTest(
-    data.full_name,
-    data.email,
-    data.meetings,
-    data.tentative_meetings
-  );
+  let results = JSON.parse(tentative)[0]["tentative_meetings"];
 });
 
 // ENDPOINT for getting the user's upcoming meetings
-app.post("/upcomingmeetings", checkLoggedIn, async (req, res) => {
-  const data = req.body;
-  const upcoming = JSON.stringify(await db.getUpcomingMeetings(data.email));
-  let meetingIds = JSON.parse(upcoming)[0]["meetings"];
-  for (let i = 0; i < meetingIds.length; i++) {
-    res.send(JSON.stringify(await db.getMeeting(meetingIds[i])));
-  }
+app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
+  const email = req.params.email;
+  const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
+  let results = JSON.parse(upcoming)[0]["meetings"];
+  let meetings = [];
+  results.forEach((meeting_id) => {
+    meetings.push(JSON.stringify(await db.getMeeting(meeting_id)));
+  });
+  res.send(meetings); //gets the array of upcoming meetings
 });
 
 //ENDPOINT for getting a meeting id from a meeting's title
@@ -219,7 +229,7 @@ app.post("/meetingId", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for user declining a meeting invite
-app.post("/meetingdeclined", checkLoggedIn, async (req, res) => {
+app.post("/meeting-declined", checkLoggedIn, async (req, res) => {
   //called if tentative meeting is declined
   //deletes the meeting from the meetings table
   //get tentative meetings for a specific user
@@ -234,7 +244,7 @@ app.post("/meetingdeclined", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for user accepting a meeting invite
-app.post("/meetingaccepted", checkLoggedIn, async (req, res) => {
+app.post("/meeting-accepted", checkLoggedIn, async (req, res) => {
   //meeting stays in the meetings table
   //get tentative meetings for a specific user
   const data = req.body;
@@ -256,6 +266,7 @@ app.post("/meetingaccepted", checkLoggedIn, async (req, res) => {
   await db.updateUpcomingMeetings(arr, data.email);
 });
 
+// ENDPOINT for getting the user's google calendar events
 app.get("/google-calendar", checkLoggedIn, async (req, res) => {
   try {
     const calendars = await googleCalendar.listCalendars(credentials);
