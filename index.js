@@ -8,6 +8,7 @@ const LocalStorage = require("node-localstorage").LocalStorage;
 const PORT = process.env.PORT || 8081;
 const db = require("./database.js");
 const googleCalendar = require("./google-calendar.js");
+const url = require("url");
 
 // environment variables
 require("dotenv").config();
@@ -75,19 +76,19 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname + "/client/html/login.html"));
 });
 
-app.get("/meetings", checkLoggedIn, function (req, res) {
+app.get("/meetings", function (req, res) {
   res.sendFile(path.join(__dirname + "/client/html/meetings.html"));
 });
 
-app.get("/calendar", checkLoggedIn, function (req, res) {
+app.get("/calendar", function (req, res) {
   res.sendFile(path.join(__dirname + "/client/html/calendar.html"));
 });
 
-app.get("/meeting-info", checkLoggedIn, function (req, res) {
+app.get("/meeting-info", function (req, res) {
   res.sendFile(path.join(__dirname + "/client/html/meeting-info.html"));
 });
 
-app.get("/scheduling", checkLoggedIn, function (req, res) {
+app.get("/scheduling", function (req, res) {
   res.sendFile(path.join(__dirname + "/client/html/scheduling.html"));
 });
 
@@ -117,10 +118,15 @@ app.get(
     if (results.length === 0) {
       await db.addUser(user, email);
     }
-    localStorage.setItem("email", email);
-    localStorage.setItem("username", user);
     // Redirect to calendar
-    res.redirect("/calendar");
+    res.redirect(
+      url.format({
+        pathname: "/calendar",
+        query: {
+          email: email,
+        },
+      })
+    );
   }
 );
 
@@ -133,24 +139,25 @@ app.get("/logout", (req, res) => {
 });
 
 // ENDPOINT for deleting a person
-app.post("/deletePerson", checkLoggedIn, async (req, res) => {
+app.post("/deletePerson", async (req, res) => {
   const data = req.body;
   await db.delUser(data.email);
 });
 
 // ENDPOINT for adding a person
-app.post("/addPerson", checkLoggedIn, async (req, res) => {
+app.post("/addPerson", async (req, res) => {
   const data = req.body;
-  await db.addUserTest(
+  let result = await db.addUserTest(
     data.full_name,
     data.email,
     data.meetings,
     data.tentative_meetings
   );
+  res.send(result);
 });
 
 // ENDPOINT for scheduling a meeting
-app.post("/schedule", checkLoggedIn, async (req, res) => {
+app.post("/schedule", async (req, res) => {
   //should be changed to updating the tentative meetings in users as well
   //adds a meeting to the meeting table
   const data = req.body;
@@ -167,18 +174,19 @@ app.post("/schedule", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting the meeting information for a meeting with a specific id
-app.get("/meetings/:id", checkLoggedIn, async (req, res) => {
-  res.send(JSON.stringify(await db.getMeeting(parseInt(req.params.id)))[0]);
+app.get("/meetings/:id", async (req, res) => {
+  let meeting = (await db.getMeeting(parseInt(req.params.id)))[0];
+  res.send(JSON.stringify(meeting));
 });
 
 // ENDPOINT for deleting a meeting with a specific id
-app.delete("/meetings/:id", checkLoggedIn, async (req, res) => {
+app.delete("/meetings/:id", async (req, res) => {
   await db.delMeeting(req.params.id);
   res.redirect("/meetings");
 });
 
 // ENDPOINT for getting the user's tentative meetings
-app.get("/tentative-meetings/:email", checkLoggedIn, async (req, res) => {
+app.get("/tentative-meetings/:email", async (req, res) => {
   //returns meeting id
   const email = req.params.email;
   const tentative = JSON.stringify(await db.getTentativeMeetings(email));
@@ -191,19 +199,23 @@ app.get("/tentative-meetings/:email", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting the meeting info from a user's tentative meetings
-app.get("/tentative-meetings-info/:email", checkLoggedIn, async (req, res) => {
+app.get("/tentative-meetings-info/:email", async (req, res) => {
   const email = req.params.email;
   const tentative = JSON.stringify(await db.getTentativeMeetings(email));
   let results = JSON.parse(tentative)[0]["tentative_meetings"];
-  let meetings = [];
-  results.forEach(async (item) => {
-    meetings.push(await db.getMeeting(JSON.parse(item)["meetingId"]));
-  });
+  let meetings = await Promise.all(
+    results.map(async (item) => {
+      let meeting = (
+        await db.getMeeting(parseInt(JSON.parse(item)["meetingId"]))
+      )[0];
+      return meeting;
+    })
+  );
   res.send(meetings); //gets the array of tentative meetings
 });
 
 // ENDPOINT for getting the group of users' tentative meetings
-app.put("/tentative-meetings", checkLoggedIn, async (req, res) => {
+app.put("/tentative-meetings", async (req, res) => {
   const meeting_id = req.body.meeting_id;
   const attendees = req.body.attendees;
   attendees.forEach(async (email) => {
@@ -216,29 +228,32 @@ app.put("/tentative-meetings", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting the user's upcoming meetings
-app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
+app.get("/upcoming-meetings/:email", async (req, res) => {
   const email = req.params.email;
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
   let results = JSON.parse(upcoming)[0]["meetings"];
-  let meetings = [];
-  results.forEach(async (meeting_id) => {
-    meetings.push(JSON.stringify(await db.getMeeting(meeting_id)));
-  });
-  res.send(meetings); //gets the array of upcoming meetings
+  let meetings = await Promise.all(
+    results.map(async (item) => {
+      let meeting = (await db.getMeeting(parseInt(JSON.parse(item))))[0];
+      return meeting;
+    })
+  );
+  res.send(meetings); //gets the array of tentative meetings
 });
 
 // ENDPOINT for updating the host's upcoming meetings
-app.put("/upcoming-meetings", checkLoggedIn, async (req, res) => {
+app.put("/upcoming-meetings", async (req, res) => {
   const email = req.body.email;
   const meeting_id = req.body.meeting_id;
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
   let results = JSON.parse(upcoming)[0]["meetings"];
   results.push(meeting_id);
+  await db.updateUpcomingMeetings(results, email);
   res.sendStatus(200);
 });
 
 //ENDPOINT for getting a meeting id from a meeting's title
-app.post("/meetingId", checkLoggedIn, async (req, res) => {
+app.post("/meetingId", async (req, res) => {
   const data = req.body;
   let meetingId = await db.getMeetingIdFromTitle(data.title);
   let meetings = meetingId[0]["meeting_id"];
@@ -246,7 +261,7 @@ app.post("/meetingId", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for user declining a meeting invite
-app.post("/meeting-declined", checkLoggedIn, async (req, res) => {
+app.post("/meeting-declined", async (req, res) => {
   //called if tentative meeting is declined
   //deletes the meeting from the meetings table
   //get tentative meetings for a specific user
@@ -261,7 +276,7 @@ app.post("/meeting-declined", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for user accepting a meeting invite
-app.post("/meeting-accepted", checkLoggedIn, async (req, res) => {
+app.post("/meeting-accepted", async (req, res) => {
   //meeting stays in the meetings table
   //get tentative meetings for a specific user
   const data = req.body;
@@ -284,7 +299,7 @@ app.post("/meeting-accepted", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting the user's google calendar events
-app.get("/google-calendar", checkLoggedIn, async (req, res) => {
+app.get("/google-calendar", async (req, res) => {
   try {
     const calendars = await googleCalendar.listCalendars(credentials);
     if (calendars.length !== 0) {

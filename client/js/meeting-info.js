@@ -51,7 +51,7 @@ async function populateAttendees(attendees, meeting_id) {
             </svg>`;
 
   attendees.forEach(async (attendee) => {
-    await fetch(`/tenativemeetings/${attendee}`, {
+    await fetch(`/tenative-meetings/${attendee}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -59,7 +59,6 @@ async function populateAttendees(attendees, meeting_id) {
     })
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         if (result.length !== 0) {
           const tentative_meetings = JSON.parse(result)[0];
           tentative_meetings.forEach((meeting) => {
