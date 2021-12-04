@@ -206,7 +206,7 @@ app.get("/tentative-meetings-info/:email", checkLoggedIn, async (req, res) => {
 app.put("/tentative-meetings", checkLoggedIn, async (req, res) => {
   const meeting_id = req.body.meeting_id;
   const attendees = req.body.attendees;
-  attendees.forEach((email) => {
+  attendees.forEach(async (email) => {
     const tentative = JSON.stringify(await db.getTentativeMeetings(email));
     let results = JSON.parse(tentative)[0]["tentative_meetings"];
     results.push({ meetingId: meeting_id, isDecline: null });
@@ -221,7 +221,7 @@ app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
   let results = JSON.parse(upcoming)[0]["meetings"];
   let meetings = [];
-  results.forEach((meeting_id) => {
+  results.forEach(async (meeting_id) => {
     meetings.push(JSON.stringify(await db.getMeeting(meeting_id)));
   });
   res.send(meetings); //gets the array of upcoming meetings
