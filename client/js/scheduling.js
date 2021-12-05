@@ -61,48 +61,41 @@ async function scheduleMeeting() {
         attendees: attendeeEmailsArray,
       }),
     });
-    console.log(response);
-    let result = await response.json();
+    let meeting_id = (await response.json()).id;
     // Call update meetings and pass meeting id and attendees array
-    updateAttendeeMeetings(result["id"], attendeeEmailsArray);
-    updateHostMeetings(result["id"], email);
+    updateAttendeeMeetings(meeting_id, attendeeEmailsArray);
+    updateHostMeetings(meeting_id, email);
     // Alert user that meeting has been successfully scheduled
     alert("Meeting successfully scheduled.");
   }
 }
 
 async function updateAttendeeMeetings(meeting_id, attendees) {
-  await fetch(`/tentative-meetings`, {
+  const response = await fetch(`/tentative-meetings`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       meeting_id: meeting_id,
       attendees: attendees,
-    },
-  })
-    .then((response) => response.text())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => console.log("error", error));
+    }),
+  });
+  const result = await response.json();
+  console.log(result);
 }
 
 async function updateHostMeetings(meeting_id, email) {
-  await fetch(`/upcoming-meetings`, {
+  const response = await fetch(`/upcoming-meetings`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       meeting_id: meeting_id,
       email: email,
-    },
-  })
-    .then((response) => response.text())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => console.log("error", error));
+    }),
+  });
+  const result = await response.json();
+  console.log(result);
 }

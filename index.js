@@ -221,8 +221,8 @@ app.put("/tentative-meetings", async (req, res) => {
   const meeting_id = req.body.meeting_id;
   const attendees = req.body.attendees;
   attendees.forEach(async (email) => {
-    const tentative = JSON.stringify(await db.getTentativeMeetings(email));
-    let results = JSON.parse(tentative)[0]["tentative_meetings"];
+    const tentative = await db.getTentativeMeetings(email);
+    let results = tentative[0]["tentative_meetings"];
     results.push({ meetingId: meeting_id, isDecline: null });
     await db.updateTentativeMeetings(results, email);
   });
@@ -232,8 +232,8 @@ app.put("/tentative-meetings", async (req, res) => {
 // ENDPOINT for getting the user's upcoming meetings
 app.get("/upcoming-meetings/:email", async (req, res) => {
   const email = req.params.email;
-  const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
-  let results = JSON.parse(upcoming)[0]["meetings"];
+  const upcoming = await db.getUpcomingMeetings(email);
+  let results = upcoming[0]["meetings"];
   let meetings = await Promise.all(
     results.map(async (item) => {
       let meeting = (await db.getMeeting(parseInt(JSON.parse(item))))[0];
