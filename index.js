@@ -208,9 +208,7 @@ app.get("/tentative-meetings-info/:email", async (req, res) => {
   let results = JSON.parse(tentative)[0]["tentative_meetings"];
   let meetings = await Promise.all(
     results.map(async (item) => {
-      let meeting = (
-        await db.getMeeting(parseInt(JSON.parse(item)["meetingId"]))
-      )[0];
+      let meeting = (await db.getMeeting(parseInt(item)))[0];
       return meeting;
     })
   );
@@ -224,7 +222,11 @@ app.put("/tentative-meetings", async (req, res) => {
   attendees.forEach(async (email) => {
     const tentative = await db.getTentativeMeetings(email);
     let results = tentative[0]["tentative_meetings"];
-    results.push({ meetingId: meeting_id, isDecline: null });
+    console.log(results);
+    console.log(results.includes(meeting_id));
+    if (!results.includes(meeting_id)) {
+      results.push(meeting_id);
+    }
     await db.updateTentativeMeetings(results, email);
   });
   res.sendStatus(200);
@@ -237,7 +239,7 @@ app.get("/upcoming-meetings/:email", async (req, res) => {
   let results = upcoming[0]["meetings"];
   let meetings = await Promise.all(
     results.map(async (item) => {
-      let meeting = (await db.getMeeting(parseInt(JSON.parse(item))))[0];
+      let meeting = (await db.getMeeting(parseInt(item)))[0];
       return meeting;
     })
   );
@@ -250,17 +252,11 @@ app.put("/upcoming-meetings", async (req, res) => {
   const meeting_id = req.body.meeting_id;
   const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
   let results = JSON.parse(upcoming)[0]["meetings"];
-  results.push(meeting_id);
+  if (!results.includes(meeting_id)) {
+    results.push(meeting_id);
+  }
   await db.updateUpcomingMeetings(results, email);
   res.sendStatus(200);
-});
-
-//ENDPOINT for getting a meeting id from a meeting's title
-app.post("/meetingId", async (req, res) => {
-  const data = req.body;
-  let meetingId = await db.getMeetingIdFromTitle(data.title);
-  let meetings = meetingId[0]["meeting_id"];
-  res.send(JSON.stringify(meetings));
 });
 
 // ENDPOINT for user declining a meeting invite
@@ -269,12 +265,12 @@ app.post("/meeting-declined", async (req, res) => {
   //deletes the meeting from the meetings table
   //get tentative meetings for a specific user
   const email = req.body.email;
-  const meeting_id = parseInt(req.body.meeting_id);
+  const meeting_id = req.body.meeting_id;
   const tentative = await db.getTentativeMeetings(email);
   let results = tentative[0]["tentative_meetings"];
   let new_meetings = [];
   results.forEach((meeting) => {
-    if (JSON.parse(meeting)["meetingId"] !== meeting_id) {
+    if (meeting !== meeting_id) {
       new_meetings.push(meeting);
     }
   });
@@ -285,12 +281,12 @@ app.post("/meeting-declined", async (req, res) => {
 app.post("/meeting-accepted", async (req, res) => {
   //delete from tentative meetings
   const email = req.body.email;
-  const meeting_id = parseInt(req.body.meeting_id);
+  const meeting_id = req.body.meeting_id;
   const tentative = await db.getTentativeMeetings(email);
   let results = tentative[0]["tentative_meetings"];
   let new_meetings = [];
   results.forEach((meeting) => {
-    if (JSON.parse(meeting)["meetingId"] !== meeting_id) {
+    if (meeting !== meeting_id) {
       new_meetings.push(meeting);
     }
   });
