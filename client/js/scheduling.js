@@ -46,7 +46,7 @@ async function scheduleMeeting() {
   ) {
     alert("Required information is missing.");
   } else {
-    await fetch("/schedule", {
+    let response = await fetch("/schedule", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -60,19 +60,14 @@ async function scheduleMeeting() {
         description: description,
         attendees: attendeeEmailsArray,
       }),
-    })
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
-        // Call update meetings and pass meeting id and attendees array
-        updateAttendeeMeetings(JSON.parse(result).id, attendeeEmailsArray);
-        updateHostMeetings(JSON.parse(result).id, email);
-        // Alert user that meeting has been successfully scheduled
-        alert("Meeting successfully scheduled.");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    });
+    console.log(response);
+    let result = await response.json();
+    // Call update meetings and pass meeting id and attendees array
+    updateAttendeeMeetings(result["id"], attendeeEmailsArray);
+    updateHostMeetings(result["id"], email);
+    // Alert user that meeting has been successfully scheduled
+    alert("Meeting successfully scheduled.");
   }
 }
 
