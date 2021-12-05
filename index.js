@@ -211,7 +211,7 @@ app.get("/tentative-meetings-info/:email", checkLoggedIn, async (req, res) => {
 
 // ENDPOINT for getting the group of users' tentative meetings
 app.put("/tentative-meetings", async (req, res) => {
-  const meeting_id = req.body.meeting_id;
+  const meeting_id = req.body.meeting_id.toString();
   const attendees = req.body.attendees;
   attendees.forEach(async (email) => {
     const tentative = await db.getTentativeMeetings(email);
@@ -241,7 +241,7 @@ app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
 // ENDPOINT for updating the host's upcoming meetings
 app.put("/upcoming-meetings", checkLoggedIn, async (req, res) => {
   const email = req.body.email;
-  const meeting_id = req.body.meeting_id;
+  const meeting_id = req.body.meeting_id.toString();
   const upcoming = await db.getUpcomingMeetings(email);
   let results = upcoming[0]["meetings"];
   if (!results.includes(meeting_id)) {
