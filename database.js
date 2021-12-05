@@ -2,7 +2,7 @@
  *             DATABASE TABLES             *
  * * * * * * * * * * * * * * * * * * * * * * 
     
-create table users(user_id SERIAL PRIMARY KEY, full_name TEXT NOT NULL, email TEXT NOT NULL, meetings text[], tentative_meetings jsonb[]);
+create table users(user_id SERIAL PRIMARY KEY, full_name TEXT NOT NULL, email TEXT NOT NULL, meetings text[], tentative_meetings text[]);
 create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date TEXT, start_time TIME NOT NULL, end_time TIME NOT NULL, location TEXT NOT NULL, description TEXT, attendees text[]);
 
 Example tables:

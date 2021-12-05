@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8081;
 const db = require("./database.js");
 const googleCalendar = require("./google-calendar.js");
 const url = require("url");
+const e = require("express");
 
 // environment variables
 require("dotenv").config();
@@ -267,37 +268,39 @@ app.post("/meeting-declined", async (req, res) => {
   //called if tentative meeting is declined
   //deletes the meeting from the meetings table
   //get tentative meetings for a specific user
-  const data = req.body;
-  const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
-  let meetingId = JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"]; //meeting id of declined tentative meeting
-  await db.delMeeting(meetingId); //deletes the meeting from the meeting table
-  await db.updateTentativeMeetings(
-    { meeting_id: meetingId, isDecline: true },
-    data.email
-  );
+  const email = req.body.email;
+  const meeting_id = parseInt(req.body.meeting_id);
+  const tentative = await db.getTentativeMeetings(email);
+  let results = tentative[0]["tentative_meetings"];
+  let new_meetings = [];
+  results.forEach((meeting) => {
+    if (JSON.parse(meeting)["meetingId"] !== meeting_id) {
+      new_meetings.push(meeting);
+    }
+  });
+  res.send(await db.updateTentativeMeetings(new_meetings, email));
 });
 
 // ENDPOINT for user accepting a meeting invite
 app.post("/meeting-accepted", async (req, res) => {
-  //meeting stays in the meetings table
-  //get tentative meetings for a specific user
-  const data = req.body;
-  const tentative = JSON.stringify(await db.getTentativeMeetings(data.email));
-  let meetingId = JSON.stringify(
-    JSON.parse(tentative)[0]["tentative_meetings"]["meeting_id"]
-  );
-  await db.updateTentativeMeetings(
-    { meeting_id: meetingId, isDecline: false },
-    data.email
-  );
-  const upcoming = JSON.stringify(await db.getUpcomingMeetings(data.email));
-  let upcomingmeetingIds = JSON.parse(upcoming)[0]["meetings"]; //gives the array of meetingids
-  let arr = [];
-  for (let i = 0; i < upcomingmeetingIds.length; i++) {
-    arr.push(upcomingmeetingIds[i]); //pushes ids of all the upcoming meetings
-  }
-  arr.push(meetingId); //pushes id of tentative meeting turned upcoming
-  await db.updateUpcomingMeetings(arr, data.email);
+  //delete from tentative meetings
+  const email = req.body.email;
+  const meeting_id = parseInt(req.body.meeting_id);
+  const tentative = await db.getTentativeMeetings(email);
+  let results = tentative[0]["tentative_meetings"];
+  let new_meetings = [];
+  results.forEach((meeting) => {
+    if (JSON.parse(meeting)["meetingId"] !== meeting_id) {
+      new_meetings.push(meeting);
+    }
+  });
+  res.send(await db.updateTentativeMeetings(new_meetings, email));
+
+  // add to upcoming meetings
+  const upcoming = await db.getUpcomingMeetings(email);
+  let upcomingmeetingIds = upcoming[0]["meetings"]; //gives the array of meetingids
+  upcomingmeetingIds.push(meeting_id);
+  await db.updateUpcomingMeetings(upcomingmeetingIds, email);
 });
 
 // ENDPOINT for getting the user's google calendar events

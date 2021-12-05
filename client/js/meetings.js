@@ -138,34 +138,36 @@ async function loadUpcomingMeetings(email) {
 
 async function acceptMeeting() {
   const meeting_id = this.id;
-  await fetch(`/meeting-accepted`, {
+  const response = await fetch(`/meeting-accepted`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       email: email,
-    },
-  })
-    .then((response) => response.text())
-    .then((result) => {})
-    .catch((error) => console.log("error", error));
+      meeting_id: meeting_id,
+    }),
+  });
+  const result = await response.json();
+  console.log(result);
+  location.reload();
 }
 
 async function declineMeeting() {
   const meeting_id = this.id;
-  await fetch(`/meeting-declined`, {
+  const response = await fetch(`/meeting-declined`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       email: email,
-    },
-  })
-    .then((response) => response.text())
-    .then((result) => {})
-    .catch((error) => console.log("error", error));
+      meeting_id: meeting_id,
+    }),
+  });
+  const result = await response.json();
+  console.log(result);
+  location.reload();
 }
 
 async function meetingDetails() {
