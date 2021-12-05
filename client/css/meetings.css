@@ -138,7 +138,7 @@ body {
   width: fit-content;
   height: 4vh;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 34px;
   line-height: 32px;
   color: #000000;
   margin-left: auto;
@@ -155,45 +155,45 @@ text {
   justify-content: space-between;
 }
 
-#detailButton {
-  background-color: white;
-  color: #8f7878;
-  font-size: 0.75vw;
-  font-weight: bold;
-  border-radius: 20px;
-  margin-left: 6vw;
+.detail {
+  background-color: white !important;
+  color: #8f7878 !important;
+  font-size: 0.75vw !important;
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  margin-left: 6vw !important;
 }
 
-#detailButton:hover {
-  background-color: lightgray;
+.detail:hover {
+  background-color: lightgray !important;
 }
 
-#tentativeButton1 {
-  border-color: #7d9fec;
-  background-color: #7d9fec;
-  font-size: 0.75vw;
-  border-radius: 20px;
-  margin-left: 1vw;
-  font-weight: bold;
+.accept {
+  border-color: #7d9fec !important;
+  background-color: #7d9fec !important;
+  font-size: 0.75vw !important;
+  border-radius: 20px !important;
+  margin-left: 1vw !important;
+  font-weight: bold !important;
 }
 
-#tentativeButton1:hover {
-  background-color: green;
-  border-color: green;
+.accept:hover {
+  background-color: green !important;
+  border-color: green !important;
 }
 
-#tentativeButton2 {
-  background-color: #f3bd56;
-  border-color: #f3bd56;
-  font-size: 0.75vw;
-  border-radius: 20px;
-  font-weight: bold;
-  margin-left: 3px;
+.decline {
+  background-color: #f3bd56 !important;
+  border-color: #f3bd56 !important;
+  font-size: 0.75vw !important;
+  border-radius: 20px !important;
+  font-weight: bold !important;
+  margin-left: 3px !important;
 }
 
-#tentativeButton2:hover {
-  background-color: red;
-  border-color: red;
+.decline:hover {
+  background-color: red !important;
+  border-color: red !important;
 }
 
 .tentative-meetings-title,
