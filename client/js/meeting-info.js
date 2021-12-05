@@ -32,7 +32,6 @@ async function populateMeetingInfo(meeting_id) {
 }
 
 async function populateAttendees(attendees, meeting_id) {
-  let attendeeListHtml = "";
   let actualClass = "";
   let actualIcon = "";
   let acceptedClass = "bg-success";
@@ -49,51 +48,53 @@ async function populateAttendees(attendees, meeting_id) {
   let declinedIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="#dc3545" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
               <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
             </svg>`;
-  attendees.forEach(async (attendee) => {
-    let tentativeMeetings = [];
-    let upcomingMeetings = [];
-    // Get tentative meetings
-    await fetch(`/tentative-meetings/${attendee}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    })
-      .then((response) => response.text())
-      .then((result) => {
-        tentativeMeetings = result;
+  let attendeeList = await Promise.all(
+    attendees.map(async (attendee) => {
+      let tentativeMeetings = [];
+      let upcomingMeetings = [];
+      // Get tentative meetings
+      await fetch(`/tentative-meetings/${attendee}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
       })
-      .catch((error) => console.log("error", error));
-    // Get upcoming meetings
-    await fetch(`/upcoming-meetings/${attendee}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    })
-      .then((response) => response.text())
-      .then((result) => {
-        upcomingMeetings = result;
+        .then((response) => response.text())
+        .then((result) => {
+          tentativeMeetings = result;
+        })
+        .catch((error) => console.log("error", error));
+      // Get upcoming meetings
+      await fetch(`/upcoming-meetings/${attendee}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
       })
-      .catch((error) => console.log("error", error));
-    if (
-      !tentativeMeetings.includes(meeting_id) &&
-      !upcomingMeetings.includes(meeting_id)
-    ) {
-      actualClass = declinedClass;
-      acceptedIcon = declinedIcon;
-    } else {
-      actualClass = upcomingMeetings.includes(meeting_id)
-        ? acceptedClass
-        : tentativeClass;
-      acceptedIcon = upcomingMeetings.includes(meeting_id)
-        ? acceptedIcon
-        : tentativeIcon;
-    }
-    attendeeListHtml += `<span class="badge rounded-pill ${actualClass}">${attendee}</span> ${actualIcon}`;
-  });
-  console.log(`attendeelist:${attendeeListHtml}`);
-  document.getElementById("attendee-list").innerHTML = attendeeListHtml;
+        .then((response) => response.text())
+        .then((result) => {
+          upcomingMeetings = result;
+        })
+        .catch((error) => console.log("error", error));
+      if (
+        !tentativeMeetings.includes(meeting_id) &&
+        !upcomingMeetings.includes(meeting_id)
+      ) {
+        actualClass = declinedClass;
+        actualIcon = declinedIcon;
+      } else {
+        actualClass = upcomingMeetings.includes(meeting_id)
+          ? acceptedClass
+          : tentativeClass;
+        actualIcon = upcomingMeetings.includes(meeting_id)
+          ? acceptedIcon
+          : tentativeIcon;
+      }
+      return `<div class="icons-container"><span class="badge rounded-pill ${actualClass}">${attendee}</span> ${actualIcon}</div>`;
+    })
+  );
+
+  document.getElementById("attendee-list").innerHTML = attendeeList.join("");
 }
 
 async function deleteMeeting(meeting_id) {
@@ -112,7 +113,7 @@ async function deleteMeeting(meeting_id) {
 
 async function editMeeting(meeting_id) {
   await fetch(`/meetings/${meeting_id}`, {
-    method: "DELETE",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },

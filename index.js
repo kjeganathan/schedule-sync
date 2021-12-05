@@ -210,14 +210,12 @@ app.get("/tentative-meetings-info/:email", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting the group of users' tentative meetings
-app.put("/tentative-meetings", checkLoggedIn, async (req, res) => {
+app.put("/tentative-meetings", async (req, res) => {
   const meeting_id = req.body.meeting_id;
   const attendees = req.body.attendees;
   attendees.forEach(async (email) => {
     const tentative = await db.getTentativeMeetings(email);
     let results = tentative[0]["tentative_meetings"];
-    console.log(results);
-    console.log(results.includes(meeting_id));
     if (!results.includes(meeting_id)) {
       results.push(meeting_id);
     }
@@ -244,8 +242,8 @@ app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
 app.put("/upcoming-meetings", checkLoggedIn, async (req, res) => {
   const email = req.body.email;
   const meeting_id = req.body.meeting_id;
-  const upcoming = JSON.stringify(await db.getUpcomingMeetings(email));
-  let results = JSON.parse(upcoming)[0]["meetings"];
+  const upcoming = await db.getUpcomingMeetings(email);
+  let results = upcoming[0]["meetings"];
   if (!results.includes(meeting_id)) {
     results.push(meeting_id);
   }
