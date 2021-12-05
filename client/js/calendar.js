@@ -1,6 +1,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get("email");
-localStorage.setItem("email", email);
+if (email !== null) {
+  localStorage.setItem("email", email);
+}
 
 document.addEventListener("DOMContentLoaded", async function () {
   var calendar_events = [];

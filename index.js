@@ -4,12 +4,10 @@ const router = express.Router();
 const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-const LocalStorage = require("node-localstorage").LocalStorage;
 const PORT = process.env.PORT || 8081;
 const db = require("./database.js");
 const googleCalendar = require("./google-calendar.js");
 const url = require("url");
-const e = require("express");
 
 // environment variables
 require("dotenv").config();
@@ -58,9 +56,6 @@ passport.serializeUser(function (user, cb) {
 passport.deserializeUser(function (obj, cb) {
   cb(null, obj);
 });
-
-// Local Storage configuration
-let localStorage = new LocalStorage("./local-storage");
 
 function checkLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -135,7 +130,6 @@ app.get(
 app.get("/logout", (req, res) => {
   credentials = null;
   req.logout();
-  localStorage.clear();
   res.redirect("/");
 });
 
