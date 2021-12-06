@@ -11,6 +11,11 @@
   margin-right: auto;
 }
 
+.grid-container{
+  margin-bottom: 30px;
+  height:100%;
+}
+
 text {
   z-index: 1000;
 }
@@ -60,6 +65,14 @@ text {
 .decline:hover {
   background-color: red !important;
   border-color: red !important;
+}
+
+#upcoming-meetings{
+  padding-bottom:20px;
+}
+
+#tentative-meetings{
+  padding-bottom:20px;
 }
 
 .tentative-meetings-title,
