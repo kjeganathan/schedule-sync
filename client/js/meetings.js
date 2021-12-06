@@ -9,7 +9,7 @@ window.addEventListener("load", async function () {
 
 async function loadTentativeMeetings(email) {
   let tentative_html = "";
-  await fetch(`/tentative-meetings-info/${email}`, {
+  await fetch(`/tentative-meetings/${email}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

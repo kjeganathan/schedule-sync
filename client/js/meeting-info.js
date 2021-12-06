@@ -98,17 +98,31 @@ async function populateAttendees(attendees, meeting_id) {
 }
 
 async function deleteMeeting(meeting_id) {
+  var attendees = [];
+  // Get the attendees
   await fetch(`/meetings/${meeting_id}`, {
-    method: "DELETE",
+    method: "GET",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
   })
     .then((response) => response.text())
     .then((result) => {
-      console.log(result);
+      const meeting = JSON.parse(result);
+      attendees = meeting.attendees;
     })
     .catch((error) => console.log("error", error));
+  // Update the attendees tentative and upcoming meetings and delete the meeting from their list
+  updateAttendeeMeetings(meeting_id, attendees);
+  // Delete the meeting from the database
+  // const response = await fetch(`/meetings/${meeting_id}`, {
+  //   method: "DELETE",
+  //   headers: {
+  //     "Content-Type": "application/json;charset=utf-8",
+  //   },
+  // });
+  // let result = await response.json();
+  // console.log(result);
 }
 
 async function editMeeting(meeting_id) {
@@ -123,4 +137,19 @@ async function editMeeting(meeting_id) {
       console.log(result);
     })
     .catch((error) => console.log("error", error));
+}
+
+async function updateAttendeeMeetings(meeting_id, attendees) {
+  const response = await fetch(`/attendee-meetings`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({
+      meeting_id: meeting_id,
+      attendees: attendees,
+    }),
+  });
+  let result = await response.json();
+  console.log(result);
 }
