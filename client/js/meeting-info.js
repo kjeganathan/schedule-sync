@@ -22,8 +22,12 @@ async function populateMeetingInfo(meeting_id) {
       const meeting = JSON.parse(result);
       document.getElementById("title").innerHTML = meeting.title;
       document.getElementById("date").innerHTML = meeting.date;
-      document.getElementById("start-time").innerHTML = meeting.start_time;
-      document.getElementById("end-time").innerHTML = meeting.end_time;
+      document.getElementById("start-time").innerHTML = tConvert(
+        meeting.start_time
+      );
+      document.getElementById("end-time").innerHTML = tConvert(
+        meeting.end_time
+      );
       document.getElementById("attendee-number").innerHTML =
         meeting.attendees.length;
       document.getElementById("description").innerHTML = meeting.description;
@@ -146,4 +150,19 @@ async function updateAttendeeMeetings(meeting_id, attendees) {
   });
   let result = await response.json();
   console.log(result);
+}
+
+function tConvert(time) {
+  // Check correct time format and split into components
+  time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [
+    time,
+  ];
+
+  if (time.length > 1) {
+    // If time format correct
+    time = time.slice(1); // Remove full string match value
+    time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join(""); // return adjusted time or original string
 }
