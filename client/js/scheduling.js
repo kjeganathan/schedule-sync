@@ -5,7 +5,7 @@ const email = localStorage.getItem("email");
 
 window.addEventListener("load", async function () {
   // Add event listeners to schedule button and remote/in person input
-  const scheduleButton = document.getElementById("schedule");
+  const scheduleButton = document.getElementById("Schedule");
   const remoteInput = document.getElementById("remote");
   const inPersonInput = document.getElementById("inPerson");
   remoteInput.addEventListener("input", async () => {
