@@ -1,8 +1,10 @@
 "use strict";
 
+// Get the user's email
 var email = localStorage.getItem("email");
 
 window.addEventListener("load", async function () {
+  // load the user's tentative and upcoming meetings
   loadTentativeMeetings(email);
   loadUpcomingMeetings(email);
 });
@@ -136,6 +138,7 @@ async function loadUpcomingMeetings(email) {
     });
 }
 
+// User accepts a meeting
 async function acceptMeeting() {
   const meeting_id = this.id;
   const response = await fetch(`/meeting-accepted`, {
@@ -153,6 +156,7 @@ async function acceptMeeting() {
   location.reload();
 }
 
+// User declines the meeting
 async function declineMeeting() {
   const meeting_id = this.id;
   const response = await fetch(`/meeting-declined`, {
@@ -170,6 +174,7 @@ async function declineMeeting() {
   location.reload();
 }
 
+// Get the meeting information
 async function meetingDetails() {
   const meeting_id = this.id;
   localStorage.setItem("meeting-id", meeting_id);
