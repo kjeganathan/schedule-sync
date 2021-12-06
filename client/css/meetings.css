@@ -96,12 +96,7 @@ text {
   line-height: 32px;
   margin-bottom: 1vw;
   /* identical to box height, or 89% */
-
   color: #ffffff;
-}
-
-.last-card {
-  margin-bottom: 3vw;
 }
 
 #start-time,
@@ -113,7 +108,6 @@ text {
   font-weight: 400;
   font-size: 1vw;
   line-height: 3px;
-
   color: #ffffff;
 }
 
@@ -133,17 +127,13 @@ text {
   background: #505050;
 }
 
-#card3 {
-  height: 23vh;
-  width: 34.5vw;
-  margin-top: 1vw;
-  border-radius: 20px;
-  background: #505050;
+#card1:last-of-type,
+#card2:last-of-type {
+  margin-bottom: 90px;
 }
+/* Column Banner Styling */
 
-/* Login and Create Account Header Banner Styling */
-
-#loginCol {
+#tentativeCol {
   height: 0vh;
   position: absolute;
   left: 0%;
@@ -153,7 +143,7 @@ text {
   margin-right: 5vw;
 }
 
-#createAccountCol {
+#upcomingCol {
   margin-left: 30vw;
   width: 50vw;
   height: 27vh;
