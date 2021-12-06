@@ -1,9 +1,11 @@
 "use strict";
 
+// Get the user's email
 const email = localStorage.getItem("email");
 
 window.addEventListener("load", async function () {
-  const scheduleButton = document.getElementById("Schedule");
+  // Add event listeners to schedule button and remote/in person input
+  const scheduleButton = document.getElementById("schedule");
   const remoteInput = document.getElementById("remote");
   const inPersonInput = document.getElementById("inPerson");
   remoteInput.addEventListener("input", async () => {
@@ -17,6 +19,7 @@ window.addEventListener("load", async function () {
 });
 
 async function scheduleMeeting() {
+  // Get form information
   const addMeetingTitle = document.getElementById("meetingTitle").value;
   let meetingDate = document.getElementById("meetingDate").value;
   meetingDate = meetingDate.replace(/(\d{4})\-(\d{2})\-(\d{2})/, "$2/$3/$1");
@@ -46,6 +49,7 @@ async function scheduleMeeting() {
   ) {
     alert("Required information is missing.");
   } else {
+    // Schedule meeting
     let response = await fetch("/schedule", {
       method: "POST",
       headers: {
@@ -61,9 +65,11 @@ async function scheduleMeeting() {
         attendees: attendeeEmailsArray,
       }),
     });
+    // Get the returned meeting id
     let meeting_id = (await response.json()).id;
-    // Call update meetings and pass meeting id and attendees array
+    // Update the attendees tentative meetings with the new meeting
     updateAttendeeMeetings(meeting_id, attendeeEmailsArray);
+    // Update the host's meetings with the new meeting
     updateHostMeetings(meeting_id, email);
     // Alert user that meeting has been successfully scheduled
     alert("Meeting successfully scheduled.");
@@ -72,6 +78,7 @@ async function scheduleMeeting() {
   }
 }
 
+// Add the scheduled meeting to the attendees tentative meetings
 async function updateAttendeeMeetings(meeting_id, attendees) {
   const response = await fetch(`/tentative-meetings`, {
     method: "PUT",
@@ -87,6 +94,7 @@ async function updateAttendeeMeetings(meeting_id, attendees) {
   console.log(result);
 }
 
+// Add the scheduled meeting to the host's meetings
 async function updateHostMeetings(meeting_id, email) {
   const response = await fetch(`/upcoming-meetings`, {
     method: "PUT",

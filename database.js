@@ -7,9 +7,9 @@ create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date 
 
 Example tables:
         
-user_id  |       full_name       |            email            |    meetings      |             tentative meetings   
----------+-----------------------+------------------+-----------------------------+------------------------------------------------
-1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |      ["1"]       |   [ {"meetingId":"1", "isDecline": false} ]
+user_id  |       full_name       |            email            |    meetings      |     tentative meetings   
+---------+-----------------------+------------------+-----------------------------+--------------------------
+1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |      ["1"]       |           [ "2" ]
 
 
 meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees  
@@ -68,18 +68,24 @@ async function addUser(full_name, email) {
   );
 }
 
-async function addUserTest(full_name, email, meetings, tentative_meetings) {
-  return await connectAndRun((db) =>
-    db.none(
-      "INSERT INTO users (full_name, email, meetings, tentative_meetings) VALUES ($1, $2, $3, $4);",
-      [full_name, email, meetings, tentative_meetings]
-    )
-  );
-}
-
 async function getUser(email) {
   return await connectAndRun((db) =>
     db.any("SELECT * FROM users WHERE email = $1;", [email])
+  );
+}
+
+async function delUser(email) {
+  return await connectAndRun((db) =>
+    db.none("DELETE FROM users where email = $1;", [email])
+  );
+}
+
+async function updateUserMeetings(meetings, tentative_meetings, email) {
+  return await connectAndRun((db) =>
+    db.any(
+      "UPDATE users SET meetings = $1, tentative_meetings = $2 where email = $3;",
+      [meetings, tentative_meetings, email]
+    )
   );
 }
 
@@ -112,17 +118,11 @@ async function delMeeting(meeting_id) {
   );
 }
 
-async function delUser(email) {
-  return await connectAndRun((db) =>
-    db.none("DELETE FROM users where email = $1;", [email])
-  );
-}
-
-async function getMeetingIdFromTitle(title) {
-  return await connectAndRun((db) =>
-    db.any("SELECT meeting_id FROM meetings where title = $1;", [title])
-  );
-}
+// async function updateMeeting(meeting_id) {
+//   return await connectAndRun((db) =>
+//     db.none("UPDATE FROM meetings where meeting_id = $1;", [meeting_id])
+//   );
+// }
 
 async function getTentativeMeetings(email) {
   return await connectAndRun((db) =>
@@ -147,7 +147,6 @@ async function updateUpcomingMeetings(meetings, email) {
     ])
   );
 }
-
 async function getUpcomingMeetings(email) {
   return await connectAndRun((db) =>
     db.any("SELECT meetings FROM users where email = $1;", [email])
@@ -157,14 +156,13 @@ async function getUpcomingMeetings(email) {
 module.exports = {
   addUser,
   getUser,
+  delUser,
+  updateUserMeetings,
   addMeeting,
   getMeeting,
   delMeeting,
   getTentativeMeetings,
   getUpcomingMeetings,
-  addUserTest,
   updateTentativeMeetings,
   updateUpcomingMeetings,
-  delUser,
-  getMeetingIdFromTitle,
 };

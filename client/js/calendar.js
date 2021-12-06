@@ -1,5 +1,7 @@
+// Get user email from the url query string
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get("email");
+// Set it in local storage if user is first logging in
 if (email !== null) {
   localStorage.setItem("email", email);
 }
@@ -16,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     .then((response) => response.text())
     .then((result) => {
       const events = JSON.parse(result)["calendars"];
+      // format each of the google calendar events to fit the FullCalendar format
       events.forEach((item) => {
         var event = {
           title: item.summary,
@@ -46,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     events: calendar_events,
     eventClick: function (info) {
       info.jsEvent.preventDefault(); // don't let the browser navigate
-
+      // open google calendar url in new tab
       if (info.event.url) {
         window.open(info.event.url);
       }
@@ -54,27 +57,3 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
   calendar.render();
 });
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   var calendarEl = document.getElementById("calendar");
-
-//   var calendar = new FullCalendar.Calendar(calendarEl, {
-//     plugins: ["interaction", "dayGrid", "timeGrid", "rrule"],
-//     defaultView: "dayGridMonth",
-//     defaultDate: "2019-04-07",
-//     header: {
-//       left: "prev,next today",
-//       center: "title",
-//       right: "dayGridMonth,timeGridWeek,timeGridDay",
-//     },
-//     events: [
-//       {
-//         title: "my event",
-//         rrule:
-//           "DTSTART:20190331T103000Z\nRRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20190601;BYDAY=SU,MO,FR",
-//       },
-//     ],
-//   });
-
-//   calendar.render();
-// });
