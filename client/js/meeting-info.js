@@ -1,6 +1,7 @@
+// Get the upcoming meeting id from local storage
+const upcomingMeeting = localStorage.getItem("meeting-id");
+
 window.addEventListener("load", async function () {
-  // Get the upcoming meeting id from local storage
-  const upcomingMeeting = localStorage.getItem("meeting-id");
   // Set event listener for delete button
   const deleteButton = document.getElementById("delete");
   deleteButton.addEventListener("click", deleteMeeting);
@@ -103,10 +104,10 @@ async function populateAttendees(attendees, meeting_id) {
 }
 
 // Delete the current meeting
-async function deleteMeeting(meeting_id) {
+async function deleteMeeting() {
   var attendees = [];
   // Get the attendees
-  await fetch(`/meetings/${meeting_id}`, {
+  await fetch(`/meetings/${upcomingMeeting}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -119,16 +120,16 @@ async function deleteMeeting(meeting_id) {
     })
     .catch((error) => console.log("error", error));
   // Update the attendees tentative and upcoming meetings and delete the meeting from their list
-  updateAttendeeMeetings(meeting_id, attendees);
+  updateAttendeeMeetings(upcomingMeeting, attendees);
   // Delete the meeting from the database
-  // const response = await fetch(`/meetings/${meeting_id}`, {
-  //   method: "DELETE",
-  //   headers: {
-  //     "Content-Type": "application/json;charset=utf-8",
-  //   },
-  // });
-  // let result = await response.json();
-  // console.log(result);
+  const response = await fetch(`/meetings/${upcomingMeeting}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+  console.log(response);
+  location.href = "/meetings";
 }
 
 // update each attendee's meetings by deleting the meeting id
