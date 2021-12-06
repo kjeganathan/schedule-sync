@@ -20,14 +20,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         var event = {
           title: item.summary,
           start: item.start ? item.start.dateTime : "",
-          rrule: item.recurrence
-            ? `DTSTART:${new Date(item.start.dateTime)
-                .toISOString()
-                .replace(/-|:/g, "")
-                .replace(/\.\d{3}Z/, "Z")}\n${item.recurrence[0]}`
-            : "",
           url: item.htmlLink,
         };
+        if (item.recurrence) {
+          event["rrule"] = `DTSTART:${new Date(item.start.dateTime)
+            .toISOString()
+            .replace(/-|:/g, "")
+            .replace(/\.\d{3}Z/, "Z")}\n${item.recurrence[0]}`;
+        }
         calendar_events.push(event);
       });
     });
@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   var calendarEl = document.getElementById("calendar");
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    // plugins: ["rrule"],
     initialView: "dayGridMonth",
     dayMaxEvents: true,
     headerToolbar: {
@@ -53,3 +54,27 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
   calendar.render();
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   var calendarEl = document.getElementById("calendar");
+
+//   var calendar = new FullCalendar.Calendar(calendarEl, {
+//     plugins: ["interaction", "dayGrid", "timeGrid", "rrule"],
+//     defaultView: "dayGridMonth",
+//     defaultDate: "2019-04-07",
+//     header: {
+//       left: "prev,next today",
+//       center: "title",
+//       right: "dayGridMonth,timeGridWeek,timeGridDay",
+//     },
+//     events: [
+//       {
+//         title: "my event",
+//         rrule:
+//           "DTSTART:20190331T103000Z\nRRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20190601;BYDAY=SU,MO,FR",
+//       },
+//     ],
+//   });
+
+//   calendar.render();
+// });
