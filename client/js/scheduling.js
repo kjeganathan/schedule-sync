@@ -67,6 +67,8 @@ async function scheduleMeeting() {
     updateHostMeetings(meeting_id, email);
     // Alert user that meeting has been successfully scheduled
     alert("Meeting successfully scheduled.");
+    // Rest form
+    document.getElementById("schedule-meeting").reset();
   }
 }
 
