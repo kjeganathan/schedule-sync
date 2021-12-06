@@ -11,6 +11,11 @@
   margin-right: auto;
 }
 
+.grid-container{
+  margin-bottom: 30px;
+  height:100%;
+}
+
 text {
   z-index: 1000;
 }
@@ -27,7 +32,8 @@ text {
   font-size: 0.75vw !important;
   font-weight: bold !important;
   border-radius: 20px !important;
-  margin-left: 6vw !important;
+  padding:0px;
+  margin-left: 15vw !important;
 }
 
 .detail:hover {
@@ -39,7 +45,7 @@ text {
   background-color: #7d9fec !important;
   font-size: 0.75vw !important;
   border-radius: 20px !important;
-  margin-left: 1vw !important;
+  margin-left: 9vw !important;
   font-weight: bold !important;
 }
 
@@ -54,12 +60,20 @@ text {
   font-size: 0.75vw !important;
   border-radius: 20px !important;
   font-weight: bold !important;
-  margin-left: 3px !important;
+  margin-left: 1vh !important;
 }
 
 .decline:hover {
   background-color: red !important;
   border-color: red !important;
+}
+
+#upcoming-meetings{
+  padding-bottom:20px;
+}
+
+#tentative-meetings{
+  padding-bottom:20px;
 }
 
 .tentative-meetings-title,
@@ -120,7 +134,7 @@ text {
 
 #card1,
 #card2 {
-  height: 23vh;
+  height: 24vh;
   width: 34.5vw;
   margin-top: 6vw;
   border-radius: 20px;
