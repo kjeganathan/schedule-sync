@@ -65,13 +65,15 @@ async function loadTentativeMeetings(email) {
                            <span id="location-title">Location: ${
                              tentative_meeting.location
                            }</span>
+                           
+                        </div>
+                        <div>
                            <button id="${
                              tentative_meeting.meeting_id
                            }" type="button" class="btn btn-success accept">Accept</button>
                            <button id="${
                              tentative_meeting.meeting_id
-                           }" type="button" class="btn btn-danger decline">Decline</button>  
-                        </div>
+                           }" type="button" class="btn btn-danger decline">Decline</button></div>
                      </div>
                   </div>
                </div>
@@ -148,10 +150,11 @@ async function loadUpcomingMeetings(email) {
                         <span id="upcoming-location">Location: ${
                           upcoming_meeting.location
                         } </span>
+                     </div>
+                     <div>
                         <button id="${
                           upcoming_meeting.meeting_id
-                        }" type="button" class="btn btn-light detail">Details</button>
-                     </div>
+                        }" type="button" class="btn btn-light detail">Details</button></div>
                   </div>
                </div>
             </div>
