@@ -1,11 +1,9 @@
 window.addEventListener("load", async function () {
   // Get the upcoming meeting id from local storage
   const upcomingMeeting = localStorage.getItem("meeting-id");
-  // Set event listeners for edit/delete buttons
+  // Set event listener for delete button
   const deleteButton = document.getElementById("delete");
-  const editButton = document.getElementById("edit");
   deleteButton.addEventListener("click", deleteMeeting);
-  editButton.addEventListener("click", editMeeting);
   // populate the meeting details
   populateMeetingInfo(upcomingMeeting);
 });
@@ -131,21 +129,6 @@ async function deleteMeeting(meeting_id) {
   // });
   // let result = await response.json();
   // console.log(result);
-}
-
-// Edit a meeting's information
-async function editMeeting(meeting_id) {
-  await fetch(`/meetings/${meeting_id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  })
-    .then((response) => response.text())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => console.log("error", error));
 }
 
 // update each attendee's meetings by deleting the meeting id
