@@ -33,7 +33,10 @@ async function loadTentativeMeetings(email) {
                           tentative_meeting.date
                         ).toLocaleString("en-us", {
                           month: "short",
-                        })} ${new Date(tentative_meeting.date).getDay()}</text>
+                        })} ${tentative_meeting.date.replace(
+          /(\d{2})\/(\d{2})\/(\d{4})/,
+          "$2"
+        )}</text>
                      </svg>
                   </div>
                   <div class="card-body">
@@ -118,7 +121,10 @@ async function loadUpcomingMeetings(email) {
                        upcoming_meeting.date
                      ).toLocaleString("en-us", {
                        month: "short",
-                     })} ${new Date(upcoming_meeting.date).getDay()}</text>
+                     })} ${upcoming_meeting.date.replace(
+          /(\d{2})\/(\d{2})\/(\d{4})/,
+          "$2"
+        )}</text>
                   </svg>
                </div>
                <div class="card-body">
