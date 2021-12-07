@@ -1,5 +1,7 @@
 // Get the upcoming meeting id from local storage
 const upcomingMeeting = localStorage.getItem("meeting-id");
+// Get user email to check if they are the host
+const email = localStorage.getItem("email");
 
 window.addEventListener("load", async function () {
   // Set event listener for delete button
@@ -145,7 +147,9 @@ async function updateAttendeeMeetings(meeting_id, attendees) {
     },
     body: JSON.stringify({
       meeting_id: meeting_id,
-      attendees: attendees,
+      attendees: !attendees.includes(email)
+        ? attendees.concat([email])
+        : attendees,
     }),
   });
   let result = await response.json();

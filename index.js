@@ -177,6 +177,8 @@ app.put("/attendee-meetings", async (req, res) => {
     upcoming_meetings = upcoming_meetings.filter(
       (meeting) => meeting !== meeting_id
     );
+    console.log(`upcoming: ${upcoming_meetings}`);
+    console.log(`tentative: ${tentative_meetings}`);
     // update the user's meetings with the new upcoming and tentative meetings
     await db.updateUserMeetings(upcoming_meetings, tentative_meetings, email);
   });
