@@ -355,9 +355,9 @@ app.get("/google-calendar", checkLoggedIn, async (req, res) => {
 });
 
 // ENDPOINT for getting google user's availability given a time range
-app.get("/availability", checkLoggedIn, async (req, res) => {
-  const dateMin = req.body.dateMin;
-  const dateMax = req.body.dateMax;
+app.get("/availability/:dateMin/:dateMax", checkLoggedIn, async (req, res) => {
+  const dateMin = req.params.dateMin;
+  const dateMax = req.params.dateMax;
   try {
     const busy = await googleCalendar.freeBusy(credentials, dateMin, dateMax);
     res.send(JSON.stringify(busy));

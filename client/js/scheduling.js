@@ -111,3 +111,19 @@ async function updateHostMeetings(meeting_id, email) {
   const result = await response.json();
   console.log(result);
 }
+
+async function meetingSuggestions(dateMin, dateMax) {
+  await fetch(`/availability/${dateMin}/${dateMax}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
