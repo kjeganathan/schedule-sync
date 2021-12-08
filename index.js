@@ -354,6 +354,20 @@ app.get("/google-calendar", checkLoggedIn, async (req, res) => {
   }
 });
 
+// ENDPOINT for getting google user's availability given a time range
+app.get("/availability", checkLoggedIn, async (req, res) => {
+  const dateMin = req.body.dateMin;
+  const dateMax = req.body.dateMax;
+  try {
+    const busy = await googleCalendar.freeBusy(credentials, dateMin, dateMax);
+    res.send(JSON.stringify(busy));
+    res.sendStatus(200);
+  } catch (error) {
+    console.trace(error);
+    res.sendStatus(500);
+  }
+});
+
 app.get("*", (req, res) => {
   res.send("Error");
 });
