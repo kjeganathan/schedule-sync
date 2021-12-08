@@ -56,15 +56,4 @@ document.addEventListener("DOMContentLoaded", async function () {
     },
   });
   calendar.render();
-
-  await fetch("/availability", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  })
-    .then((response) => response.text())
-    .then((result) => {
-      console.log(result);
-    });
 });
