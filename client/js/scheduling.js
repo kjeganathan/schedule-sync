@@ -12,6 +12,24 @@ window.addEventListener("load", async function () {
     "scheduleMeeting"
   ).href = `./scheduling?email=${email}`;
   document.getElementById("myMeetings").href = `./meetings?email=${email}`;
+
+  // Add event listener for minimum choice of end time as start time
+  const startTime = document.getElementById("startTime");
+  startTime.addEventListener("input", async () => {
+    if (startTime.value !== "") {
+      document.getElementById("endTime").setAttribute("min", startTime.value);
+    }
+  });
+
+  // Check validity of end time
+  const endTime = document.getElementById("endTime");
+  endTime.addEventListener("input", async () => {
+    if (!endTime.checkValidity()) {
+      $("#endTime").tooltip("show");
+    } else {
+      $("#endTime").tooltip("hide");
+    }
+  });
   // Add event listeners to schedule button and remote/in person input
   const scheduleButton = document.getElementById("Schedule");
   const remoteInput = document.getElementById("remote");
@@ -52,10 +70,15 @@ async function scheduleMeeting() {
     endTime === "" ||
     description === "" ||
     attendeeEmails === "" ||
-    remote === "" ||
-    inPerson === ""
+    locationValue === ""
   ) {
-    alert("Required information is missing.");
+    $("#message").text(
+      "Required information is missing. Please add missing information to schedule your meeting."
+    );
+    $("#modalNotification").modal("show");
+  } else if (endTime.checkValidity()) {
+    $("#message").text("Please input an End Time later than Start Time");
+    $("#modalNotification").modal("show");
   } else {
     let event = {
       title: addMeetingTitle,
