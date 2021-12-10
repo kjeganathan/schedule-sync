@@ -1,9 +1,17 @@
 "use strict";
 
+// Get the upcoming meeting id from url query string
+const urlParams = new URLSearchParams(window.location.search);
 // Get the user's email
-var email = localStorage.getItem("email");
+const email = urlParams.get("email");
 
 window.addEventListener("load", async function () {
+  // Set NAVBAR LINKS
+  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "scheduleMeeting"
+  ).href = `./scheduling?email=${email}`;
+  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
   // load the user's tentative and upcoming meetings
   loadTentativeMeetings(email);
   loadUpcomingMeetings(email);
@@ -219,7 +227,6 @@ async function declineMeeting() {
 // Get the meeting information
 async function meetingDetails() {
   const meeting_id = this.id;
-  localStorage.setItem("meeting-id", meeting_id);
   window.location.href = `/meeting-info?meeting-id=${meeting_id}`;
 }
 

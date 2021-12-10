@@ -1,9 +1,17 @@
 "use strict";
 
+// Get the upcoming meeting id from url query string
+const urlParams = new URLSearchParams(window.location.search);
 // Get the user's email
-const email = localStorage.getItem("email");
+const email = urlParams.get("email");
 
 window.addEventListener("load", async function () {
+  // Set NAVBAR LINKS
+  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "scheduleMeeting"
+  ).href = `./scheduling?email=${email}`;
+  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
   // Add event listeners to schedule button and remote/in person input
   const scheduleButton = document.getElementById("Schedule");
   const remoteInput = document.getElementById("remote");

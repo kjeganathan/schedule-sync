@@ -1,12 +1,16 @@
 // Get the upcoming meeting id from url query string
 const urlParams = new URLSearchParams(window.location.search);
-// Get user email from the url query string
-// const email = urlParams.get("email");
+// Get user email from the url query string to check if they are the host
+const email = urlParams.get("email");
 const upcomingMeeting = urlParams.get("meeting-id");
-// Get user email to check if they are the host
-const email = localStorage.getItem("email");
 
 window.addEventListener("load", async function () {
+  // Set NAVBAR LINKS
+  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "scheduleMeeting"
+  ).href = `./scheduling?email=${email}`;
+  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
   // Set event listener for delete button
   const deleteButton = document.getElementById("delete");
   deleteButton.addEventListener("click", deleteMeeting);

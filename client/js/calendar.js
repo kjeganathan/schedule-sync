@@ -1,12 +1,15 @@
 // Get user email from the url query string
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get("email");
-// Set it in local storage if user is first logging in
-if (email !== null) {
-  localStorage.setItem("email", email);
-}
 
 document.addEventListener("DOMContentLoaded", async function () {
+  // Set NAVBAR LINKS
+  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "scheduleMeeting"
+  ).href = `./scheduling?email=${email}`;
+  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
+
   var calendar_events = [];
   // Get user's google calendar events
   await fetch("/google-calendar", {
