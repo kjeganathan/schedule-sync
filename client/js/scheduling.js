@@ -57,21 +57,23 @@ async function scheduleMeeting() {
   ) {
     alert("Required information is missing.");
   } else {
+    let event = {
+      title: addMeetingTitle,
+      date: meetingDate,
+      start_time: startTime,
+      end_time: endTime,
+      location: locationValue,
+      description: description,
+      attendees: attendeeEmailsArray,
+    };
+
     // Schedule meeting
     let response = await fetch("/schedule", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
-      body: JSON.stringify({
-        title: addMeetingTitle,
-        date: meetingDate,
-        start_time: startTime,
-        end_time: endTime,
-        location: locationValue,
-        description: description,
-        attendees: attendeeEmailsArray,
-      }),
+      body: JSON.stringify(event),
     });
     // Get the returned meeting id
     let meeting_id = (await response.json()).id;
@@ -79,6 +81,8 @@ async function scheduleMeeting() {
     updateAttendeeMeetings(meeting_id, attendeeEmailsArray);
     // Update the host's meetings with the new meeting
     updateHostMeetings(meeting_id, email);
+    // Add the meeting to user's calendar
+    addMeetingToCalendar(event);
     // Alert user that meeting has been successfully scheduled
     alert("Meeting successfully scheduled.");
     // Reset form
@@ -115,6 +119,38 @@ async function updateHostMeetings(meeting_id, email) {
       meeting_id: meeting_id,
       email: email,
     }),
+  });
+  const result = await response.json();
+  console.log(result);
+}
+
+async function addMeetingToCalendar(event) {
+  event.date = document.getElementById("meetingDate").value;
+  const startTime = moment(
+    `${event.date} ${event.start_time}`,
+    "YYYY-MM-DD HH:mm:ss"
+  ).format();
+
+  const endTime = moment(
+    `${event.date} ${event.end_time}`,
+    "YYYY-MM-DD HH:mm:ss"
+  ).format();
+  console.log(startTime);
+
+  let attendees = event.attendees.map((email) => {
+    return { email: email };
+  });
+
+  event.start_time = startTime;
+  event.end_time = endTime;
+  event.attendees = attendees;
+
+  const response = await fetch(`/add-to-calendar`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(event),
   });
   const result = await response.json();
   console.log(result);

@@ -368,6 +368,40 @@ app.get("/availability/:dateMin/:dateMax", checkLoggedIn, async (req, res) => {
   }
 });
 
+// ENDPOINT for adding an event to a google user's calendar
+app.post("/add-to-calendar", checkLoggedIn, async (req, res) => {
+  const data = req.body;
+  const event = {
+    summary: data.title,
+    location: data.location,
+    description: data.description,
+    start: {
+      dateTime: data.start_time,
+      timeZone: "EST",
+    },
+    end: {
+      dateTime: data.end_time,
+      timeZone: "EST",
+    },
+    // recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
+    attendees: data.attendees,
+    reminders: {
+      useDefault: false,
+      overrides: [
+        { method: "email", minutes: 24 * 60 },
+        { method: "popup", minutes: 10 },
+      ],
+    },
+  };
+
+  try {
+    await googleCalendar.insertIntoCalendar(credentials, event);
+    res.sendStatus(200);
+  } catch (error) {
+    console.trace(error);
+    res.sendStatus(500);
+  }
+});
 app.get("*", (req, res) => {
   res.send("Error");
 });
