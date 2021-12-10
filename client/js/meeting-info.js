@@ -1,5 +1,8 @@
-// Get the upcoming meeting id from local storage
-const upcomingMeeting = localStorage.getItem("meeting-id");
+// Get the upcoming meeting id from url query string
+const urlParams = new URLSearchParams(window.location.search);
+// Get user email from the url query string
+// const email = urlParams.get("email");
+const upcomingMeeting = urlParams.get("meeting-id");
 // Get user email to check if they are the host
 const email = localStorage.getItem("email");
 

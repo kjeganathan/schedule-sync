@@ -220,7 +220,7 @@ async function declineMeeting() {
 async function meetingDetails() {
   const meeting_id = this.id;
   localStorage.setItem("meeting-id", meeting_id);
-  window.location.href = "/meeting-info";
+  window.location.href = `/meeting-info?meeting-id=${meeting_id}`;
 }
 
 function tConvert(time) {
