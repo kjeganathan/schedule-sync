@@ -151,7 +151,7 @@ async function declineMeeting() {
 async function meetingDetails() {
   const meeting_id = this.id.split("-")[0];
   const event_id = this.id.split("-")[1];
-  window.location.href = `/meeting-info?meeting-id=${meeting_id}?&event-id=${event_id}`;
+  window.location.href = `/meeting-info?meeting-id=${meeting_id}?&event-id=${event_id}&email=${email}`;
 }
 
 function tConvert(time) {
