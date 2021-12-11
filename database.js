@@ -12,9 +12,9 @@ user_id  |       full_name       |            email            |    meetings    
 1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |      ["1"]       |           [ "2" ]
 
 
-meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees  
--------------+---------------------+---------------------+------------------+----------------+-----------------+-----------------------------+-------------------------------------------------------
-1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"]
+meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees                        |         event_id
+-------------+---------------------+---------------------+------------------+----------------+-----------------+-----------------------------+--------------------------------------------------------+--------------------------
+1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"] | tsgsjb6koud6il13lpiv8iklmc
 
 */
 
@@ -90,6 +90,7 @@ async function updateUserMeetings(meetings, tentative_meetings, email) {
 }
 
 async function addMeeting(
+  event_id,
   title,
   date,
   start_time,
@@ -100,8 +101,17 @@ async function addMeeting(
 ) {
   return await connectAndRun((db) =>
     db.any(
-      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING meeting_id;",
-      [title, date, start_time, end_time, location, description, attendees]
+      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees, event_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING meeting_id;",
+      [
+        title,
+        date,
+        start_time,
+        end_time,
+        location,
+        description,
+        attendees,
+        event_id,
+      ]
     )
   );
 }

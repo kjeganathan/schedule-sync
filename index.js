@@ -192,6 +192,7 @@ app.post("/schedule", checkLoggedIn, async (req, res) => {
   // Adds the meeting to the database
   let result = (
     await db.addMeeting(
+      data.event_id,
       data.title,
       data.date,
       data.start_time,
@@ -395,8 +396,11 @@ app.post("/add-to-calendar", checkLoggedIn, async (req, res) => {
   };
 
   try {
-    await googleCalendar.insertIntoCalendar(credentials, event);
-    res.sendStatus(200);
+    const event_id = await googleCalendar.insertIntoCalendar(
+      credentials,
+      event
+    );
+    res.send(JSON.stringify({ event_id: event_id }));
   } catch (error) {
     console.trace(error);
     res.sendStatus(500);

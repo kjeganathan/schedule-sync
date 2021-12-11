@@ -72,26 +72,21 @@ async function insertIntoCalendar(tokens, event) {
   // Authorize a client with credentials, then call the Google Calendar API.
   const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-  calendar.events.insert(
-    {
-      auth: oAuth2Client,
-      calendarId: "primary",
-      resource: event,
-    },
-    function (err, event) {
-      if (err) {
-        console.log(
-          "There was an error contacting the Calendar service: " + err
-        );
-        return;
-      }
-      console.log("Event created: %s", event.htmlLink);
-    }
-  );
+  const result = await calendar.events.insert({
+    auth: oAuth2Client,
+    calendarId: "primary",
+    resource: event,
+  });
+
+  // Return Event ID
+  return result.data.id;
 }
+
+async function confirmMeeting(tokens, event) {}
 
 module.exports = {
   listCalendars,
   freeBusy,
   insertIntoCalendar,
+  confirmMeeting,
 };

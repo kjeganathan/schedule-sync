@@ -76,7 +76,7 @@ async function scheduleMeeting() {
       "Required information is missing. Please add missing information to schedule your meeting."
     );
     $("#modalNotification").modal("show");
-  } else if (endTime.checkValidity()) {
+  } else if (!document.getElementById("endTime").checkValidity()) {
     $("#message").text("Please input an End Time later than Start Time");
     $("#modalNotification").modal("show");
   } else {
@@ -89,6 +89,11 @@ async function scheduleMeeting() {
       description: description,
       attendees: attendeeEmailsArray,
     };
+
+    // Add the meeting to user's calendar
+    let event_id = await addMeetingToCalendar(event);
+    // Add event id to event
+    event.event_id = event_id;
 
     // Schedule meeting
     let response = await fetch("/schedule", {
@@ -104,10 +109,9 @@ async function scheduleMeeting() {
     updateAttendeeMeetings(meeting_id, attendeeEmailsArray);
     // Update the host's meetings with the new meeting
     updateHostMeetings(meeting_id, email);
-    // Add the meeting to user's calendar
-    addMeetingToCalendar(event);
     // Alert user that meeting has been successfully scheduled
-    alert("Meeting successfully scheduled.");
+    $("#message").text("Meeting Successfully Scheduled");
+    $("#modalNotification").modal("show");
     // Reset form
     document.getElementById("schedule-meeting").reset();
     document.getElementById("inPerson").disabled = false;
@@ -148,35 +152,44 @@ async function updateHostMeetings(meeting_id, email) {
 }
 
 async function addMeetingToCalendar(event) {
-  event.date = document.getElementById("meetingDate").value;
+  let google_event = {
+    title: event.title,
+    date: event.date,
+    start_time: event.start_time,
+    end_time: event.end_time,
+    location: event.location,
+    description: event.description,
+    attendees: event.attendees,
+  };
+  google_event.date = document.getElementById("meetingDate").value;
+
   const startTime = moment(
-    `${event.date} ${event.start_time}`,
+    `${google_event.date} ${google_event.start_time}`,
     "YYYY-MM-DD HH:mm:ss"
   ).format();
 
   const endTime = moment(
-    `${event.date} ${event.end_time}`,
+    `${google_event.date} ${google_event.end_time}`,
     "YYYY-MM-DD HH:mm:ss"
   ).format();
-  console.log(startTime);
 
-  let attendees = event.attendees.map((email) => {
+  let attendees = google_event.attendees.map((email) => {
     return { email: email };
   });
 
-  event.start_time = startTime;
-  event.end_time = endTime;
-  event.attendees = attendees;
+  google_event.start_time = startTime;
+  google_event.end_time = endTime;
+  google_event.attendees = attendees;
 
   const response = await fetch(`/add-to-calendar`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(event),
+    body: JSON.stringify(google_event),
   });
   const result = await response.json();
-  console.log(result);
+  return result.event_id;
 }
 
 async function meetingSuggestions(dateMin, dateMax) {
