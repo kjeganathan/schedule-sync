@@ -88,9 +88,9 @@ async function loadUpcomingMeetings(email) {
                       } </span>
                    </div>
                    <div>
-                      <button id="${
-                        upcoming_meeting.meeting_id
-                      }" type="button" class="btn btn-light detail">Details</button></div>
+                      <button id="${upcoming_meeting.meeting_id}-${
+            upcoming_meeting.event_id
+          }" type="button" class="btn btn-light detail">Details</button></div>
                 </div>
              </div>
           </div>
@@ -149,8 +149,9 @@ async function declineMeeting() {
 
 // Get the meeting information
 async function meetingDetails() {
-  const meeting_id = this.id;
-  window.location.href = `/meeting-info?meeting-id=${meeting_id}`;
+  const meeting_id = this.id.split("-")[0];
+  const event_id = this.id.split("-")[1];
+  window.location.href = `/meeting-info?meeting-id=${meeting_id}?&event-id=${event_id}`;
 }
 
 function tConvert(time) {

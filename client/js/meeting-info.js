@@ -3,6 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 // Get user email from the url query string to check if they are the host
 const email = urlParams.get("email");
 const upcomingMeeting = urlParams.get("meeting-id");
+const eventId = urlParams.get("event-id");
 
 window.addEventListener("load", async function () {
   // Set NAVBAR LINKS
@@ -15,11 +16,11 @@ window.addEventListener("load", async function () {
   const deleteButton = document.getElementById("delete");
   deleteButton.addEventListener("click", deleteMeeting);
   // populate the meeting details
-  populateMeetingInfo(upcomingMeeting);
+  populateMeetingInfo(upcomingMeeting, eventId);
 });
 
 // Fetch a specific meeting an populate the html with the meeting information
-async function populateMeetingInfo(meeting_id) {
+async function populateMeetingInfo(meeting_id, event_id) {
   await fetch(`/meetings/${meeting_id}`, {
     method: "GET",
     headers: {
@@ -41,13 +42,13 @@ async function populateMeetingInfo(meeting_id) {
         meeting.attendees.length;
       document.getElementById("description").innerHTML = meeting.description;
       document.getElementById("location").innerHTML = meeting.location;
-      populateAttendees(meeting.attendees, meeting_id);
+      populateAttendees(meeting.attendees, meeting_id, event_id);
     })
     .catch((error) => console.log("error", error));
 }
 
 // Get the attendees and populate the attendee list html with whether or not they accepted, declined, or haven't replied yet
-async function populateAttendees(attendees, meeting_id) {
+async function populateAttendees(attendees, meeting_id, event_id) {
   let actualClass = "";
   let actualIcon = "";
   let acceptedClass = "bg-success";
@@ -66,10 +67,9 @@ async function populateAttendees(attendees, meeting_id) {
             </svg>`;
   let attendeeList = await Promise.all(
     attendees.map(async (attendee) => {
-      let tentativeMeetings = [];
-      let upcomingMeetings = [];
-      // Get tentative meetings
-      await fetch(`/tentative-meetings/${attendee}`, {
+      let status = "";
+      // Get status
+      await fetch(`/status/${event_id}/${attendee}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -77,37 +77,18 @@ async function populateAttendees(attendees, meeting_id) {
       })
         .then((response) => response.text())
         .then((result) => {
-          tentativeMeetings = result;
+          status = JSON.parse(result);
         })
         .catch((error) => console.log("error", error));
-      // Get upcoming meetings
-      await fetch(`/upcoming-meetings/${attendee}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-      })
-        .then((response) => response.text())
-        .then((result) => {
-          upcomingMeetings = result;
-        })
-        .catch((error) => console.log("error", error));
-      // User has declined if the meeting id is not in either tentative meetings or their upcoming meetings
-      if (
-        !tentativeMeetings.includes(meeting_id) &&
-        !upcomingMeetings.includes(meeting_id)
-      ) {
-        actualClass = declinedClass;
-        actualIcon = declinedIcon;
+      // User has not accepted/declined
+      if (status === "needsAction") {
+        actualClass = tentativeClass;
+        actualIcon = tentativeIcon;
       }
-      // Otherwise, the user has either accepted or hasn't replied
+      // Otherwise, the user has either accepted or has declined
       else {
-        actualClass = upcomingMeetings.includes(meeting_id)
-          ? acceptedClass
-          : tentativeClass;
-        actualIcon = upcomingMeetings.includes(meeting_id)
-          ? acceptedIcon
-          : tentativeIcon;
+        actualClass = status === "confirmed" ? acceptedClass : declinedClass;
+        actualIcon = status === "confirmed" ? acceptedIcon : declinedIcon;
       }
       return `<div class="icons-container"><span class="badge rounded-pill ${actualClass}">${attendee}</span> ${actualIcon}</div>`;
     })

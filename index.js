@@ -318,6 +318,23 @@ app.post("/add-to-calendar", checkLoggedIn, async (req, res) => {
   }
 });
 
+// ENDPOINT for getting attendee status on meeting
+app.get("/status/:event_id/:attendee", checkLoggedIn, async (req, res) => {
+  const event_id = req.params.event_id;
+  const email = req.params.attendee;
+  try {
+    const status = await googleCalendar.attendeeStatus(
+      credentials,
+      event_id,
+      email
+    );
+    res.send(JSON.stringify(status));
+  } catch (error) {
+    console.trace(error);
+    res.sendStatus(500);
+  }
+});
+
 app.get("*", (req, res) => {
   res.send("Error");
 });
