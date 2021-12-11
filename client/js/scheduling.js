@@ -105,10 +105,11 @@ async function scheduleMeeting() {
     });
     // Get the returned meeting id
     let meeting_id = (await response.json()).id;
-    // Update the attendees tentative meetings with the new meeting
-    updateAttendeeMeetings(meeting_id, attendeeEmailsArray);
-    // Update the host's meetings with the new meeting
-    updateHostMeetings(meeting_id, email);
+    // Update the attendees meetings with the new meeting
+    updateAttendeeMeetings(
+      { meeting_id: meeting_id, event_id: event_id },
+      attendeeEmailsArray
+    );
     // Alert user that meeting has been successfully scheduled
     $("#message").text("Meeting Successfully Scheduled");
     $("#modalNotification").modal("show");
@@ -119,38 +120,23 @@ async function scheduleMeeting() {
   }
 }
 
-// Add the scheduled meeting to the attendees tentative meetings
-async function updateAttendeeMeetings(meeting_id, attendees) {
-  const response = await fetch(`/tentative-meetings`, {
+// Add the scheduled meeting to the attendees meetings
+async function updateAttendeeMeetings(meeting, attendees) {
+  const response = await fetch(`/meetings`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      meeting_id: meeting_id,
-      attendees: attendees,
+      meeting: meeting,
+      attendees: attendees.concat([email]),
     }),
   });
   const result = await response.json();
   console.log(result);
 }
 
-// Add the scheduled meeting to the host's meetings
-async function updateHostMeetings(meeting_id, email) {
-  const response = await fetch(`/upcoming-meetings`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      meeting_id: meeting_id,
-      email: email,
-    }),
-  });
-  const result = await response.json();
-  console.log(result);
-}
-
+// Add the meeting to the attendees google calendars
 async function addMeetingToCalendar(event) {
   let google_event = {
     title: event.title,
@@ -192,6 +178,7 @@ async function addMeetingToCalendar(event) {
   return result.event_id;
 }
 
+// Provide meeting suggestions
 async function meetingSuggestions(dateMin, dateMax) {
   await fetch(`/availability/${dateMin}/${dateMax}`, {
     method: "GET",

@@ -82,11 +82,32 @@ async function insertIntoCalendar(tokens, event) {
   return result.data.id;
 }
 
-async function confirmMeeting(tokens, event) {}
+async function attendeeStatus(tokens, event_id, email) {
+  oAuth2Client.setCredentials(tokens);
+  // Authorize a client with credentials, then call the Google Calendar API.
+  const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+
+  const result = await calendar.events.get({
+    auth: oAuth2Client,
+    calendarId: "primary",
+    eventId: event_id,
+  });
+
+  const attendees = result.data.attendees;
+  let status = "";
+  attendees.forEach((attendee) => {
+    status = attendee.email === email ? attendee.responseStatus : "";
+  });
+  // HOST meeting
+  if (status === "") {
+    status = "confirmed";
+  }
+  return status;
+}
 
 module.exports = {
   listCalendars,
   freeBusy,
   insertIntoCalendar,
-  confirmMeeting,
+  attendeeStatus,
 };
