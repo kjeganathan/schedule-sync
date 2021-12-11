@@ -28,6 +28,13 @@ async function loadTentativeMeetings(email) {
     .then((response) => response.text())
     .then((result) => {
       let meetings = JSON.parse(result);
+      // Sort meetings by closest meeting
+      meetings.sort(function (a, b) {
+        return (
+          new Date(a.date) - new Date(b.date) ||
+          a.start_time.localeCompare(b.start_time)
+        );
+      });
       meetings.forEach((tentative_meeting) => {
         let meeting_html = `<div class="card" id="card1">
                <div id="entire-card" class="card-horizontal">
