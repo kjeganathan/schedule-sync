@@ -111,42 +111,6 @@ async function loadUpcomingMeetings(email) {
     });
 }
 
-// User accepts a meeting
-async function acceptMeeting() {
-  const meeting_id = this.id;
-  const response = await fetch(`/meeting-accepted`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      meeting_id: meeting_id,
-    }),
-  });
-  const result = await response.json();
-  console.log(result);
-  location.reload();
-}
-
-// User declines the meeting
-async function declineMeeting() {
-  const meeting_id = this.id;
-  const response = await fetch(`/meeting-declined`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      meeting_id: meeting_id,
-    }),
-  });
-  const result = await response.json();
-  console.log(result);
-  location.reload();
-}
-
 // Get the meeting information
 async function meetingDetails() {
   const meeting_id = this.id.split("-")[0];

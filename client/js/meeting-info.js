@@ -12,9 +12,6 @@ window.addEventListener("load", async function () {
     "scheduleMeeting"
   ).href = `./scheduling?email=${email}`;
   document.getElementById("myMeetings").href = `./meetings?email=${email}`;
-  // Set event listener for delete button
-  const deleteButton = document.getElementById("delete");
-  deleteButton.addEventListener("click", deleteMeeting);
   // populate the meeting details
   populateMeetingInfo(upcomingMeeting, eventId);
 });
@@ -95,53 +92,6 @@ async function populateAttendees(attendees, meeting_id, event_id) {
   );
   // populate the html
   document.getElementById("attendee-list").innerHTML = attendeeList.join("");
-}
-
-// Delete the current meeting
-async function deleteMeeting() {
-  var attendees = [];
-  // Get the attendees
-  await fetch(`/meetings/${upcomingMeeting}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  })
-    .then((response) => response.text())
-    .then((result) => {
-      const meeting = JSON.parse(result);
-      attendees = meeting.attendees;
-    })
-    .catch((error) => console.log("error", error));
-  // Update the attendees tentative and upcoming meetings and delete the meeting from their list
-  updateAttendeeMeetings(upcomingMeeting, attendees);
-  // Delete the meeting from the database
-  const response = await fetch(`/meetings/${upcomingMeeting}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  });
-  console.log(response);
-  location.href = "/meetings";
-}
-
-// update each attendee's meetings by deleting the meeting id
-async function updateAttendeeMeetings(meeting_id, attendees) {
-  const response = await fetch(`/attendee-meetings`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify({
-      meeting_id: meeting_id,
-      attendees: !attendees.includes(email)
-        ? attendees.concat([email])
-        : attendees,
-    }),
-  });
-  let result = await response.json();
-  console.log(result);
 }
 
 function tConvert(time) {
