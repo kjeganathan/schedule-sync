@@ -4,14 +4,20 @@
 const urlParams = new URLSearchParams(window.location.search);
 // Get the user's email
 const email = urlParams.get("email");
+const full_name = urlParams.get("name");
+const picture = urlParams.get("picture");
 
 window.addEventListener("load", async function () {
   // Set NAVBAR LINKS
-  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "myCalendar"
+  ).href = `./calendar?email=${email}&name=${full_name}&picture=${picture}`;
   document.getElementById(
     "scheduleMeeting"
-  ).href = `./scheduling?email=${email}`;
-  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
+  ).href = `./scheduling?email=${email}&name=${full_name}&picture=${picture}`;
+  document.getElementById(
+    "myMeetings"
+  ).href = `./meetings?email=${email}&name=${full_name}&picture=${picture}`;
 
   // Add event listener for minimum choice of end time as start time
   const startTime = document.getElementById("startTime");

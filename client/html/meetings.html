@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <title>Schedule Sync</title>
-      <script defer src="../js/meetings.js"></script>
-      <meta charset="utf-8" />
-      <meta
-         name="viewport"
-         content="width=device-width, initial-scale=1, shrink-to-fit=yes"
-         />
-      <meta
-         name="google-site-verification"
-         content="iTbJ-p6IVlnmn8YXUm689TcZ19mK1nzdVxHm08gF8Yw"
-         />
-         <link rel="stylesheet" href="../styles.css" />
-      <link rel="stylesheet" href="../css/meetings.css">
-      <link rel="icon" href="assets/images/logo-blue.png" type="image/png" />
-      <link
-         rel="stylesheet"
-         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-         />
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script defer src="../js/meetings.js"></script>
-   </head>
-   <body>
-     <div class="navbar">
+  <head>
+    <title>Schedule Sync</title>
+    <script defer src="../js/meetings.js"></script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=yes"
+    />
+    <meta
+      name="google-site-verification"
+      content="iTbJ-p6IVlnmn8YXUm689TcZ19mK1nzdVxHm08gF8Yw"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../css/meetings.css" />
+    <link rel="icon" href="assets/images/logo-blue.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="../js/meetings.js"></script>
+  </head>
+  <body>
+    <div class="navbar">
       <a id="myCalendar">My Calendar</a>
       <a id="scheduleMeeting">Schedule a Meeting</a>
       <img
@@ -35,42 +35,27 @@
       <a id="myMeetings">My Meetings</a>
       <a href="./logout" id="logout">Logout</a>
     </div>
-      <div id="title"> My Meetings </div>
+    <div id="title">My Meetings</div>
 
-      <!--Grid-->
-      <div class="grid-container">
-      <div class="container">
-      <!--Header Banner-->
-         <div class="row">
-         <!--Banner Column-->
-            <div id="tentativeCol" class="col-sm border-right">
-            <br/>
-            <br/>
-               <div>
-                  <h2 class="tentative-meetings-title">Tentative Meetings</h2>
-               </div>
-            <div id="tentative-meetings"></div>
-         </div>
-         <!--Col 1 end-->
+    <div class="user-info">
+      <div class="flex-box">
+        <div id="photo"></div>
+        <div>
+          <p id="full-name"></p>
+          <p id="email"></p>
+        </div>
       </div>
-      <!--Banner Column-->
-      <div id="upcomingCol" class="col-sm">
-         <br/>
-         <br/>
-         <div>
-            <h2 class="upcoming-meetings-title">Upcoming Meetings</h2>
-         </div>
-         <div id="upcoming-meetings"></div>
-      </div>
-   </div>
+    </div>
+    <!--Grid-->
+    <div id="grid"></div>
 
-      <div class="footer">
-         <style>
-            .heart {
-            color: #e25555;
-            }
-         </style>
-         <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
-      </div>
-   </body>
+    <div class="footer">
+      <style>
+        .heart {
+          color: #e25555;
+        }
+      </style>
+      <p>Made with <span class="heart">♥</span> in Amherst, MA</p>
+    </div>
+  </body>
 </html>

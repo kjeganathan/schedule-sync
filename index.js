@@ -113,7 +113,7 @@ app.get(
   async function (req, res) {
     const email = userProfile.emails[0].value;
     const user = userProfile.displayName;
-    console.log(user);
+    const picture = userProfile._json.picture;
     const results = await db.getUser(email);
     if (results.length === 0) {
       await db.addUser(user, email);
@@ -124,6 +124,8 @@ app.get(
         pathname: "/calendar",
         query: {
           email: email,
+          name: user,
+          picture: picture,
         },
       })
     );
@@ -242,7 +244,7 @@ app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
         credentials,
         meeting["event_id"],
         email
-      )) === "confirmed"
+      )) === "accepted"
     );
   });
 

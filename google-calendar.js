@@ -100,7 +100,7 @@ async function attendeeStatus(tokens, event_id, email) {
   });
   // HOST meeting
   if (status === "") {
-    status = "confirmed";
+    status = "accepted";
   }
   return status;
 }

@@ -11,28 +11,13 @@
   margin-right: auto;
 }
 
-.grid-container{
-  margin-bottom: 30px;
-  height:100%;
-}
-
-text {
-  z-index: 1000;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .detail {
   background-color: white !important;
   color: #8f7878 !important;
   font-size: 0.75vw !important;
   font-weight: bold !important;
   border-radius: 20px !important;
-  padding:0px;
+  padding: 0px;
   margin-left: 15vw !important;
 }
 
@@ -40,54 +25,8 @@ text {
   background-color: lightgray !important;
 }
 
-.accept {
-  border-color: #7d9fec !important;
-  background-color: #7d9fec !important;
-  font-size: 0.75vw !important;
-  border-radius: 20px !important;
-  margin-left: 9vw !important;
-  font-weight: bold !important;
-}
-
-.accept:hover {
-  background-color: green !important;
-  border-color: green !important;
-}
-
-.decline {
-  background-color: #f3bd56 !important;
-  border-color: #f3bd56 !important;
-  font-size: 0.75vw !important;
-  border-radius: 20px !important;
-  font-weight: bold !important;
-  margin-left: 1vh !important;
-}
-
-.decline:hover {
-  background-color: red !important;
-  border-color: red !important;
-}
-
-#upcoming-meetings{
-  padding-bottom:20px;
-}
-
-#tentative-meetings{
-  padding-bottom:20px;
-}
-
-.tentative-meetings-title,
-.upcoming-meetings-title {
-  padding: 10px;
-  width: fit-content;
-  margin-right: auto;
-  margin-left: auto;
-  height: 4vh;
-  font-weight: normal;
-  font-size: 28px;
-  line-height: 32px;
-  color: #000000;
-  text-decoration: underline;
+#upcoming-meetings {
+  padding-bottom: 20px;
 }
 
 .card-body {
@@ -132,37 +71,12 @@ text {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#card1,
 #card2 {
   height: 24vh;
   width: 34.5vw;
   margin-top: 6vw;
   border-radius: 20px;
   background: #505050;
-}
-
-#card1:last-of-type,
-#card2:last-of-type {
-  margin-bottom: 90px;
-}
-/* Column Banner Styling */
-
-#tentativeCol {
-  height: 0vh;
-  position: absolute;
-  left: 0%;
-  width: 50vw;
-  text-align: left;
-  margin-left: 1vw;
-  margin-right: 5vw;
-}
-
-#upcomingCol {
-  margin-left: 30vw;
-  width: 50vw;
-  height: 27vh;
-  text-align: left;
-  border-left-width: 5px;
 }
 
 .card-horizontal {
@@ -198,4 +112,50 @@ text {
 
 .img-square-wrapper {
   margin-right: 2vw !important;
+}
+
+/* (A) 3 COLUMNS PER ROW */
+#grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 3vw 7vh;
+  margin: auto 10vw;
+}
+/* (B) 1 COL ON SMALL SCREENS */
+@media screen and (max-width: 768px) {
+  #grid {
+    grid-template-columns: auto;
+  }
+}
+/* (C) OPTIONAL FOR THE CELLS */
+.cell {
+  padding: 10px;
+}
+
+.user-info {
+  background-color: rgb(223, 219, 219);
+  height: 20vh;
+  margin: 5vh 0;
+  display: flex;
+  align-items: center;
+}
+
+.flex-box {
+  display: flex;
+  align-items: flex-end;
+  width: max-content;
+  margin-left: 4vw;
+}
+
+#full-name,
+#email {
+  margin: 0 2vw;
+}
+
+#full-name {
+  font-size: 2em;
+}
+
+#email {
+  color: #505050;
 }

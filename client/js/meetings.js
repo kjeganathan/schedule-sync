@@ -4,14 +4,22 @@
 const urlParams = new URLSearchParams(window.location.search);
 // Get the user's email
 const email = urlParams.get("email");
+const full_name = urlParams.get("name");
+const picture = urlParams.get("picture");
 
 window.addEventListener("load", async function () {
   // Set NAVBAR LINKS
-  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "myCalendar"
+  ).href = `./calendar?email=${email}&name=${full_name}&picture=${picture}`;
   document.getElementById(
     "scheduleMeeting"
-  ).href = `./scheduling?email=${email}`;
-  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
+  ).href = `./scheduling?email=${email}&name=${full_name}&picture=${picture}`;
+  document.getElementById(
+    "myMeetings"
+  ).href = `./meetings?email=${email}&name=${full_name}&picture=${picture}`;
+  // load user information
+  loadUserInformation(email, full_name, picture);
   // load the user's upcoming meetings
   loadUpcomingMeetings(email);
 });
@@ -42,7 +50,7 @@ async function loadUpcomingMeetings(email) {
             new Date(new Date().toDateString())
           )
         ) {
-          meeting_html = `<div class="card" id="card2">
+          meeting_html = `<div class="cell"><div class="card" id="card2">
           <div id="entire-card" class="card-horizontal">
              <div class="img-square-wrapper">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="calendar-icon" class="bi bi-calendar-fill" viewBox="0 0 16 16">
@@ -94,12 +102,13 @@ async function loadUpcomingMeetings(email) {
                 </div>
              </div>
           </div>
+       </div>
        </div>`;
         }
         upcoming_html += meeting_html;
       });
       // Insert the upcoming meetings string into the tentative meetings div
-      document.getElementById("upcoming-meetings").innerHTML = upcoming_html;
+      document.getElementById("grid").innerHTML = upcoming_html;
       // Initialize the event listener for the details button
       const detailButtons = document.querySelectorAll(".btn-light");
       detailButtons.forEach((button) => {
@@ -111,11 +120,18 @@ async function loadUpcomingMeetings(email) {
     });
 }
 
+// load user information
+async function loadUserInformation(email, full_name, picture) {
+  $("#photo").html(`<img src=${picture}>`);
+  $("#full-name").text(full_name);
+  $("#email").text(email);
+}
+
 // Get the meeting information
 async function meetingDetails() {
   const meeting_id = this.id.split("-")[0];
   const event_id = this.id.split("-")[1];
-  window.location.href = `/meeting-info?meeting-id=${meeting_id}?&event-id=${event_id}&email=${email}`;
+  window.location.href = `/meeting-info?meeting-id=${meeting_id}&event-id=${event_id}&email=${email}`;
 }
 
 function tConvert(time) {

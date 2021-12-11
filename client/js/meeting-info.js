@@ -2,16 +2,22 @@
 const urlParams = new URLSearchParams(window.location.search);
 // Get user email from the url query string to check if they are the host
 const email = urlParams.get("email");
+const full_name = urlParams.get("name");
+const picture = urlParams.get("picture");
 const upcomingMeeting = urlParams.get("meeting-id");
 const eventId = urlParams.get("event-id");
 
 window.addEventListener("load", async function () {
   // Set NAVBAR LINKS
-  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "myCalendar"
+  ).href = `./calendar?email=${email}&name=${full_name}&picture=${picture}`;
   document.getElementById(
     "scheduleMeeting"
-  ).href = `./scheduling?email=${email}`;
-  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
+  ).href = `./scheduling?email=${email}&name=${full_name}&picture=${picture}`;
+  document.getElementById(
+    "myMeetings"
+  ).href = `./meetings?email=${email}&name=${full_name}&picture=${picture}`;
   // populate the meeting details
   populateMeetingInfo(upcomingMeeting, eventId);
 });
@@ -75,6 +81,7 @@ async function populateAttendees(attendees, meeting_id, event_id) {
         .then((response) => response.text())
         .then((result) => {
           status = JSON.parse(result);
+          console.log(status);
         })
         .catch((error) => console.log("error", error));
       // User has not accepted/declined
@@ -84,8 +91,8 @@ async function populateAttendees(attendees, meeting_id, event_id) {
       }
       // Otherwise, the user has either accepted or has declined
       else {
-        actualClass = status === "confirmed" ? acceptedClass : declinedClass;
-        actualIcon = status === "confirmed" ? acceptedIcon : declinedIcon;
+        actualClass = status === "accepted" ? acceptedClass : declinedClass;
+        actualIcon = status === "accepted" ? acceptedIcon : declinedIcon;
       }
       return `<div class="icons-container"><span class="badge rounded-pill ${actualClass}">${attendee}</span> ${actualIcon}</div>`;
     })

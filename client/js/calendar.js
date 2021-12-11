@@ -1,14 +1,20 @@
 // Get user email from the url query string
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get("email");
+const full_name = urlParams.get("name");
+const picture = urlParams.get("picture");
 
 document.addEventListener("DOMContentLoaded", async function () {
   // Set NAVBAR LINKS
-  document.getElementById("myCalendar").href = `./calendar?email=${email}`;
+  document.getElementById(
+    "myCalendar"
+  ).href = `./calendar?email=${email}&name=${full_name}&picture=${picture}`;
   document.getElementById(
     "scheduleMeeting"
-  ).href = `./scheduling?email=${email}`;
-  document.getElementById("myMeetings").href = `./meetings?email=${email}`;
+  ).href = `./scheduling?email=${email}&name=${full_name}&picture=${picture}`;
+  document.getElementById(
+    "myMeetings"
+  ).href = `./meetings?email=${email}&name=${full_name}&picture=${picture}`;
 
   var calendar_events = [];
   // Get user's google calendar events
