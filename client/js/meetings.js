@@ -131,7 +131,7 @@ async function loadUserInformation(email, full_name, picture) {
 async function meetingDetails() {
   const meeting_id = this.id.split("-")[0];
   const event_id = this.id.split("-")[1];
-  window.location.href = `/meeting-info?meeting-id=${meeting_id}&event-id=${event_id}&email=${email}`;
+  window.location.href = `/meeting-info?meeting-id=${meeting_id}&event-id=${event_id}&email=${email}&name=${full_name}&picture=${picture}`;
 }
 
 function tConvert(time) {
