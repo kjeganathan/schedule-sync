@@ -29,9 +29,6 @@ async function loadTentativeMeetings(email) {
     .then((result) => {
       let meetings = JSON.parse(result);
       meetings.forEach((tentative_meeting) => {
-        console.log(
-          tentative_meeting.date.toLocaleString("en-us", { month: "short" })
-        );
         let meeting_html = `<div class="card" id="card1">
                <div id="entire-card" class="card-horizontal">
                   <div class="img-square-wrapper">
@@ -119,8 +116,22 @@ async function loadUpcomingMeetings(email) {
     .then((response) => response.text())
     .then((result) => {
       let meetings = JSON.parse(result);
+      // Sort meetings by closest meeting
+      meetings.sort(function (a, b) {
+        return (
+          new Date(a.date) - new Date(b.date) ||
+          a.start_time.localeCompare(b.start_time)
+        );
+      });
       meetings.forEach((upcoming_meeting) => {
-        let meeting_html = `<div class="card" id="card2">
+        let meeting_html = "";
+        if (
+          !(
+            new Date(upcoming_meeting.date).toDateString() <
+            new Date(new Date().toDateString())
+          )
+        ) {
+          meeting_html = `<div class="card" id="card2">
             <div id="entire-card" class="card-horizontal">
                <div class="img-square-wrapper">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="calendar-icon" class="bi bi-calendar-fill" viewBox="0 0 16 16">
@@ -130,9 +141,9 @@ async function loadUpcomingMeetings(email) {
                      ).toLocaleString("en-us", {
                        month: "short",
                      })} ${upcoming_meeting.date.replace(
-          /(\d{2})\/(\d{2})\/(\d{4})/,
-          "$2"
-        )}</text>
+            /(\d{2})\/(\d{2})\/(\d{4})/,
+            "$2"
+          )}</text>
                   </svg>
                </div>
                <div class="card-body">
@@ -173,6 +184,7 @@ async function loadUpcomingMeetings(email) {
                </div>
             </div>
          </div>`;
+        }
         upcoming_html += meeting_html;
       });
       // Insert the upcoming meetings string into the tentative meetings div
