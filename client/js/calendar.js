@@ -1,3 +1,5 @@
+"use strict";
+
 // Get user email from the url query string
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get("email");

@@ -1,3 +1,5 @@
+"use strict";
+
 // Get the upcoming meeting id from url query string
 const urlParams = new URLSearchParams(window.location.search);
 // Get user email from the url query string to check if they are the host
