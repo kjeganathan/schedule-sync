@@ -64,65 +64,85 @@
 
     <div class="scheduleMeeting">
       <form id="schedule-meeting">
-        <div class="mb-3">
-          <label for="meeting-title" class="form-label">Meeting Title</label>
-          <input type="text" class="form-control" id="meetingTitle" required />
-        </div>
-        <div class="mb-3">
-          <label for="meeting-date" class="form-label">Meeting Date</label>
-          <input type="date" class="form-control" id="meetingDate" required />
-        </div>
-        <div class="wrapper">
-          <div class="mb-1">
-            <label for="start-time" class="form-label">Start Time</label>
-            <input type="time" class="form-control" id="startTime" required />
-          </div>
+        <div class="wrap">
           <div class="mb-3">
-            <label for="end-time" class="form-label">End Time</label>
+            <label for="meeting-title" class="form-label">Meeting Title</label>
+            <input type="text" class="form-control" id="meetingTitle" required />
+          </div>
+        </div>
+        
+        <div class="wrap">
+          <div class="mb-3">
+            <label for="meeting-date" class="form-label">Meeting Date</label>
+            <input type="date" class="form-control" id="meetingDate" required />
+            </div>
+        </div>
+        
+        <div class="wrap">
+            <div class="wrapper">
+              <div class="mb-1">
+                <label for="start-time" class="form-label">Start Time</label>
+                <input type="time" class="form-control" id="startTime" required />
+              </div>
+              <div class="left-spacing">
+                <div class="mb-3">
+                  <label for="end-time" class="form-label">End Time</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="endTime"
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Please input a time later than Start Time"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        <div class="wrap">
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                class="form-control mb-10"
+                rows="4"
+                cols="50"
+              ></textarea>
+            </div>
+        </div>
+      
+        <div class="wrap">
+          <div class="mb-3">
+            <label for="attendees" class="form-label">Add Guests</label>
             <input
-              type="time"
-              class="form-control"
-              id="endTime"
-              data-toggle="tooltip"
-              data-placement="right"
-              title="Please input a time later than Start Time"
+              type="email"
+              class="form-control mb-10"
+              id="attendeeEmail"
+              placeholder="Enter a comma separated list of attendees emails"
+              multiple
               required
             />
           </div>
         </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            class="form-control mb-10"
-            rows="4"
-            cols="50"
-          ></textarea>
+        
+        <div class="wrap">
+          <label for="location" class="form-label"
+          >How would you like to meet?</label>
         </div>
-        <div class="mb-3">
-          <label for="attendees" class="form-label">Add Guests</label>
-          <input
-            type="email"
-            class="form-control mb-10"
-            id="attendeeEmail"
-            placeholder="Enter a comma separated list of attendees emails"
-            multiple
-            required
-          />
-        </div>
-        <label for="location" class="form-label"
-          >How would you like to meet?</label
-        >
+        
+        <div class="wrap">
         <div class="wrapper">
           <div class="input-group mb-3">
             <div class="input-group-text">
               <label
                 for="remote"
                 class="form-label"
+                id = "grey-fill"
                 style="margin: 0.2rem !important"
-                >Remote</label
-              >
+                >Remote</label>
             </div>
             <input
               type="text"
@@ -131,27 +151,43 @@
               placeholder="Input meeting link"
             />
           </div>
-          <div class="input-group mb-3 ml-10">
-            <div class="input-group-text">
-              <label
-                for="in-person"
-                class="form-label"
-                style="margin: 0.2rem !important"
-                >In-person</label
-              >
-            </div>
-            <input
-              type="text"
-              class="form-control"
-              id="inPerson"
-              placeholder="Input physical address"
-            />
           </div>
         </div>
-        <button type="button" class="button btn btn-primary" id="Schedule">
-          Schedule
-        </button>
+
+          <div class="wrap">
+            <div class="wrapper">
+                <div class="input-group mb-3">
+                  <div class="input-group-text">
+                    <label
+                      for="in-person"
+                      class="form-label"
+                      id = "grey-fill"
+                      style="margin: 0.2rem !important"
+                      >In-person</label>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inPerson"
+                    placeholder="Input physical address"
+                  />
+                </div>
+              </div>
+          </div>
+          
+        <div class="wrap">
+          <button type="button" class="button btn btn-primary" id="Schedule">
+            Schedule
+          </button>
+        </div>
+        
       </form>
+
+    <!-- <div class="time-suggestions">
+      
+    </div> -->
+
+      <!-- <div class="line"></div> -->
 
       <!-- MODAL -->
       <div
