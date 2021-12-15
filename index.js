@@ -173,6 +173,7 @@ app.post("/schedule", checkLoggedIn, async (req, res) => {
       data.event_id,
       data.title,
       data.date,
+      data.timeZone,
       data.start_time,
       data.end_time,
       data.location,
@@ -294,11 +295,11 @@ app.post("/add-to-calendar", checkLoggedIn, async (req, res) => {
     description: data.description,
     start: {
       dateTime: data.start_time,
-      timeZone: "EST",
+      timeZone: data.timeZone,
     },
     end: {
       dateTime: data.end_time,
-      timeZone: "EST",
+      timeZone: data.timeZone,
     },
     // recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
     attendees: data.attendees,

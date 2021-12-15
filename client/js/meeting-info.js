@@ -37,6 +37,7 @@ async function populateMeetingInfo(meeting_id, event_id) {
       const meeting = JSON.parse(result);
       document.getElementById("title").innerHTML = meeting.title;
       document.getElementById("date").innerHTML = meeting.date;
+      document.getElementById("timeZone").innerHTML = meeting.timezone;
       document.getElementById("start-time").innerHTML = tConvert(
         meeting.start_time
       );
@@ -47,13 +48,13 @@ async function populateMeetingInfo(meeting_id, event_id) {
         meeting.attendees.length;
       document.getElementById("description").innerHTML = meeting.description;
       document.getElementById("location").innerHTML = meeting.location;
-      populateAttendees(meeting.attendees, meeting_id, event_id);
+      populateAttendees(meeting.attendees, event_id);
     })
     .catch((error) => console.log("error", error));
 }
 
 // Get the attendees and populate the attendee list html with whether or not they accepted, declined, or haven't replied yet
-async function populateAttendees(attendees, meeting_id, event_id) {
+async function populateAttendees(attendees, event_id) {
   let actualClass = "";
   let actualIcon = "";
   let acceptedClass = "bg-success";

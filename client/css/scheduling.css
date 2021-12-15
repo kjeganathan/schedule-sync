@@ -147,3 +147,10 @@
 #time-suggestion-title {
   font-size: 2rem;
 }
+
+#no-availability {
+  margin-top: 3vh;
+  font-weight: bold;
+  font-size: large;
+  color: #7d9fec;
+}

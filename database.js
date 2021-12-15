@@ -93,6 +93,7 @@ async function addMeeting(
   event_id,
   title,
   date,
+  timeZone,
   start_time,
   end_time,
   location,
@@ -101,7 +102,7 @@ async function addMeeting(
 ) {
   return await connectAndRun((db) =>
     db.any(
-      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees, event_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING meeting_id;",
+      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees, event_id, timeZone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING meeting_id;",
       [
         title,
         date,
@@ -111,6 +112,7 @@ async function addMeeting(
         description,
         attendees,
         event_id,
+        timeZone,
       ]
     )
   );
