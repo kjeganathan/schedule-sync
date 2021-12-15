@@ -57,6 +57,7 @@ async function scheduleMeeting() {
   meetingDate = meetingDate.replace(/(\d{4})\-(\d{2})\-(\d{2})/, "$2/$3/$1");
   const startTime = document.getElementById("startTime").value;
   const endTime = document.getElementById("endTime").value;
+  const timeZone = document.getElementById("timeZone").value;
   const description = document.getElementById("description").value;
   const attendeeEmails = document.getElementById("attendeeEmail").value;
   const attendeeEmailsArray = attendeeEmails.split(",");
@@ -76,7 +77,8 @@ async function scheduleMeeting() {
     endTime === "" ||
     description === "" ||
     attendeeEmails === "" ||
-    locationValue === ""
+    locationValue === "" ||
+    timeZone == ""
   ) {
     $("#message").text(
       "Required information is missing. Please add missing information to schedule your meeting."
@@ -91,6 +93,7 @@ async function scheduleMeeting() {
       date: meetingDate,
       start_time: startTime,
       end_time: endTime,
+      timeZone: timeZone,
       location: locationValue,
       description: description,
       attendees: attendeeEmailsArray,
