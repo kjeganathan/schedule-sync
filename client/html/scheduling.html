@@ -29,108 +29,337 @@
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../css/scheduling.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <script defer src="../js/scheduling.js"></script>
   </head>
   <body>
     <div class="navbar">
-      <a href="./calendar" id="myCalendar">My Calendar</a>
-      <a href="./scheduling" id="scheduleMeeting">Schedule a Meeting</a>
+      <a id="myCalendar">My Calendar</a>
+      <a id="scheduleMeeting">Schedule a Meeting</a>
       <img
         width="100px"
         height="74x"
         class="logo"
         src="../assets/images/logo-blue.png"
       />
-      <a href="./meetings" id="myMeetings">My Meetings</a>
+      <a id="myMeetings">My Meetings</a>
       <a href="./logout" id="logout">Logout</a>
     </div>
 
-    <h2 id="title">Schedule a Meeting</h2>
+    <div class="boxes">
+      <div class="scheduleMeeting">
+        <form id="schedule-meeting">
+          <h4 class="mb-0" id="schedule-meeting-title"></h4>
+          <div class="wrap">
+            <div class="mb-2">
+              <label for="meeting-title" class="form-label"
+                >Meeting Title</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="meetingTitle"
+                required
+              />
+            </div>
+          </div>
 
-    <div class="scheduleMeeting">
-      <form id="schedule-meeting">
-        <div class="mb-3">
-          <label for="meeting-title" class="form-label">Meeting Title</label>
-          <input type="text" class="form-control" id="meetingTitle" required />
-        </div>
-        <div class="mb-3">
-          <label for="meeting-date" class="form-label">Meeting Date</label>
-          <input type="date" class="form-control" id="meetingDate" required />
-        </div>
-        <div class="wrapper">
-          <div class="mb-1">
-            <label for="start-time" class="form-label">Start Time</label>
-            <input type="time" class="form-control" id="startTime" required />
+          <div class="wrap">
+            <div class="mb-2">
+              <label for="meeting-date" class="form-label">Meeting Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="meetingDate"
+                required
+              />
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="end-time" class="form-label">End Time</label>
-            <input type="time" class="form-control" id="endTime" required />
+
+          <div class="wrap">
+            <div class="wrapper">
+              <div class="mb-1">
+                <label for="start-time" class="form-label">Start Time</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="startTime"
+                  required
+                />
+              </div>
+              <div class="left-spacing">
+                <div class="mb-2">
+                  <label for="end-time" class="form-label">End Time</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="endTime"
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Please input a time later than Start Time"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            class="form-control mb-10"
-            rows="4"
-            cols="50"
-          ></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="attendees" class="form-label">Add Guests</label>
-          <input
-            type="email"
-            class="form-control mb-10"
-            id="attendeeEmail"
-            placeholder="Enter a comma separated list of attendees emails"
-            multiple
-            required
-          />
-        </div>
-        <label for="location" class="form-label"
-          >How would you like to meet?</label
+          <div class="wrap">
+            <label for="timezone" class="form-label"> Timezone:</label>
+          </div>
+          <div class="wrap mb-1">
+            <select id="timeZone">
+              <option value="Greenwich Mean Time (GMT)">
+                Greenwich Mean Time (GMT)
+              </option>
+              <option value="Universal Coordinated Time (UTC)">
+                Universal Coordinated Time (UTC)
+              </option>
+              <option value="European Central Time (UTC)">
+                European Central Time (UTC)
+              </option>
+              <option value="Eastern European Time (EET)">
+                Eastern European Time (EET)
+              </option>
+              <option value="(Arabic) Egypt Standard Time (ART)">
+                (Arabic) Egypt Standard Time (ART)
+              </option>
+              <option value="Middle East Time (MET)">
+                Middle East Time (MET)
+              </option>
+              <option value="Near East Time (NET)">Near East Time (NET)</option>
+              <option value="Pakistan Lahore Time (PLT)">
+                Pakistan Lahore Time (PLT)
+              </option>
+              <option value="India Standard Time (IST)">
+                India Standard Time (IST)
+              </option>
+              <option value="Bangladesh Standard Time (BST)">
+                Bangladesh Standard Time (BST)
+              </option>
+              <option value="Vietnam Standard Time (VST)">
+                Vietnam Standard Time (VST)
+              </option>
+              <option value="China Taiwan Time (CTT)">
+                China Taiwan Time (CTT)
+              </option>
+              <option value="Japan Standard Time (JST)">
+                Japan Standard Time (JST)
+              </option>
+              <option value=" Australia Central Time (ACT)">
+                Australia Central Time (ACT)
+              </option>
+              <option value="Solomon Standard Time (SST)">
+                Solomon Standard Time (SST)
+              </option>
+              <option value="New Zealand Standard Time (NST)">
+                New Zealand Standard Time (NST)
+              </option>
+              <option value="Midway Islands Time (MIT)">
+                Midway Islands Time (MIT)
+              </option>
+              <option value="Hawaii Standard Time (HST)">
+                Hawaii Standard Time (HST)
+              </option>
+              <option value="Alaska Standard Time (AST)">
+                Alaska Standard Time (AST)
+              </option>
+              <option value="Pacific Standard Time (PST)">
+                Pacific Standard Time (PST)
+              </option>
+              <option value="Mountain Standard Time (MST)">
+                Mountain Standard Time (MST)
+              </option>
+              <option value="Central Standard Time (CST)">
+                Central Standard Time (CST)
+              </option>
+              <option value="Eastern Standard Time (EST)">
+                Eastern Standard Time (EST)
+              </option>
+              <option value="Phoenix Standard Time (PNT)">
+                Phoenix Standard Time (PNT)
+              </option>
+              <option value="Indiana Eastern Standard Time (IET)">
+                Indiana Eastern Standard Time (IET)
+              </option>
+              <option value="Puerto Rico and US Virgin Islands Time (PRT)">
+                Puerto Rico and US Virgin Islands Time (PRT)
+              </option>
+              <option value="Canada Newfoundland Time (CNT)">
+                Canada Newfoundland Time (CNT)
+              </option>
+              <option value="Argentina Standard Time (AGT)">
+                Argentina Standard Time (AGT)
+              </option>
+              <option value="Brazil Eastern Time (BET)">
+                Brazil Eastern Time (BET)
+              </option>
+              <option value="Central African Time (CAT)">
+                Central African Time (CAT)
+              </option>
+            </select>
+          </div>
+
+          <div class="wrap">
+            <div class="mb-2">
+              <label for="description" class="form-label">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                class="form-control mb-10"
+                rows="4"
+                cols="50"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="wrap">
+            <div class="mb-2">
+              <label for="attendees" class="form-label">Add Guests</label>
+              <input
+                type="email"
+                class="form-control mb-10"
+                id="attendeeEmail"
+                placeholder="Enter a comma separated list of attendees emails"
+                multiple
+                required
+              />
+            </div>
+          </div>
+
+          <div class="wrap">
+            <label for="location" class="form-label"
+              >How would you like to meet?</label
+            >
+          </div>
+
+          <div class="wrap">
+            <div class="wrapper">
+              <div class="input-group mb-3">
+                <div class="input-group-text">
+                  <label
+                    for="remote"
+                    class="form-label"
+                    id="grey-fill"
+                    style="margin: 0.2rem !important"
+                    >Remote</label
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="remote"
+                  placeholder="Input meeting link"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="wrap">
+            <div class="wrapper">
+              <div class="input-group mb-3">
+                <div class="input-group-text">
+                  <label
+                    for="in-person"
+                    class="form-label"
+                    id="grey-fill"
+                    style="margin: 0.2rem !important"
+                    >In-person</label
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inPerson"
+                  placeholder="Input physical address"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="wrap">
+            <button type="button" class="button btn btn-primary" id="Schedule">
+              Schedule
+            </button>
+          </div>
+        </form>
+
+        <!-- MODAL -->
+        <div
+          class="modal fade"
+          id="modalNotification"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
         >
-        <div class="wrapper">
-          <div class="input-group mb-3">
-            <div class="input-group-text">
-              <label
-                for="remote"
-                class="form-label"
-                style="margin: 0.2rem !important"
-                >Remote</label
-              >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                  Notification from Schedule Sync:
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="message"></div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
             </div>
-            <input
-              type="text"
-              class="form-control"
-              id="remote"
-              placeholder="Input meeting link"
-            />
-          </div>
-          <div class="input-group mb-3 ml-10">
-            <div class="input-group-text">
-              <label
-                for="in-person"
-                class="form-label"
-                style="margin: 0.2rem !important"
-                >In-person</label
-              >
-            </div>
-            <input
-              type="text"
-              class="form-control"
-              id="inPerson"
-              placeholder="Input physical address"
-            />
           </div>
         </div>
-        <button type="button" class="button btn btn-primary" id="Schedule">
-          Schedule
-        </button>
-      </form>
+      </div>
+
+      <div class="vl"></div>
+
+      <div class="time-suggestions">
+        <h4 class="mb=0" id="time-suggestion-title">Availability</h4>
+        <div>
+          <p style="margin-top: 2vh; width: 30vw; word-wrap: break-word">
+            Please select a date in order to recieve your busy time blocks for
+            that day
+          </p>
+          <div class="mb-10">
+            <input type="date" class="form-control" id="suggestionDate" />
+          </div>
+          <p id="no-availability"></p>
+        </div>
+        <div id="availability"></div>
+      </div>
     </div>
+
     <div class="footer">
       <style>
         .heart {

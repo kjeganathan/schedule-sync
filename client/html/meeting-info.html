@@ -43,15 +43,15 @@
 
   <body>
     <div class="navbar">
-      <a href="./calendar" id="myCalendar">My Calendar</a>
-      <a href="./scheduling" id="scheduleMeeting">Schedule a Meeting</a>
+      <a id="myCalendar">My Calendar</a>
+      <a id="scheduleMeeting">Schedule a Meeting</a>
       <img
         width="100px"
         height="74x"
         class="logo"
         src="../assets/images/logo-blue.png"
       />
-      <a href="./meetings" id="myMeetings">My Meetings</a>
+      <a id="myMeetings">My Meetings</a>
       <a href="./logout" id="logout">Logout</a>
     </div>
 
@@ -146,7 +146,7 @@
           </div>
           <div>
             <h2 class="card-title">Time Zone</h2>
-            <div class="card-text">EST</div>
+            <div class="card-text" id="timeZone"></div>
           </div>
         </div>
       </div>
@@ -184,34 +184,17 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="large-card" id="recurring-info">
-      <div class="card-horizontal">
-        <div>
-          <h2 class="large-card-title">Recurring</h2>
-          <div class="large-card-text">
-            Yes/No
-          </div>
-        </div>
-      </div>
-    </div> -->
     </div>
 
     <div class="meeting-description-container">
-      <div style="width: 50vw; margin-bottom:50px;">
+      <div style="width: 50vw; margin-bottom: 50px">
         <h3>Meeting Description</h3>
         <p class="description" id="description"></p>
-        <!-- <button type="button" class="btn btn-dark" id="edit">
-          Edit Meeting
-        </button> -->
-        <button type="button" class="btn btn-danger" id="delete">
-          Delete Meeting
-        </button>
       </div>
 
       <div class="line"></div>
 
-      <div style="width: 50vw; margin-bottom:30px;">
+      <div style="width: 50vw; margin-bottom: 30px">
         <h3>Attendee List</h3>
         <div class="badge">
           <div class="badge-container" id="attendee-list"></div>

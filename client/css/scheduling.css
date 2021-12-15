@@ -1,24 +1,25 @@
-#title {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  width: 100%;
-  height: 32px;
-  font-weight: normal;
-  font-size: 34px;
-  line-height: 32px;
-  color: #000000;
-}
-
-.form-group {
-  color: rgb(0, 0, 0);
+.boxes {
+  display: flex;
+  flex-direction: row;
 }
 
 .scheduleMeeting {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.time-suggestions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 7vw;
 }
 
 #description {
-  height: 80px;
+  height: 10px;
 }
 
 .wrapper {
@@ -27,11 +28,13 @@
   justify-content: space-evenly;
   align-items: flex-start;
   width: max-content;
-  margin: 0 auto;
 }
 
-.wrapper > div {
-  margin: 0 20px;
+.wrap {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 50px;
 }
 
 #inPersonCheckbox {
@@ -48,7 +51,8 @@
   text-align: center;
 }
 
-#meetingDate {
+#meetingDate,
+#timeZone {
   width: 20vw !important;
 }
 
@@ -60,4 +64,93 @@
 
 .button {
   margin-bottom: 90px;
+}
+
+#Schedule {
+  background-color: #505050;
+  opacity: 1;
+  border: black;
+}
+#Schedule:hover {
+  opacity: 0.7;
+}
+
+.input-group {
+  width: 585px;
+}
+
+#grey-fill {
+  width: 100px;
+}
+
+.left-spacing {
+  margin-left: 30px;
+}
+
+.vl {
+  border-left: 3px solid rgb(0, 0, 0);
+  height: 77vh;
+  margin-left: 8vw;
+  margin-top: 3vh;
+}
+
+.card-title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: left;
+  width: max-content;
+}
+
+.card-text {
+  text-align: left;
+  font-size: 18px;
+}
+
+.card {
+  width: max-content;
+  padding: 3vh 5vw;
+  margin: 0 auto;
+  margin-top: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #505050;
+  color: white;
+}
+
+#timeZone {
+  border-style: solid;
+  border-color: #cacaca;
+  height: 4vh;
+}
+
+.card-horizontal {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+
+.img-square-wrapper {
+  margin-right: 2vw !important;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 1px;
+}
+
+#time-suggestion-title {
+  font-size: 2rem;
+}
+
+#no-availability {
+  margin-top: 3vh;
+  font-weight: bold;
+  font-size: large;
+  color: #7d9fec;
 }

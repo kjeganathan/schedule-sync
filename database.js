@@ -7,14 +7,14 @@ create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date 
 
 Example tables:
         
-user_id  |       full_name       |            email            |    meetings      |     tentative meetings   
----------+-----------------------+------------------+-----------------------------+--------------------------
-1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |      ["1"]       |           [ "2" ]
+user_id  |       full_name       |            email            |                          meetings        
+---------+-----------------------+------------------+---------------------------------------------------------------------------
+1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |   [{meeting_id: "1", event_id: "tsgsjb6koud6il13lpiv8iklmc"}]       |           [ "2" ]
 
 
-meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees  
--------------+---------------------+---------------------+------------------+----------------+-----------------+-----------------------------+-------------------------------------------------------
-1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"]
+meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees                        |         event_id
+-------------+---------------------+---------------------+------------------+----------------+-----------------+-----------------------------+--------------------------------------------------------+--------------------------
+1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"] | tsgsjb6koud6il13lpiv8iklmc
 
 */
 
@@ -62,8 +62,8 @@ async function connectAndRun(task) {
 async function addUser(full_name, email) {
   return await connectAndRun((db) =>
     db.none(
-      "INSERT INTO users (full_name, email, meetings, tentative_meetings) VALUES ($1, $2, $3, $4);",
-      [full_name, email, [], []]
+      "INSERT INTO users (full_name, email, meetings) VALUES ($1, $2, $3);",
+      [full_name, email, []]
     )
   );
 }
@@ -90,8 +90,10 @@ async function updateUserMeetings(meetings, tentative_meetings, email) {
 }
 
 async function addMeeting(
+  event_id,
   title,
   date,
+  timeZone,
   start_time,
   end_time,
   location,
@@ -100,8 +102,18 @@ async function addMeeting(
 ) {
   return await connectAndRun((db) =>
     db.any(
-      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING meeting_id;",
-      [title, date, start_time, end_time, location, description, attendees]
+      "INSERT INTO meetings (title, date, start_time, end_time, location, description, attendees, event_id, timeZone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING meeting_id;",
+      [
+        title,
+        date,
+        start_time,
+        end_time,
+        location,
+        description,
+        attendees,
+        event_id,
+        timeZone,
+      ]
     )
   );
 }
@@ -118,28 +130,7 @@ async function delMeeting(meeting_id) {
   );
 }
 
-// async function updateMeeting(meeting_id) {
-//   return await connectAndRun((db) =>
-//     db.none("UPDATE FROM meetings where meeting_id = $1;", [meeting_id])
-//   );
-// }
-
-async function getTentativeMeetings(email) {
-  return await connectAndRun((db) =>
-    db.any("SELECT tentative_meetings FROM users where email = $1;", [email])
-  );
-}
-
-async function updateTentativeMeetings(tentative_meetings, email) {
-  return await connectAndRun((db) =>
-    db.any("UPDATE users SET tentative_meetings = $1 where email = $2;", [
-      tentative_meetings,
-      email,
-    ])
-  );
-}
-
-async function updateUpcomingMeetings(meetings, email) {
+async function updateMeetings(meetings, email) {
   return await connectAndRun((db) =>
     db.any("UPDATE users SET meetings = $1 where email = $2;", [
       meetings,
@@ -147,7 +138,8 @@ async function updateUpcomingMeetings(meetings, email) {
     ])
   );
 }
-async function getUpcomingMeetings(email) {
+
+async function getUserMeetings(email) {
   return await connectAndRun((db) =>
     db.any("SELECT meetings FROM users where email = $1;", [email])
   );
@@ -161,8 +153,6 @@ module.exports = {
   addMeeting,
   getMeeting,
   delMeeting,
-  getTentativeMeetings,
-  getUpcomingMeetings,
-  updateTentativeMeetings,
-  updateUpcomingMeetings,
+  getUserMeetings,
+  updateMeetings,
 };
