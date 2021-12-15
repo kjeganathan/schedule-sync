@@ -1,4 +1,4 @@
-.boxes{
+.boxes {
   display: flex;
   flex-direction: row;
 }
@@ -11,11 +11,11 @@
   align-items: flex-start;
 }
 
-.time-suggestions{
+.time-suggestions {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  margin-left: 150px;
+  margin-left: 7vw;
 }
 
 #description {
@@ -31,9 +31,9 @@
 }
 
 .wrap {
-  display: flex; 
-  align-items: flex-start; 
-  text-align: left; 
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
   margin-left: 50px;
 }
 
@@ -51,7 +51,8 @@
   text-align: center;
 }
 
-#meetingDate {
+#meetingDate,
+#timeZone {
   width: 20vw !important;
 }
 
@@ -65,33 +66,32 @@
   margin-bottom: 90px;
 }
 
-#Schedule{
-background-color: #505050;
-opacity: 1;
-border: black;
-
+#Schedule {
+  background-color: #505050;
+  opacity: 1;
+  border: black;
 }
-#Schedule:hover {opacity: 0.7}
+#Schedule:hover {
+  opacity: 0.7;
+}
 
-.input-group{
+.input-group {
   width: 585px;
 }
 
-#grey-fill{
+#grey-fill {
   width: 100px;
 }
 
-
-.left-spacing{
+.left-spacing {
   margin-left: 30px;
 }
 
 .vl {
-  border-left: 2px solid rgb(0, 0, 0);
-  height: 750px;
-  margin-left: 100px;
-  margin-right: 20px;
-  margin-top: 20px;
+  border-left: 3px solid rgb(0, 0, 0);
+  height: 77vh;
+  margin-left: 8vw;
+  margin-top: 3vh;
 }
 
 .card-title {
@@ -109,7 +109,7 @@ border: black;
 
 .card {
   width: max-content;
-  padding: 3vh 8vw;
+  padding: 3vh 5vw;
   margin: 0 auto;
   margin-top: 2vw;
   margin-left: auto;
@@ -117,12 +117,14 @@ border: black;
   vertical-align: middle;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: #e5ecfb;
+  background: #505050;
+  color: white;
 }
 
-#timeZone{
-   border-style: solid;
-   border-color: #cacaca;
+#timeZone {
+  border-style: solid;
+  border-color: #cacaca;
+  height: 4vh;
 }
 
 .card-horizontal {
@@ -136,9 +138,12 @@ border: black;
   margin-right: 2vw !important;
 }
 
-.form-label{
-  font-weight: 400;
+.form-label {
+  font-weight: bold;
   margin-top: 5px;
   margin-bottom: 1px;
 }
 
+#time-suggestion-title {
+  font-size: 2rem;
+}

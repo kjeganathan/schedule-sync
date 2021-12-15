@@ -109,7 +109,10 @@ app.get(
 // ENDPOINT for logging in user and adding user to database if they are not already in it
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
+  passport.authenticate("google", {
+    prompt: "select_account",
+    failureRedirect: "/",
+  }),
   async function (req, res) {
     const email = userProfile.emails[0].value;
     const user = userProfile.displayName;

@@ -46,10 +46,10 @@
       crossorigin="anonymous"
     ></script>
     <script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"
-  ></script>
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <script defer src="../js/scheduling.js"></script>
   </head>
   <body>
@@ -66,100 +66,172 @@
       <a href="./logout" id="logout">Logout</a>
     </div>
 
-    <div class ="boxes">
-
+    <div class="boxes">
       <div class="scheduleMeeting">
         <form id="schedule-meeting">
-          <h4 class="mb-0" id="schedule-meeting-title">Schedule a Meeting</h4>
+          <h4 class="mb-0" id="schedule-meeting-title"></h4>
           <div class="wrap">
             <div class="mb-2">
-              <label for="meeting-title" class="form-label">Meeting Title</label>
-              <input type="text" class="form-control" id="meetingTitle" required />
+              <label for="meeting-title" class="form-label"
+                >Meeting Title</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="meetingTitle"
+                required
+              />
             </div>
           </div>
-          
+
           <div class="wrap">
             <div class="mb-2">
               <label for="meeting-date" class="form-label">Meeting Date</label>
-              <input type="date" class="form-control" id="meetingDate" required />
-              </div>
+              <input
+                type="date"
+                class="form-control"
+                id="meetingDate"
+                required
+              />
+            </div>
           </div>
-          
+
           <div class="wrap">
-              <div class="wrapper">
-                <div class="mb-1">
-                  <label for="start-time" class="form-label">Start Time</label>
-                  <input type="time" class="form-control" id="startTime" required />
+            <div class="wrapper">
+              <div class="mb-1">
+                <label for="start-time" class="form-label">Start Time</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="startTime"
+                  required
+                />
+              </div>
+              <div class="left-spacing">
+                <div class="mb-2">
+                  <label for="end-time" class="form-label">End Time</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="endTime"
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Please input a time later than Start Time"
+                    required
+                  />
                 </div>
-                <div class="left-spacing">
-                  <div class="mb-2">
-                    <label for="end-time" class="form-label">End Time</label>
-                    <input
-                      type="time"
-                      class="form-control"
-                      id="endTime"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Please input a time later than Start Time"
-                      required
-                    />
-                  </div>
-                </div>
               </div>
+            </div>
           </div>
           <div class="wrap">
-            <label for="timezone" class="form-label">
-            Timezone:</label>
+            <label for="timezone" class="form-label"> Timezone:</label>
           </div>
-         <div class = "wrap mb-1">
-          <select id="timeZone">
-            <option value="Greenwich Mean Time (GMT)">Greenwich Mean Time (GMT)</option>
-            <option value="Universal Coordinated Time (UTC)">Universal Coordinated Time (UTC)</option>
-            <option value="European Central Time (UTC)">European Central Time (UTC)</option>
-            <option value="Eastern European Time (EET)">Eastern European Time (EET)</option>
-            <option value="(Arabic) Egypt Standard Time (ART)">(Arabic) Egypt Standard Time (ART)</option>
-            <option value="Middle East Time (MET)">Middle East Time (MET)</option>
-            <option value="Near East Time (NET)">Near East Time (NET)</option>
-            <option value="Pakistan Lahore Time (PLT)">Pakistan Lahore Time (PLT)</option>
-            <option value="India Standard Time (IST)">India Standard Time (IST)</option>
-            <option value="Bangladesh Standard Time (BST)">Bangladesh Standard Time (BST)</option>
-            <option value="Vietnam Standard Time (VST)">Vietnam Standard Time (VST)</option>
-            <option value="China Taiwan Time (CTT)">China Taiwan Time (CTT)</option>
-            <option value="Japan Standard Time (JST)">Japan Standard Time (JST)</option>
-            <option value=" Australia Central Time (ACT)">Australia Central Time (ACT)</option>
-            <option value="Solomon Standard Time (SST)">Solomon Standard Time (SST)</option>
-            <option value="New Zealand Standard Time (NST)">New Zealand Standard Time (NST)</option>
-            <option value="Midway Islands Time (MIT)">Midway Islands Time (MIT)</option>
-            <option value="Hawaii Standard Time (HST)">Hawaii Standard Time (HST)</option>
-            <option value="Alaska Standard Time (AST)">Alaska Standard Time (AST)</option>
-            <option value="Pacific Standard Time (PST)">Pacific Standard Time (PST)</option>
-            <option value="Mountain Standard Time (MST)">Mountain Standard Time (MST)</option>
-            <option value="Central Standard Time (CST)">Central Standard Time (CST)</option>
-            <option value="Eastern Standard Time (EST)">Eastern Standard Time (EST)</option>
-            <option value="Phoenix Standard Time (PNT)">Phoenix Standard Time (PNT)</option>
-            <option value="Indiana Eastern Standard Time (IET)">Indiana Eastern Standard Time (IET)</option>
-            <option value="Puerto Rico and US Virgin Islands Time (PRT)">Puerto Rico and US Virgin Islands Time
-                (PRT)</option>
-            <option value="Canada Newfoundland Time (CNT)">Canada Newfoundland Time (CNT)</option>
-            <option value="Argentina Standard Time (AGT)">Argentina Standard Time (AGT)</option>
-            <option value="Brazil Eastern Time (BET)">Brazil Eastern Time (BET)</option>
-            <option value="Central African Time (CAT)">Central African Time (CAT)</option>
-        </select>
-         </div>
-          
+          <div class="wrap mb-1">
+            <select id="timeZone">
+              <option value="Greenwich Mean Time (GMT)">
+                Greenwich Mean Time (GMT)
+              </option>
+              <option value="Universal Coordinated Time (UTC)">
+                Universal Coordinated Time (UTC)
+              </option>
+              <option value="European Central Time (UTC)">
+                European Central Time (UTC)
+              </option>
+              <option value="Eastern European Time (EET)">
+                Eastern European Time (EET)
+              </option>
+              <option value="(Arabic) Egypt Standard Time (ART)">
+                (Arabic) Egypt Standard Time (ART)
+              </option>
+              <option value="Middle East Time (MET)">
+                Middle East Time (MET)
+              </option>
+              <option value="Near East Time (NET)">Near East Time (NET)</option>
+              <option value="Pakistan Lahore Time (PLT)">
+                Pakistan Lahore Time (PLT)
+              </option>
+              <option value="India Standard Time (IST)">
+                India Standard Time (IST)
+              </option>
+              <option value="Bangladesh Standard Time (BST)">
+                Bangladesh Standard Time (BST)
+              </option>
+              <option value="Vietnam Standard Time (VST)">
+                Vietnam Standard Time (VST)
+              </option>
+              <option value="China Taiwan Time (CTT)">
+                China Taiwan Time (CTT)
+              </option>
+              <option value="Japan Standard Time (JST)">
+                Japan Standard Time (JST)
+              </option>
+              <option value=" Australia Central Time (ACT)">
+                Australia Central Time (ACT)
+              </option>
+              <option value="Solomon Standard Time (SST)">
+                Solomon Standard Time (SST)
+              </option>
+              <option value="New Zealand Standard Time (NST)">
+                New Zealand Standard Time (NST)
+              </option>
+              <option value="Midway Islands Time (MIT)">
+                Midway Islands Time (MIT)
+              </option>
+              <option value="Hawaii Standard Time (HST)">
+                Hawaii Standard Time (HST)
+              </option>
+              <option value="Alaska Standard Time (AST)">
+                Alaska Standard Time (AST)
+              </option>
+              <option value="Pacific Standard Time (PST)">
+                Pacific Standard Time (PST)
+              </option>
+              <option value="Mountain Standard Time (MST)">
+                Mountain Standard Time (MST)
+              </option>
+              <option value="Central Standard Time (CST)">
+                Central Standard Time (CST)
+              </option>
+              <option value="Eastern Standard Time (EST)">
+                Eastern Standard Time (EST)
+              </option>
+              <option value="Phoenix Standard Time (PNT)">
+                Phoenix Standard Time (PNT)
+              </option>
+              <option value="Indiana Eastern Standard Time (IET)">
+                Indiana Eastern Standard Time (IET)
+              </option>
+              <option value="Puerto Rico and US Virgin Islands Time (PRT)">
+                Puerto Rico and US Virgin Islands Time (PRT)
+              </option>
+              <option value="Canada Newfoundland Time (CNT)">
+                Canada Newfoundland Time (CNT)
+              </option>
+              <option value="Argentina Standard Time (AGT)">
+                Argentina Standard Time (AGT)
+              </option>
+              <option value="Brazil Eastern Time (BET)">
+                Brazil Eastern Time (BET)
+              </option>
+              <option value="Central African Time (CAT)">
+                Central African Time (CAT)
+              </option>
+            </select>
+          </div>
+
           <div class="wrap">
-              <div class="mb-2">
-                <label for="description" class="form-label">Description</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  class="form-control mb-10"
-                  rows="4"
-                  cols="50"
-                ></textarea>
-              </div>
+            <div class="mb-2">
+              <label for="description" class="form-label">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                class="form-control mb-10"
+                rows="4"
+                cols="50"
+              ></textarea>
+            </div>
           </div>
-        
+
           <div class="wrap">
             <div class="mb-2">
               <label for="attendees" class="form-label">Add Guests</label>
@@ -173,54 +245,57 @@
               />
             </div>
           </div>
-          
+
           <div class="wrap">
             <label for="location" class="form-label"
-            >How would you like to meet?</label>
+              >How would you like to meet?</label
+            >
           </div>
-          
+
           <div class="wrap">
-          <div class="wrapper">
-            <div class="input-group mb-3">
-              <div class="input-group-text">
-                <label
-                  for="remote"
-                  class="form-label"
-                  id = "grey-fill"
-                  style="margin: 0.2rem !important"
-                  >Remote</label>
+            <div class="wrapper">
+              <div class="input-group mb-3">
+                <div class="input-group-text">
+                  <label
+                    for="remote"
+                    class="form-label"
+                    id="grey-fill"
+                    style="margin: 0.2rem !important"
+                    >Remote</label
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="remote"
+                  placeholder="Input meeting link"
+                />
               </div>
-              <input
-                type="text"
-                class="form-control"
-                id="remote"
-                placeholder="Input meeting link"
-              />
-            </div>
             </div>
           </div>
-  
-            <div class="wrap">
-              <div class="wrapper">
-                  <div class="input-group mb-3">
-                    <div class="input-group-text">
-                      <label
-                        for="in-person"
-                        class="form-label"
-                        id = "grey-fill"
-                        style="margin: 0.2rem !important"
-                        >In-person</label>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inPerson"
-                      placeholder="Input physical address"
-                    />
-                  </div>
+
+          <div class="wrap">
+            <div class="wrapper">
+              <div class="input-group mb-3">
+                <div class="input-group-text">
+                  <label
+                    for="in-person"
+                    class="form-label"
+                    id="grey-fill"
+                    style="margin: 0.2rem !important"
+                    >In-person</label
+                  >
                 </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inPerson"
+                  placeholder="Input physical address"
+                />
+              </div>
             </div>
-            
+          </div>
+
           <div class="wrap">
             <button type="button" class="button btn btn-primary" id="Schedule">
               Schedule
@@ -267,64 +342,62 @@
         </div>
       </div>
 
-      <!-- <div class="vl"></div> -->
+      <div class="vl"></div>
 
       <div class="time-suggestions">
-        <h4 class="mb=0" id="time-suggestion-title">Time Suggestions</h4>
+        <h4 class="mb=0" id="time-suggestion-title">Meeting Suggestions</h4>
 
         <div class="card">
           <div class="card-horizontal">
             <div class="img-square-wrapper">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="100"
+                height="100"
                 fill="currentColor"
-                class="bi bi-alarm-fill"
+                id="calendar-icon"
+                class="bi bi-calendar-fill"
                 viewBox="0 0 16 16"
               >
                 <path
-                  d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zm2.5 5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"
+                  d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"
                 />
               </svg>
             </div>
             <div>
               <h2 class="card-title">Time Block Suggestion 1</h2>
-              <div class="card-text" id="start-time">Start time: </div>
-              <div class="card-text" id="end-time">End Time: </div>
+              <div class="card-text" id="start-time">Start time:</div>
+              <div class="card-text" id="end-time">End Time:</div>
             </div>
           </div>
         </div>
-        
 
         <div class="card">
           <div class="card-horizontal">
             <div class="img-square-wrapper">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="100"
+                height="100"
                 fill="currentColor"
-                class="bi bi-alarm-fill"
+                id="calendar-icon"
+                class="bi bi-calendar-fill"
                 viewBox="0 0 16 16"
               >
                 <path
-                  d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zm2.5 5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"
+                  d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"
                 />
               </svg>
             </div>
             <div>
               <h2 class="card-title">Time Block Suggestion 2</h2>
-              <div class="card-text" id="start-time">Start time: </div>
-              <div class="card-text" id="end-time">End Time: </div>
+              <div class="card-text" id="start-time">Start time:</div>
+              <div class="card-text" id="end-time">End Time:</div>
             </div>
           </div>
         </div>
-    
       </div>
-     </div>
-
-     
+    </div>
 
     <div class="footer">
       <style>
