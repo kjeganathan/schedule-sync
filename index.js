@@ -259,7 +259,7 @@ app.get("/upcoming-meetings/:email", checkLoggedIn, async (req, res) => {
 // ENDPOINT for getting the user's google calendar events
 app.get("/google-calendar", checkLoggedIn, async (req, res) => {
   try {
-    const calendars = await googleCalendar.listCalendars(credentials);
+    const calendars = await googleCalendar.listEvents(credentials);
     if (calendars.length !== 0) {
       res.contentType("application/json");
       res.send(JSON.stringify({ calendars: calendars }));

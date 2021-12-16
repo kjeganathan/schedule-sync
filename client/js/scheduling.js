@@ -156,6 +156,7 @@ async function updateAttendeeMeetings(meeting, attendees) {
 
 // Add the meeting to the attendees google calendars
 async function addMeetingToCalendar(event) {
+  console.log(event.timeZone);
   let google_event = {
     title: event.title,
     date: event.date,
@@ -209,6 +210,7 @@ async function meetingSuggestions(dateMin, dateMax) {
     .then((results) => {
       let data = JSON.parse(results);
       if (data.length) {
+        document.getElementById("no-availability").innerHTML = "";
         let availabilityHtml = "";
         data.sort(function (a, b) {
           return a.start.localeCompare(b.start);

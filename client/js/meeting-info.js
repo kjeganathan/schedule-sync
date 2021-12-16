@@ -47,7 +47,11 @@ async function populateMeetingInfo(meeting_id, event_id) {
       document.getElementById("attendee-number").innerHTML =
         meeting.attendees.length;
       document.getElementById("description").innerHTML = meeting.description;
-      document.getElementById("location").innerHTML = meeting.location;
+      document.getElementById("location").innerHTML = meeting.location.includes(
+        "https"
+      )
+        ? `<a href=${meeting.location}>${meeting.location}</a>`
+        : meeting.location;
       populateAttendees(meeting.attendees, event_id);
     })
     .catch((error) => console.log("error", error));
@@ -84,7 +88,6 @@ async function populateAttendees(attendees, event_id) {
         .then((response) => response.text())
         .then((result) => {
           status = JSON.parse(result);
-          console.log(status);
         })
         .catch((error) => console.log("error", error));
       // User has not accepted/declined

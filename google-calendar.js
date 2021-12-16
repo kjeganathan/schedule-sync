@@ -7,12 +7,15 @@ const oAuth2Client = new google.auth.OAuth2(
   redirect_uris[0]
 );
 
-async function listCalendars(tokens) {
+// List a user's events from all their calendars
+async function listEvents(tokens) {
   oAuth2Client.setCredentials(tokens);
   // Authorize a client with credentials, then call the Google Calendar API.
   const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+  // Get all the calendar ids
   const calendars = (await calendar.calendarList.list()).data.items;
 
+  // Map all the events to one array from each calendar id
   const events = await Promise.all(
     calendars.map(async (obj) => {
       const data = await (
@@ -23,15 +26,18 @@ async function listCalendars(tokens) {
       return data;
     })
   );
+  // For each array of events push each event to one single array
   var calendar_events = [];
   events.map((calendar) => {
     calendar.forEach((item) => {
       calendar_events.push(item);
     });
   });
+  // Return array of calendar events
   return calendar_events;
 }
 
+// Get a user's availability based on a specified time range
 async function freeBusy(tokens, dateMin, dateMax) {
   oAuth2Client.setCredentials(tokens);
   // Authorize a client with credentials, then call the Google Calendar API.
@@ -40,6 +46,7 @@ async function freeBusy(tokens, dateMin, dateMax) {
   let busy = [];
   let errors = [];
 
+  // Call Free/Busy API and get when the user is busy
   const result = await calendar.freebusy.query({
     resource: {
       // Set times to ISO strings as such
@@ -49,6 +56,7 @@ async function freeBusy(tokens, dateMin, dateMax) {
       items: (await calendar.calendarList.list()).data.items,
     },
   });
+  // Sort through the data to populate busy object and errors object
   const data = result.data.calendars;
   for (const [key, value] of Object.entries(data)) {
     busy = busy.concat(data[key].busy);
@@ -64,14 +72,17 @@ async function freeBusy(tokens, dateMin, dateMax) {
   } else {
     console.log("Free");
   }
+  // Return busy object
   return busy;
 }
 
+// Insert an event into a user's Google Calendar
 async function insertIntoCalendar(tokens, event) {
   oAuth2Client.setCredentials(tokens);
   // Authorize a client with credentials, then call the Google Calendar API.
   const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
+  // insert the event into the user's google calendar
   const result = await calendar.events.insert({
     auth: oAuth2Client,
     calendarId: "primary",
@@ -82,31 +93,36 @@ async function insertIntoCalendar(tokens, event) {
   return result.data.id;
 }
 
+// Check the attendee's status for a specific event
 async function attendeeStatus(tokens, event_id, email) {
   oAuth2Client.setCredentials(tokens);
   // Authorize a client with credentials, then call the Google Calendar API.
   const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
+  // Get the event
   const result = await calendar.events.get({
     auth: oAuth2Client,
     calendarId: "primary",
     eventId: event_id,
   });
 
+  // populate the status of the specified attendee
   const attendees = result.data.attendees;
   let status = "";
   attendees.forEach((attendee) => {
     status = attendee.email === email ? attendee.responseStatus : "";
   });
-  // HOST meeting
+
+  // If the status is empty, this is the host's email -> set to accepted
   if (status === "") {
     status = "accepted";
   }
+  // Return status
   return status;
 }
 
 module.exports = {
-  listCalendars,
+  listEvents,
   freeBusy,
   insertIntoCalendar,
   attendeeStatus,

@@ -8,13 +8,13 @@ create table meetings( meeting_id SERIAL PRIMARY KEY, title TEXT NOT NULL, date 
 Example tables:
         
 user_id  |       full_name       |            email            |                          meetings        
----------+-----------------------+------------------+---------------------------------------------------------------------------
-1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |   [{meeting_id: "1", event_id: "tsgsjb6koud6il13lpiv8iklmc"}]       |           [ "2" ]
+---------+-----------------------+------------------+---------------------------------------------------------------------------------
+1        |    Emma  Martinez     |   emmaMartinez@gmail.com    |   [{meeting_id: "1", event_id: "tsgsjb6koud6il13lpiv8iklmc"}]       | 
 
 
-meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees                        |         event_id
--------------+---------------------+---------------------+------------------+----------------+-----------------+-----------------------------+--------------------------------------------------------+--------------------------
-1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"] | tsgsjb6koud6il13lpiv8iklmc
+meeting_id   |       title         |        date         |    start_time    |    end_time    |    location     |         description         |                       attendees                        |         event_id              |         timezone
+-------------+---------------------+---------------------+------------------+----------------+-----------------+-----------------------------+--------------------------------------------------------+-----------------------------------------------------
+1            |   Music Arts Club   |     11/09/2021      |      9:00 AM     |    10:00 AM    |      Zoom       |   Music Arts Club Meeting   |   ["emmaMartinez@gmail.com", "sammyRemerez@gmail.com"] | tsgsjb6koud6il13lpiv8iklmc    |           EST
 
 */
 
@@ -59,6 +59,8 @@ async function connectAndRun(task) {
 }
 
 //Database functions
+
+// Add a new user to the database
 async function addUser(full_name, email) {
   return await connectAndRun((db) =>
     db.none(
@@ -68,27 +70,21 @@ async function addUser(full_name, email) {
   );
 }
 
+// Get a user from the database
 async function getUser(email) {
   return await connectAndRun((db) =>
     db.any("SELECT * FROM users WHERE email = $1;", [email])
   );
 }
 
+// Delete a user from the database
 async function delUser(email) {
   return await connectAndRun((db) =>
     db.none("DELETE FROM users where email = $1;", [email])
   );
 }
 
-async function updateUserMeetings(meetings, tentative_meetings, email) {
-  return await connectAndRun((db) =>
-    db.any(
-      "UPDATE users SET meetings = $1, tentative_meetings = $2 where email = $3;",
-      [meetings, tentative_meetings, email]
-    )
-  );
-}
-
+// Add a meeting to the database
 async function addMeeting(
   event_id,
   title,
@@ -118,18 +114,21 @@ async function addMeeting(
   );
 }
 
+// Get a meeting from the database
 async function getMeeting(meeting_id) {
   return await connectAndRun((db) =>
     db.any("SELECT * FROM meetings where meeting_id = $1;", [meeting_id])
   );
 }
 
+// Delete a meeting from the database
 async function delMeeting(meeting_id) {
   return await connectAndRun((db) =>
     db.none("DELETE FROM meetings where meeting_id = $1;", [meeting_id])
   );
 }
 
+// Update a meeting in the database
 async function updateMeetings(meetings, email) {
   return await connectAndRun((db) =>
     db.any("UPDATE users SET meetings = $1 where email = $2;", [
@@ -139,6 +138,7 @@ async function updateMeetings(meetings, email) {
   );
 }
 
+// Get a user's meetings from the database
 async function getUserMeetings(email) {
   return await connectAndRun((db) =>
     db.any("SELECT meetings FROM users where email = $1;", [email])
@@ -149,7 +149,6 @@ module.exports = {
   addUser,
   getUser,
   delUser,
-  updateUserMeetings,
   addMeeting,
   getMeeting,
   delMeeting,
