@@ -1,6 +1,6 @@
 # ScheduleSync
 
-![Logo](./client/assets/images/logo.jpg)
+<img src="./client/assets/images/logo.jpg" width="200">
 
 Schedule Sync is an online scheduling application that helps users better schedule their meetings.
 
