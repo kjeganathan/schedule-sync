@@ -41,8 +41,8 @@ Please make sure to update tests as appropriate.
 
 ## Authors
 
-- [@awatterson22](https://github.com/awatterson22)
 - [@kjeganathan](https://github.com/kjeganathan)
+- [@awatterson22](https://github.com/awatterson22)
 - [@jtanniru](https://github.com/jtanniru)
 - [@dishsrivastava](https://github.com/dishsrivastava)
 - [@rinraja](https://github.com/rinraja)
@@ -52,4 +52,4 @@ Please make sure to update tests as appropriate.
 
 ## Feedback
 
-If you have any feedback, please reach out to us at abbywatterson4@gmail.com or feel free to fill out our Google Survey: https://forms.gle/Qmn2SrTYbxeuGxum6
+If you have any feedback, please reach out to us at kavyaje08@gmail.com or abbywatterson4@gmail.com or feel free to fill out our Google Survey: https://forms.gle/Qmn2SrTYbxeuGxum6
